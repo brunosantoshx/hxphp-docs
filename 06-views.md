@@ -80,7 +80,6 @@ class ProdutosController extends \HXPHP\System\Controller
 ```php
 class ProdutosController extends \HXPHP\System\Controller
 {
-
     public function indexAction()
     {
       $this->view->setVar('mensagem', 'Hello World')
