@@ -10,16 +10,16 @@ Módulos são basicamente plugins, ou seja, são bibliotecas de códigos que tem
 ----
 ### *Message Module* {#message-module}
 
-O único módulo nativo do framework é o **Message Module**. Ele é responsável por gerenciar todas as mensagens de erro, aviso, sucesso e etc.
+O único módulo nativo do framework é o <b>Message Module</b>. Ele é responsável por gerenciar todas as mensagens de erro, aviso, sucesso e etc.
 
 Para utilizar este módulo é necessário:
 
 + Criar um template de mensagens no formato JSON, e;
-+ Salvar na pasta `templates/Modules/Messages/`. 
++ Salvar na pasta `templates/Modules/Messages/`.
 
 Veja o exemplo do template `auth.json`:
 ```json
-  {
+{
     "description" : "Template de mensagens para o serviço de autenticação",
     "messages" : {
         "usuario-bloqueado" : {
@@ -54,8 +54,7 @@ Veja o exemplo do template `auth.json`:
             "message" : "Não foi possível realizar a autenticação, confira seus dados!"
         }
     }
-  }
-
+}
 ```
 
 Perceba que existem três estruturas principais:
@@ -64,36 +63,36 @@ Perceba que existem três estruturas principais:
 + Messages, e;
 + Alerts.
 
-A estrutura **description** deve conter a descrição do template. 
+A estrutura <b>description</b> deve conter a descrição do template.
 
-Já a estrutura **messages** deve acomodar mensagens que serão enviadas por e-mail. 
+Já a estrutura <b>messages</b> deve acomodar mensagens que serão enviadas por e-mail.
 
-E, por fim, a estrutura **alerts** que deve acomodar as mensagens que serão renderizadas pelo [Alert Helper](#alert-helper).
+E, por fim, a estrutura <b>alerts</b> que deve acomodar as mensagens que serão renderizadas pelo [Alert Helper](#alert-helper).
 
-As estruturas **messages** e **alerts** contém seções pré-definidas:
+As estruturas <b>messages</b> e <b>alerts</b> contém seções pré-definidas:
 
-+ **subject** e **message** para a a estrutura **messages**, e;
-+ **style**, **title** e **message** para a estrutura **alerts**.
++ <b>subject</b> e <b>message</b> para a a estrutura <b>messages</b>, e;
++ <b>style</b>, <b>title</b> e <b>message</b> para a estrutura <b>alerts</b>.
 
 Estas seções devem ser acomodadas dentro de uma estrura intermediária que é nomeada com um código referente ao seu conteúdo.
 
-Após criar e preencher os templates com seus respectivos conteúdos é possível resgatar estes valores de forma prática através do **Messages Module**.
+Após criar e preencher os templates com seus respectivos conteúdos é possível resgatar estes valores de forma prática através do <b>Messages Module</b>.
 
 O primeiro passo é declarar para o método construtor do módulo qual é o nome do template que será utilizado.
 
-Obs: **Lembre-se de não informar a extensão .json**.
+Obs: <b>Lembre-se de não informar a extensão .json</b>.
 
 O código resultante seria:
 ```php
-  $messages = new Messages('auth');
-  //ou
-  $this->load('Modules\Messages', 'auth');
+$messages = new Messages('auth');
+//ou
+$this->load('Modules\Messages', 'auth');
 ```
 
 Para retornar o conteúdo de uma mensagem|alerta é necessário utilizar o seguinte caminho:
 
 ```php
-  $this->messages->alerts->getByCode('conta-em-uso');
+$this->messages->alerts->getByCode('conta-em-uso');
 ```
 
 Executando o código acima tem-se como retorno um *array* no formato necessário para ser interpretado pelo [Alert Helper](#alert-helper).
@@ -101,21 +100,21 @@ Executando o código acima tem-se como retorno um *array* no formato necessário
 Perceba que `{alerts}` é uma das opções disponíveis, isto é, trata-se da estrutura que você deseja utilizar. No template anteriormente apresentado, pode-se observar duas estruturas: *messages* e *alerts*.
 
 ```php
-  $this->messages->messages->getByCode('usuario-bloqueado');
+$this->messages->messages->getByCode('usuario-bloqueado');
 ```
 
 Caso queira definir uma estrutura padrão e utilizar diretamente o método `getByCode($codigo)` configure o método `setBlock($estrutura);`.
 
 ```php
-  $this->messages->setBlock('messages');
-  $this->messages->getByCode('usuario-bloqueado');
+$this->messages->setBlock('messages');
+$this->messages->getByCode('usuario-bloqueado');
 ```
 
 Também é possível preencher valores coringas presentes na mensagem do template (%s), para tal, é necessário informar estes parâmetros em um *array* seguindo o padrão abaixo:
 
 Template para exemplo:
 ```json
-  {
+{
     "description" : "Template de mensagens para exemplo",
     "alerts" : {
         "codigo" : {
@@ -124,21 +123,20 @@ Template para exemplo:
             "message" : "Olá %s %s, como vai?"
         }
     }
-  }
+}
 ```
 O código resultante seria:
 ```php
-  $this->load('Modules\Messages', 'meutemplate');
-  $this->messages->setBlock('alerts');
+$this->load('Modules\Messages', 'meutemplate');
+$this->messages->setBlock('alerts');
 
-  $substituir_coringas = array(
+$substituir_coringas = [
     'title' => 'Hello World',
-    'message' => array(
+    'message' => [
       'Bruno',
       'Santos'
-    )
-  );
+    ]
+];
 
-
-  $this->messages->getByCode('codigo', $substituir_coringas);
+$this->messages->getByCode('codigo', $substituir_coringas);
 ```
