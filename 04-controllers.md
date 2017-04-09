@@ -19,7 +19,7 @@ Resumindo, nesta camada é decidido o “se”, “o que”, “quando” e “o
 
 Agora que você já sabe o que é um *controller* e a sua importância para o funcionamento da aplicação, você poderá finalmente criar o seu primeiro *controller*. Para tal, siga estes passos:
 
-+ Defina o link desejado (Ex: http://site.com.br/`produtos`/ ou http://site.com.br/`lista-de-produtos`/);
++ Defina o link desejado (Ex: http://site.com.br/<code>produtos</code>/ ou http://site.com.br/<code>lista-de-produtos</code>/);
 + Crie um arquivo nomeado no padrão *CamelCase*; com o link desejado, sem espaços, hífens ou *underscores*; com o sufixo 'Controller', e; a extensão '.php'. Ou seja, para os exemplos acima, os controllers seriam: `ProdutosController.php` e `ListaDeProdutosController.php`;
 + Salve este arquivo na pasta: `app/controllers/`
 
@@ -38,7 +38,7 @@ Após salvar o arquivo, comece com o desenvolvimento de seu código e atente-se 
 Fique atento às seguintes características do código listado acima:
 
 + O nome da classe é igual ao nome do arquivo;
-+ Cada *controller* é uma extensão da classe mestre `*\HXPHP\System\Controller*`, e;
++ Cada *controller* é uma extensão da classe mestre `<em>\HXPHP\System\Controller</em>`, e;
 + A `indexAction()`, *action* padrão do controller, é executada automaticamente.
 
 Mas, afinal de contas o que são *actions*?
@@ -49,7 +49,7 @@ Mas, afinal de contas o que são *actions*?
 
 Após criar o *controller* é provável que seja necessário a criação de *actions* específicas e, para tal, siga estes passos:
 
-+ Defina o link desejado, por exemplo: http://site.com.br/produtos/`listar`/ , e;
++ Defina o link desejado, por exemplo: http://site.com.br/produtos/<code>listar</code>/ , e;
 + No *controller* desejado, crie um método `público` nomeado com o link desejado, sem espaços, hífens ou *underscores*; com o sufixo 'Action'.
 
 O código resultante do exemplo acima seria:
@@ -97,7 +97,7 @@ Algumas observações importantes:
 + Estes argumentos podem ser nomeados livremente, porém devem ter <b>obrigatoriamente um valor pré-definido</b>, por exemplo: `listarAction($categoria = '', $pagina = 1)`, e;
 + Os argumentos devem ser declarados na mesma ordem que os parâmetros.
 
-Através deste mecanismo é possível ter `<b>N</b> parâmetros` e nomeá-los de forma sugestiva, o que possibilitará uma melhor experiência com seus códigos.
+Através deste mecanismo é possível ter <code><b>N</b> parâmetros</code> e nomeá-los de forma sugestiva, o que possibilitará uma melhor experiência com seus códigos.
 
 ----
 
@@ -148,7 +148,7 @@ Caso queira utilizar os valores das configurações e até mesmo recursos como o
 É muito comum que seja necessário o processo de redirecionamento nos *controllers*.
 
 Imagine o seguinte processo:
-`produtos/cadastrar/ <b>-></b> produtos/salvar/ <b>-></b> produtos/listar/`
+<code>produtos/cadastrar/ <b>-></b> produtos/salvar/ <b>-></b> produtos/listar/</code>
 
 Após o formulário ser processado e disparado para a *action* <code><b>salvar</b></code> será necessário um redirecionamento para a *action* <code><b>listar</b></code> e para fazermos isto utilizamos o seguinte código:
 
