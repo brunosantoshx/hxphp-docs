@@ -31,7 +31,6 @@ class ProdutosController extends \HXPHP\System\Controller
 {
     public function indexAction()
     {
-
         $alerta = [
           'success',
           'Uhuul! Produto cadastrado com sucesso!',
@@ -68,21 +67,21 @@ O módulo contém dois métodos:
 Exemplo de configuração para definir dois menus (o primeiro para usuários com nível de acesso igual a <b>administrator</b> e o segundo que é neutro):
 
 ```php
-    $configs->env->development->menu->setMenus([
-        'Home/home' => '%siteURL%',
-        'Projetos/briefcase' => '%baseURI%/projetos/listar/',
-        'Clientes/users' => [
-          'Listar todos/users' => '%baseURI%',
-          'Tipos de clientes/users' => '%baseURI%/clientes/tipos'
-        ],
-        'Usuários/users' => '%baseURI%/usuarios/listar/'
-    ], 'administrator');
+$configs->env->development->menu->setMenus([
+    'Home/home' => '%siteURL%',
+    'Projetos/briefcase' => '%baseURI%/projetos/listar/',
+    'Clientes/users' => [
+      'Listar todos/users' => '%baseURI%',
+      'Tipos de clientes/users' => '%baseURI%/clientes/tipos'
+    ],
+    'Usuários/users' => '%baseURI%/usuarios/listar/'
+], 'administrator');
 
 
-    $configs->env->development->menu->setMenus([
-        'Home/home' => '%siteURL%/home',
-        'Projetos/briefcase' => '%baseURI%/projetos/listar/'
-    ]);
+$configs->env->development->menu->setMenus([
+    'Home/home' => '%siteURL%/home',
+    'Projetos/briefcase' => '%baseURI%/projetos/listar/'
+]);
 ```
 
 Observações:
