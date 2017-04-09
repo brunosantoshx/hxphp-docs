@@ -64,8 +64,8 @@ Mas afinal de contas para que serve essa configuração? Pois bem, ela é a fron
 
 Na prática, imagine os seguintes links requisitados por um usuário qualquer em ambos os exemplos:
   
-+ <a>http://site.com.br<code>/</code><strong>projetos/listar/1</strong></a>
-+ <a>http://localhost<code>/hxphp/</code><strong>projetos/listar/1</strong></a>
++ <a>http://site.com.br<code>/</code><b>projetos/listar/1</b></a>
++ <a>http://localhost<code>/hxphp/</code><b>projetos/listar/1</b></a>
   
 Com as situações ilustradas acima é possível compreender claramente o processo de separação, visto que, em ambas as situações a requisição foi: `projetos/listar/1`.
 
