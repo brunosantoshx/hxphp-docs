@@ -63,10 +63,10 @@ Agora com esses exemplos definidos é importante que você lembre-se da `baseURI
 Mas afinal de contas para que serve essa configuração? Pois bem, ela é a fronteira entre o `hostname` e a `requisição`. Ou seja, o que vier depois dela são os parâmetros controladores de nossa aplicação.
 
 Na prática, imagine os seguintes links requisitados por um usuário qualquer em ambos os exemplos:
-  
-+ http://site.com.br`/`**projetos/listar/1**
-+ http://localhost`/hxphp/`**projetos/listar/1**
-  
+
++ <a>http://site.com.br<code>/</code><strong>projetos/listar/1</strong></a>
++ <a>http://localhost<code>/hxphp/</code><strong>projetos/listar/1</strong></a>
+
 Com as situações ilustradas acima é possível compreender claramente o processo de separação, visto que, em ambas as situações a requisição foi: `projetos/listar/1`.
 
 Mas, isso não é tudo! Essa requisição é subdividida em:
@@ -79,8 +79,8 @@ Mas, isso não é tudo! Essa requisição é subdividida em:
 
 Também é possível organizar os *controllers* em subpastas. Esta funcionalidade permite uma fácil integração entre back e front-end, por exemplo. Confira o exemplo:
   
-+ http://localhost`/hxphp/`**admin/projetos/novo/**
-+ http://localhost`/hxphp/`**projetos/listar/1**
++ http://localhost `/hxphp/` **admin/projetos/novo/**
++ http://localhost `/hxphp/` **projetos/listar/1**
   
 Essa requisição é subdividida em:
 
