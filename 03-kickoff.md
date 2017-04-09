@@ -71,26 +71,26 @@ Com as situações ilustradas acima é possível compreender claramente o proces
 
 Mas, isso não é tudo! Essa requisição é subdividida em:
   
-+ `controller` -> *projetos*
-+ `action` -> *listar*
-+ `parâmetro(s)` -> *1*
++ `controller` -> <b>projetos<b>
++ `action` -> <b>listar<b>
++ `parâmetro(s)` -> <b>1</b>
 
 #### Subpastas
 
 Também é possível organizar os *controllers* em subpastas. Esta funcionalidade permite uma fácil integração entre back e front-end, por exemplo. Confira o exemplo:
-  
-+ http://localhost`/hxphp/`**admin/projetos/novo/**
-+ http://localhost`/hxphp/`**projetos/listar/1**
-  
+
++ <a>http://localhost<code>/hxphp/</code><b>admin/projetos/listar/1</b></a>
++ <a>http://localhost<code>/hxphp/</code><b>/projetos/listar/1</b></a>
+
 Essa requisição é subdividida em:
 
 ```
   http://localhost/hxphp/admin/projetos/novo/
 ```
   
-+ `subpasta` -> *admin*
-+ `controller` -> *projetos*
-+ `action` -> *novo*
++ `subpasta` -> <b>admin</b>
++ `controller` -> <b>projetos</b>
++ `action` -> <b>novo</b>
 + `parâmetro(s)` -> null
 
 ```
@@ -98,12 +98,12 @@ Essa requisição é subdividida em:
 ```
   
 + `subpasta` -> null
-+ `controller` -> *projetos*
-+ `action` -> *listar*
-+ `parâmetro(s)` -> *1*
++ `controller` -> <b>projetos</b>
++ `action` -> <b>listar</b>
++ `parâmetro(s)` -> <b>1</b>
 
 
-**Para utilizar esta funcionalidade é necessária a existência da respectiva subpasta no diretório dos controllers. Se a subpasta não existir, o valor é automaticamente interpretado como Controller.**
+<b>Para utilizar esta funcionalidade é necessária a existência da respectiva subpasta no diretório dos controllers. Se a subpasta não existir, o valor é automaticamente interpretado como Controller.</b>
 
 Veja abaixo a estrutura necessária para reproduzir o exemplo acima:
 
@@ -121,7 +121,7 @@ Veja abaixo a estrutura necessária para reproduzir o exemplo acima:
         listar.phtml
 ```
 
-**Obs: A configuração de subpasta também se aplica às views!**
+<b>Obs: A configuração de subpasta também se aplica às views!</b>
 
 O *Controller* e a *Action* tem posição fixa, mas os parâmetros são infinitos, ou seja, desde que você especifique os dois primeiros valores da requisição, poderá passar quantos parâmetros desejar!
 
