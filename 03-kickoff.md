@@ -71,8 +71,8 @@ Com as situações ilustradas acima é possível compreender claramente o proces
 
 Mas, isso não é tudo! Essa requisição é subdividida em:
   
-+ `controller` -> <b>projetos<b>
-+ `action` -> <b>listar<b>
++ `controller` -> <b>projetos</b>
++ `action` -> <b>listar</b>
 + `parâmetro(s)` -> <b>1</b>
 
 #### Subpastas
