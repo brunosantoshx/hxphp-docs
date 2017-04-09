@@ -1,12 +1,12 @@
 ----
 ## *Views* {#views}
 
-Nesta seção você irá conhecer a última das três camadas do padrão **MVC**.
+Nesta seção você irá conhecer a última das três camadas do padrão <b>MVC</b>.
 
 ----
 ### O que são *views*? {#o-que-sao-views}
 
-As *views*, comumente chamadas de **interfaces**, são responsáveis por toda parte gráfica de nossa aplicação. É a camada que acomoda nossos códigos HTML.
+As *views*, comumente chamadas de <b>interfaces</b>, são responsáveis por toda parte gráfica de nossa aplicação. É a camada que acomoda nossos códigos HTML.
 
 ----
 ### Criando *views* {#criando-views}
@@ -20,21 +20,21 @@ As *views* são organizadas da seguinte forma: <br>
 
 #### Subpastas
 
-Quando o parâmetro `subfolder` existe, isto é, atende aos requisitos mencionados na seção de Funcionamento da URL, as *views* também deverão ser organizadas nas respectivas subpastas do diretório `app/views`. 
+Quando o parâmetro `subfolder` existe, isto é, atende aos requisitos mencionados na seção de Funcionamento da URL, as *views* também deverão ser organizadas nas respectivas subpastas do diretório `app/views`.
 
 Um exemplo para o link (`http://www.site.com.br/hxphp/admin/produtos/listar`):
 
 ```
 app/
-	views/
-		admin/
-			produtos/
-				listar.phtml
+    views/
+        admin/
+            produtos/
+                    listar.phtml
 ```
 
 #### Convenções
 
-O padrão é **lowercase**. Todas as *views* de um *controller* são armazenadas em uma pasta com o nome do *controller*. Cada view é nomeada de acordo com a *action*. Porém, é possível alterar estas configurações através do objeto **View**.
+O padrão é <b>lowercase</b>. Todas as *views* de um *controller* são armazenadas em uma pasta com o nome do *controller*. Cada view é nomeada de acordo com a *action*. Porém, é possível alterar estas configurações através do objeto <b>View</b>.
 
 ----
 ### Configurando a *View* {#configurando-a-view}
@@ -52,45 +52,44 @@ Estas são as opções disponíveis para configurar uma view:
 
 *O código resultante seria:*
 ```php
-    class ProdutosController extends \HXPHP\System\Controller
+class ProdutosController extends \HXPHP\System\Controller
+{
+    public function indexAction()
     {
-        public function indexAction()
-        {
-            $this->view->setPath('index')
-                   ->setFile('index')
-                   ->setHeader('header')
-                   ->setFooter('footer')
-                   ->setTemplate(true)
-                   ->setAssets('css', 'teste.css')
-                   ->setAssets('css', array(
-                        'teste2.css',
-                        'teste3.css'
-                    ))
-                   ->setAssets('js', array(
-                        'teste2.js',
-                        'teste3.js'
-                    ))
-                   ->setTitle('Oops! Nada encontrado!');
-        }
-	}
+        $this->view->setPath('index')
+               ->setFile('index')
+               ->setHeader('header')
+               ->setFooter('footer')
+               ->setTemplate(true)
+               ->setAssets('css', 'teste.css')
+               ->setAssets('css', array(
+                    'teste2.css',
+                    'teste3.css'
+                ))
+               ->setAssets('js', array(
+                    'teste2.js',
+                    'teste3.js'
+                ))
+               ->setTitle('Oops! Nada encontrado!');
+    }
+}
 ```
 ----
 ### Enviando dados para a *View* {#enviando-dados-para-a-view}
 
 ```php
-    class ProdutosController extends \HXPHP\System\Controller
+class ProdutosController extends \HXPHP\System\Controller
+{
+
+    public function indexAction()
     {
-
-      public function indexAction()
-      {
-       	$this->view->setVar('mensagem', 'Hello World')
-			   ->setVars(array(
-			   		'usuario' => 'Bruno Santos',
-			   		'facebook' => 'https://www.facebook.com/brunocsantos2012'
-			   	));
-      }
-
-	}
+      $this->view->setVar('mensagem', 'Hello World')
+                ->setVars([
+                        'usuario' => 'Bruno Santos',
+                        'facebook' => 'https://www.facebook.com/brunocsantos2012'
+                     )]);
+    }
+}
 ```
 
 Na *view* todos estes dados são extraídos e atribuídos em variáveis com o prefixo `view_`. No exemplo acima, as variáveis disponíveis na view seriam:
@@ -108,22 +107,22 @@ Para realizar este procedimento no HXPHP você pode criar *views parciais*. Por 
 
 Algumas observações:
 + O padrão para nomenclatura é que o nome do arquivo comece com "_". Ex: `_social-icons.phtml`, e;
-+ É possível passar dados para as views parciais. 
++ É possível passar dados para as views parciais.
 
 #### Exemplos
 
 + View parcial (app/views/partials/_message.phtml):
 ```php
-    <h4 class="alert alert-success">
-         echo $view_msg; ?>
-    </h4>
+<h4 class="alert alert-success">
+     echo $view_msg; ?>
+</h4>
 ```
 
 + Chamada da view partial em uma view (app/views/index/index.phtml):
 ```php
-    $this->partial('message', array(
-        'msg' => 'Uhull! Você instalou e configurou o HXPHP Framework com sucesso!'
-    ));
+$this->partial('message', [
+    'msg' => 'Uhull! Você instalou e configurou o HXPHP Framework com sucesso!'
+]);
 ```
 
 O método `partial()` suporta dois parâmetros:
