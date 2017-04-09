@@ -1,16 +1,16 @@
 ----
 
 ## Controllers {#controllers}
-Esta seção aborda a primeira das três camadas do padrão **MVC**.
+Esta seção aborda a primeira das três camadas do padrão <b>MVC</b>.
 
 ----
 ### O que são Controllers? {#o-que-sao-controllers}
 
-No padrão **MVC** existem basicamente três camadas: *Model*, *View* e *Controller*. 
+No padrão <b>MVC</b> existem basicamente três camadas: *Model*, *View* e *Controller*.
 
 O *controller* é o intermediário entre as outras duas camadas, ou seja, ele controla (daí o nome) todo o fluxo de informação do site/sistema.
 
-Em outras palavras, o *controller*, comumente chamado de **controlador**, tem como objetivo definir as propriedades da visualização (*view*), isto é, ele tem a função de condicionar, executar as regras de negócio(*models*), interpretar parâmetros, dentre muitas outras.
+Em outras palavras, o *controller*, comumente chamado de <b>controlador</b>, tem como objetivo definir as propriedades da visualização (*view*), isto é, ele tem a função de condicionar, executar as regras de negócio(*models*), interpretar parâmetros, dentre muitas outras.
 
 Resumindo, nesta camada é decidido o “se”, “o que”, “quando” e “onde” deve funcionar na nossa aplicação.
 
@@ -72,7 +72,7 @@ O erro 404, comumente chamado de *Error Not Found*, é um dos erros mais conheci
 
 Como já mencionado na seção de [funcionamento da URL](#funcionamento-da-url), os parâmetros que serão interpretados no controlador (*controller*) devem constar na URL, ou seja, é necessário que o *controller* e a *action* sejam definidos.
 
-Com estas condições atendidas tem-se a seguinte estrutura: 
+Com estas condições atendidas tem-se a seguinte estrutura:
 ```
   http://site.com.br/controller/action/parametro1/parametro2/parametro3/
 ```
@@ -94,10 +94,10 @@ O código resultante do exemplo acima seria:
 Algumas observações importantes:
 
 + Os parâmetros devem ser declarados como argumentos do método (*action*);
-+ Estes argumentos podem ser nomeados livremente, porém devem ter **obrigatoriamente um valor pré-definido**, por exemplo: `listarAction($categoria = '', $pagina = 1)`, e;
++ Estes argumentos podem ser nomeados livremente, porém devem ter <b>obrigatoriamente um valor pré-definido</b>, por exemplo: `listarAction($categoria = '', $pagina = 1)`, e;
 + Os argumentos devem ser declarados na mesma ordem que os parâmetros.
 
-Através deste mecanismo é possível ter `**N** parâmetros` e nomeá-los de forma sugestiva, o que possibilitará uma melhor experiência com seus códigos.
+Através deste mecanismo é possível ter `<b>N</b> parâmetros` e nomeá-los de forma sugestiva, o que possibilitará uma melhor experiência com seus códigos.
 
 ----
 
@@ -115,7 +115,7 @@ Portanto, quando criar métodos construtores siga este padrão:
 ```php
   class ProdutosController extends \HXPHP\System\Controller
   {
-    
+
     public function __construct()
     {
       parent::__construct();
@@ -130,7 +130,7 @@ Caso queira utilizar os valores das configurações e até mesmo recursos como o
 ```php
   class ProdutosController extends \HXPHP\System\Controller
   {
-    
+
     public function __construct($configs)
     {
       parent::__construct($configs);
@@ -148,9 +148,9 @@ Caso queira utilizar os valores das configurações e até mesmo recursos como o
 É muito comum que seja necessário o processo de redirecionamento nos *controllers*.
 
 Imagine o seguinte processo:
-`produtos/cadastrar/ **->** produtos/salvar/ **->** produtos/listar/`
+`produtos/cadastrar/ <b>-></b> produtos/salvar/ <b>-></b> produtos/listar/`
 
-Após o formulário ser processado e disparado para a *action* `**salvar**` será necessário um redirecionamento para a *action* `**listar**` e para fazermos isto utilizamos o seguinte código:
+Após o formulário ser processado e disparado para a *action* <code><b>salvar</b></code> será necessário um redirecionamento para a *action* <code><b>listar</b></code> e para fazermos isto utilizamos o seguinte código:
 
 
 ```php
