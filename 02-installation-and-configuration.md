@@ -61,7 +61,7 @@ Para alterá-la: `$configs->env->nomedoambiente->baseURI = '/hxphp/';`.
 
 Os módulos padrão de ambiente são: `Database` e `Mail`. Os módulos não são padronizados.
 
-Para criar um módulo é necessário salvá-lo na pasta: `/src/HXPHP/System/Configs/Modules/` e **adicioná-lo na lista de módulos** do arquivo `/src/HXPHP/System/Configs/RegisterModules.php`.
+Para criar um módulo é necessário salvá-lo na pasta: `/src/HXPHP/System/Configs/Modules/` e <b>adicioná-lo na lista de módulos</b> do arquivo `/src/HXPHP/System/Configs/RegisterModules.php`.
 
 
 Exemplo demonstrando o registro de um módulo qualquer chamado Youtube (RegisterModules.php):
@@ -194,4 +194,4 @@ Após constatar que o [Composer](https://getcomposer.org/download) está em plen
 
 ----
 
-**Para lhe auxiliar neste processo, confira essa série completa de videoaulas gratuitas sobre instalação e uso do Composer: [Série completa do canal HXTUTORS](https://goo.gl/9oQNr5)**
+<b>Para lhe auxiliar neste processo, confira essa série completa de videoaulas gratuitas sobre instalação e uso do Composer: [Série completa do canal HXTUTORS](https://goo.gl/9oQNr5)</b>
