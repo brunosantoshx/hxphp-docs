@@ -113,7 +113,7 @@ Algumas observações:
 + View parcial (app/views/partials/_message.phtml):
 ```php
 <h4 class="alert alert-success">
-     echo $view_msg; ?>
+    <?php echo $view_msg; ?>
 </h4>
 ```
 
