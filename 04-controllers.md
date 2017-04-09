@@ -38,7 +38,7 @@ Após salvar o arquivo, comece com o desenvolvimento de seu código e atente-se 
 Fique atento às seguintes características do código listado acima:
 
 + O nome da classe é igual ao nome do arquivo;
-+ Cada *controller* é uma extensão da classe mestre `<em>\HXPHP\System\Controller</em>`, e;
++ Cada *controller* é uma extensão da classe mestre `<i>\HXPHP\System\Controller</i>`, e;
 + A `indexAction()`, *action* padrão do controller, é executada automaticamente.
 
 Mas, afinal de contas o que são *actions*?
