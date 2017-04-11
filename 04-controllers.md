@@ -1,16 +1,16 @@
 ----
 
 ## Controllers {#controllers}
-Esta seção aborda a primeira das três camadas do padrão **MVC**.
+Esta seção aborda a primeira das três camadas do padrão <b>MVC</b>.
 
 ----
 ### O que são Controllers? {#o-que-sao-controllers}
 
-No padrão **MVC** existem basicamente três camadas: *Model*, *View* e *Controller*. 
+No padrão <b>MVC</b> existem basicamente três camadas: *Model*, *View* e *Controller*.
 
 O *controller* é o intermediário entre as outras duas camadas, ou seja, ele controla (daí o nome) todo o fluxo de informação do site/sistema.
 
-Em outras palavras, o *controller*, comumente chamado de **controlador**, tem como objetivo definir as propriedades da visualização (*view*), isto é, ele tem a função de condicionar, executar as regras de negócio(*models*), interpretar parâmetros, dentre muitas outras.
+Em outras palavras, o *controller*, comumente chamado de <b>controlador</b>, tem como objetivo definir as propriedades da visualização (*view*), isto é, ele tem a função de condicionar, executar as regras de negócio(*models*), interpretar parâmetros, dentre muitas outras.
 
 Resumindo, nesta camada é decidido o “se”, “o que”, “quando” e “onde” deve funcionar na nossa aplicação.
 
@@ -19,7 +19,7 @@ Resumindo, nesta camada é decidido o “se”, “o que”, “quando” e “o
 
 Agora que você já sabe o que é um *controller* e a sua importância para o funcionamento da aplicação, você poderá finalmente criar o seu primeiro *controller*. Para tal, siga estes passos:
 
-+ Defina o link desejado (Ex: http://site.com.br/`produtos`/ ou http://site.com.br/`lista-de-produtos`/);
++ Defina o link desejado (Ex: http://site.com.br/<code>produtos</code>/ ou http://site.com.br/<code>lista-de-produtos</code>/);
 + Crie um arquivo nomeado no padrão *CamelCase*; com o link desejado, sem espaços, hífens ou *underscores*; com o sufixo 'Controller', e; a extensão '.php'. Ou seja, para os exemplos acima, os controllers seriam: `ProdutosController.php` e `ListaDeProdutosController.php`;
 + Salve este arquivo na pasta: `app/controllers/`
 
@@ -38,7 +38,7 @@ Após salvar o arquivo, comece com o desenvolvimento de seu código e atente-se 
 Fique atento às seguintes características do código listado acima:
 
 + O nome da classe é igual ao nome do arquivo;
-+ Cada *controller* é uma extensão da classe mestre `*\HXPHP\System\Controller*`, e;
++ Cada *controller* é uma extensão da classe mestre <code><em>\HXPHP\System\Controller</em></code>, e;
 + A `indexAction()`, *action* padrão do controller, é executada automaticamente.
 
 Mas, afinal de contas o que são *actions*?
@@ -49,7 +49,7 @@ Mas, afinal de contas o que são *actions*?
 
 Após criar o *controller* é provável que seja necessário a criação de *actions* específicas e, para tal, siga estes passos:
 
-+ Defina o link desejado, por exemplo: http://site.com.br/produtos/`listar`/ , e;
++ Defina o link desejado, por exemplo: http://site.com.br/produtos/<code>listar</code>/ , e;
 + No *controller* desejado, crie um método `público` nomeado com o link desejado, sem espaços, hífens ou *underscores*; com o sufixo 'Action'.
 
 O código resultante do exemplo acima seria:
@@ -72,7 +72,7 @@ O erro 404, comumente chamado de *Error Not Found*, é um dos erros mais conheci
 
 Como já mencionado na seção de [funcionamento da URL](#funcionamento-da-url), os parâmetros que serão interpretados no controlador (*controller*) devem constar na URL, ou seja, é necessário que o *controller* e a *action* sejam definidos.
 
-Com estas condições atendidas tem-se a seguinte estrutura: 
+Com estas condições atendidas tem-se a seguinte estrutura:
 ```
   http://site.com.br/controller/action/parametro1/parametro2/parametro3/
 ```
@@ -94,10 +94,10 @@ O código resultante do exemplo acima seria:
 Algumas observações importantes:
 
 + Os parâmetros devem ser declarados como argumentos do método (*action*);
-+ Estes argumentos podem ser nomeados livremente, porém devem ter **obrigatoriamente um valor pré-definido**, por exemplo: `listarAction($categoria = '', $pagina = 1)`, e;
++ Estes argumentos podem ser nomeados livremente, porém devem ter <b>obrigatoriamente um valor pré-definido</b>, por exemplo: `listarAction($categoria = '', $pagina = 1)`, e;
 + Os argumentos devem ser declarados na mesma ordem que os parâmetros.
 
-Através deste mecanismo é possível ter `**N** parâmetros` e nomeá-los de forma sugestiva, o que possibilitará uma melhor experiência com seus códigos.
+Através deste mecanismo é possível ter <code><b>N</b> parâmetros</code> e nomeá-los de forma sugestiva, o que possibilitará uma melhor experiência com seus códigos.
 
 ----
 
@@ -115,7 +115,7 @@ Portanto, quando criar métodos construtores siga este padrão:
 ```php
   class ProdutosController extends \HXPHP\System\Controller
   {
-    
+
     public function __construct()
     {
       parent::__construct();
@@ -130,7 +130,7 @@ Caso queira utilizar os valores das configurações e até mesmo recursos como o
 ```php
   class ProdutosController extends \HXPHP\System\Controller
   {
-    
+
     public function __construct($configs)
     {
       parent::__construct($configs);
@@ -148,9 +148,9 @@ Caso queira utilizar os valores das configurações e até mesmo recursos como o
 É muito comum que seja necessário o processo de redirecionamento nos *controllers*.
 
 Imagine o seguinte processo:
-`produtos/cadastrar/ **->** produtos/salvar/ **->** produtos/listar/`
+<code>produtos/cadastrar/ <b>-></b> produtos/salvar/ <b>-></b> produtos/listar/</code>
 
-Após o formulário ser processado e disparado para a *action* `**salvar**` será necessário um redirecionamento para a *action* `**listar**` e para fazermos isto utilizamos o seguinte código:
+Após o formulário ser processado e disparado para a *action* <code><b>salvar</b></code> será necessário um redirecionamento para a *action* <code><b>listar</b></code> e para fazermos isto utilizamos o seguinte código:
 
 
 ```php

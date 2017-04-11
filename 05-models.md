@@ -1,11 +1,11 @@
 ----
 ## *Models* {#models}
-Nesta seção você irá conhecer mais uma das três camadas do padrão **MVC**.
+Nesta seção você irá conhecer mais uma das três camadas do padrão <b>MVC</b>.
 
 ----
 
 ### O que são *Models*? {#o-que-sao-models}
-Os *models*, comumente chamados de **modelos**, são responsáveis por todos os processos relacionados à dados. Ou seja, o processo de leitura, escrita e validação de dados é realizado nesta camada. Estas rotinas são chamadas de **regras de negócio**.
+Os *models*, comumente chamados de <b>modelos</b>, são responsáveis por todos os processos relacionados à dados. Ou seja, o processo de leitura, escrita e validação de dados é realizado nesta camada. Estas rotinas são chamadas de <b>regras de negócio</b>.
 
 O modelo acessa qualquer tipo de informação, isto é, desde um banco de dados até um arquivo *XML*.
 As informações obtidas no modelo são repassadas para o controlador que, mediante a necessidade, repassa para a visualização. Em outro caminho existe o envio de informações da visualização para o controlador; que, por sua vez, envia para o modelo, e; este consuma o processo realizando as devidas alterações nos dados.
@@ -19,10 +19,10 @@ Para aproveitar dos benefícios do *ORM* é necessário que o *model* herde as c
 
 O código base de um *model* é:
 ```php
-	class NomeDoModel extends \HXPHP\System\Model
-	{
-		...
-	}
+class NomeDoModel extends \HXPHP\System\Model
+{
+        ...
+}
 ```
 
 As convenções da nomenclatura dos *models* são ditas pelo *ORM* vigente, portanto estas serão abordadas em uma seção específica.
@@ -49,7 +49,7 @@ De toda forma, é recomendado que você leia a documentação oficial para compr
 A questão fundamental no uso deste *ORM* está nas convenções de nomenclatura das tabelas do banco de dados e dos *models*. Confira a lista das 5 principais:
 
 + Todas as tabelas devem ser nomeadas em INGLÊS;
-+ O nome do model é o **singular** do nome da tabela;
++ O nome do model é o <b>singular</b> do nome da tabela;
 + O nome do model deverá ser escrito no padrão CamelCase;
 + A chave primária deve ser 'id' e NÃO 'ID' ou 'Id', e;
 + {Tabela} login_attempts => {Model} LoginAttempt / lost_passwords => LostPassword.
@@ -59,13 +59,13 @@ A questão fundamental no uso deste *ORM* está nas convenções de nomenclatura
 ### *Model* na prática {#model-na-pratica}
 
 ```php
-	class Product extends \HXPHP\System\Model
-	{
-		static function exists($product_code)
-		{
-			$product = self::find_by_code($product_code);
+class Product extends \HXPHP\System\Model
+{
+    static function exists($product_code)
+    {
+        $product = self::find_by_code($product_code);
 
-			return !is_null($product) ? true : false;
-		}
-	}
+        return !is_null($product) ? true : false;
+    }
+}
 ```

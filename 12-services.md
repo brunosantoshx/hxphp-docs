@@ -32,15 +32,15 @@ Para facilitar a configuração deste serviço existe um módulo de configuraç�
 
 Configuração na prática:
 ```php
-	$configs->env->development->auth->setURLs(
-		'/hxphp/home/', 
-		'/hxphp/login/'
-	);
-	$configs->env->development->auth->setURLs(
-		'/hxphp/admin/home/', 
-		'/hxphp/admin/login/', 
-		'admin'
-	);
+$configs->env->development->auth->setURLs(
+    '/hxphp/home/',
+    '/hxphp/login/'
+);
+$configs->env->development->auth->setURLs(
+    '/hxphp/admin/home/',
+    '/hxphp/admin/login/',
+    'admin'
+);
 ```
 
 O módulo de configuração suporta 3 parâmetros:
@@ -51,39 +51,37 @@ O módulo de configuração suporta 3 parâmetros:
 
 Após definir todas as configurações, carregue o serviço no controller:
 ```php
-    class LoginController extends \HXPHP\System\Controller
+class LoginController extends \HXPHP\System\Controller
+{
+    public function __construct($configs)
     {
-    	public function __construct($configs)
-    	{
-            parent::__construct($configs);
+        parent::__construct($configs);
 
-            $this->load(
-				'Services\Auth',
-				$this->configs->auth->after_login,
-				$this->configs->auth->after_logout,
-				true,
-				$this->request->subfolder
-			);
-		
-			// Páginas públicas
-			$this->auth->redirectCheck(true);
+        $this->load('Services\Auth',
+            $this->configs->auth->after_login,
+            $this->configs->auth->after_logout,
+            true,
+            $this->request->subfolder
+        );
 
-			// Páginas privadas
-			//$this->auth->redirectCheck();
-    	}
+        // Páginas públicas
+        $this->auth->redirectCheck(true);
 
-		public function logarAction()
-		{
-			$this->auth->login(1, 'brunosantos', 'user');
-		}
-
-		public function sairAction()
-		{
-			$this->auth->logout();
-		}
+        // Páginas privadas
+        //$this->auth->redirectCheck();
     }
-```
 
+    public function logarAction()
+    {
+        $this->auth->login(1, 'brunosantos', 'user');
+    }
+
+    public function sairAction()
+    {
+        $this->auth->logout();
+    }
+}
+```
 
 Este serviço geralmente trabalha em conjunto com o *model* de usuários e autentica somente após todas as validações obterem sucesso.
 
@@ -99,10 +97,10 @@ O primeiro tem a função de definir o nome e e-mail do remetente e o segundo de
 
 Exemplo de configuração:
 ```php
-	$configs->env->development->mail->setFrom([
-		'from' => 'Remetente',
-		'from_mail' => 'email@remetente.com.br'
-	]);
+$configs->env->development->mail->setFrom([
+    'from' => 'Remetente',
+    'from_mail' => 'email@remetente.com.br'
+]);
 ```
 
 O serviço contém dois métodos:
@@ -110,20 +108,20 @@ O serviço contém dois métodos:
 + `setFrom(array $from)`, e;
 + `send(...)`.
 
-O método `setFrom()` do **módulo de configuração** tem os objetivos de definir as credenciais globais e tornar estes valores disponíveis no controller. Já o método do serviço é que definirá realmente qual será a credencial utilizada, isto é, tanto é possível utilizar as credenciais do módulo com o método `getFrom()` como também definir um valor diferente.
+O método `setFrom()` do <b>módulo de configuração</b> tem os objetivos de definir as credenciais globais e tornar estes valores disponíveis no controller. Já o método do serviço é que definirá realmente qual será a credencial utilizada, isto é, tanto é possível utilizar as credenciais do módulo com o método `getFrom()` como também definir um valor diferente.
 
 Exemplo de uso:
 ```php
-	$this->load('Services\Email');
+$this->load('Services\Email');
 
-	$this->email->setFrom([
-		'from' => 'Remetente',
-		'from_mail' => 'email@remetente.com.br'
-	]);
+$this->email->setFrom([
+    'from' => 'Remetente',
+    'from_mail' => 'email@remetente.com.br'
+]);
 
-	// ou
-	
-	$this->email->setFrom($this->configs->mail->getFrom());
+// ou
+
+$this->email->setFrom($this->configs->mail->getFrom());
 ```
 
 
@@ -140,30 +138,28 @@ Após executar o método `send()` ele retornará um booleano com o status do pro
 
 Serviço na prática:
 ```php
-    class ProdutosController extends \HXPHP\System\Controller
+class ProdutosController extends \HXPHP\System\Controller
+{
+    public function comprarAction()
     {
+        $this->load('Services\Email');
+        $this->email->setFrom($this->configs->mail->getFrom());
 
-        public function comprarAction()
-        {
-            $this->load('Services\Email');
-            $this->email->setFrom($this->configs->mail->getFrom());
+        $compraComSucesso = $this->email->send(
+            'fulano@email.com.br',
+            'Compra realizada com sucesso!',
+            'Mensagem',
+            [],
+            false
+        );
 
-            $compraComSucesso = $this->email->send(
-            	'fulano@email.com.br',
-            	'Compra realizada com sucesso!',
-            	'Mensagem',
-            	[],
-            	false
-            );
-
-            $outroEmail = $this->email->send(
-            	'fulano@email.com.br',
-            	'Outro e-mail',
-            	'Mensagem'
-            );
-        }
-
+        $outroEmail = $this->email->send(
+            'fulano@email.com.br',
+            'Outro e-mail',
+            'Mensagem'
+        );
     }
+}
 ```
 
 ----
@@ -176,23 +172,22 @@ Este link deve ser absoluto e ter **obrigatoriamente** uma `/` no final, pois o 
 O token é uma propriedade pública e deve ser utilizado para validar a autenticidade da redefinição durante todo o processo.
 
 Serviço na prática:
-```php        
-    class EsqueciASenhaController extends \HXPHP\System\Controller
+```php
+class EsqueciASenhaController extends \HXPHP\System\Controller
+{
+    public function enviarAction()
     {
-        public function enviarAction()
-        {
-            $this->load(
-                'Services\PasswordRecovery',
-                $this->configs->site->url . 
-                $this->configs->baseURI . 
-                'recuperar/redefinir/'
-            );
+        $this->load(
+            'Services\PasswordRecovery',
+            $this->configs->site->url .
+            $this->configs->baseURI .
+            'recuperar/redefinir/'
+        );
 
-            echo $this->passwordrecovery->link;
-            echo $this->passwordrecovery->token;
-        }
-
+        echo $this->passwordrecovery->link;
+        echo $this->passwordrecovery->token;
     }
+}
 ```
 
 
@@ -201,7 +196,7 @@ O token gerado deverá ser armazenado no banco de dados para validação futura 
 
 Obtenção do TOKEN:
 ```php
-    $token = $this->passwordrecovery->token;
+$token = $this->passwordrecovery->token;
 ```
 
 ----
@@ -212,15 +207,15 @@ O serviço de sessão tem a única finalidade de iniciar a sessão do PHP de for
 
 Serviço na prática:
 ```php
-	\HXPHP\System\Services\StartSession\StartSession::sec_session_start();
+\HXPHP\System\Services\StartSession\StartSession::sec_session_start();
 ```
 
 ----
 ### Serviço Simple cURL {#servico-simple-curl}
 
-É muito comum a necessidade de obter e enviar dados para URLs externas através de código. Existem diferentes formas de realizar esta tarefa e uma delas é com o uso da biblioteca cURL. 
+É muito comum a necessidade de obter e enviar dados para URLs externas através de código. Existem diferentes formas de realizar esta tarefa e uma delas é com o uso da biblioteca cURL.
 
-O framework contém um serviço que executa uma das aplicações mais comuns desta biblioteca. 
+O framework contém um serviço que executa uma das aplicações mais comuns desta biblioteca.
 
 O serviço *Simple cURL* contém um único método estático (`connect()`) que suporta 3 parâmetros:
 
@@ -238,14 +233,14 @@ Algumas observações:
 
 Serviço na prática:
 ```php
-	$retorno = \HXPHP\System\Services\SimplecURL\SimplecURL::connect(
-		'http://www.hxphp.com.br/produtos/novo',
-		array(
-			'name' => 'Curso Dominando o HXPHP Framework',
-			'description' => 'Lorem Ipsum'
-		),
-		array(
-			'token' => '1RSG6K2MV0PS2LVM01PD'
-		)
-	);
+$retorno = \HXPHP\System\Services\SimplecURL\SimplecURL::connect(
+    'http://www.hxphp.com.br/produtos/novo',
+    [
+        'name' => 'Curso Dominando o HXPHP Framework',
+        'description' => 'Lorem Ipsum'
+    ],
+    [
+        'token' => '1RSG6K2MV0PS2LVM01PD'
+    ]
+);
 ```
