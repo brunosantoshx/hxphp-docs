@@ -1,3 +1,5 @@
+## Sumário
+
 + [Informações essenciais](https://github.com/brunosantoshx/hxphp-docs/blob/master/01-essential-information.md)
 + [Instalação e configuração](https://github.com/brunosantoshx/hxphp-docs/blob/master/02-installation-and-configuration.md)
 + [Pontapé inicial](https://github.com/brunosantoshx/hxphp-docs/blob/master/03-kickoff.md)
