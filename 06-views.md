@@ -147,7 +147,7 @@ O método `partial()` suporta dois parâmetros:
 ----
 ### Links relativos {#links-relativos}
 
-Para adicionar um link em uma view geralmente é usada a constante `BASE` juntamente com o restante do caminho, porém, esta prática não é a mais recomendada, pois, é preciso alterar todos os links quando ocorre uma mudança de subpastas, por exemplo.
+Para adicionar um link relativo em uma view é possível usar a constante `BASE` juntamente com o restante do caminho, porém, esta prática não é a mais recomendada, pois, é preciso alterar todos os links quando ocorre uma mudança de subpastas, por exemplo.
 
 Técnica não recomendada:
 ```php
@@ -158,4 +158,20 @@ Se a estrutura de pastas for diferente no ambiente de produção será preciso e
 
 Os métodos `getRelativeURL()` e `printRelativeURL()` suportam dois parâmetros:
 + `(string) $URL` - Caminho que será "concatenado", e;
-+ `(bool) $controller` - Este parâmetro tem como objetivo definir se o `controller` atual será concatenado ou não. O valor `true` é usado quando o primeiro parâmetro é uma action com possíveis argumentos e o valor `false` é usado quando é necessário gerar um link relativo para outro controller.</code>.
++ `(bool) $controller` - Este parâmetro tem como objetivo definir se o `controller` atual será concatenado ou não. O valor `true` é usado quando o primeiro parâmetro é uma action com possíveis argumentos e o valor `false` é usado quando é necessário gerar um link relativo para outro controller.</code> O valor padrão é `true`.
+
+#### Exemplos
+
++ Técnica não recomendada (app/views/admin/cadastro.phtml):
+```php
+<form action="<?php echo BASE . 'admin/cadastro/cadastrar/'; ?>" method="post">
+  <a href="<?php echo BASE . 'admin/login/'; ?>">Fazer login</a>
+</form>
+```
+
++ <b>Técnica recomendada</b> (app/views/admin/cadastro.phtml):
+```php
+<form action="<?php $this->printRelativeURL('cadastrar'); ?>" method="post">
+  <a href="<?php $this->printRelativeURL('login', false); ?>">Fazer login</a>
+</form>
+```
