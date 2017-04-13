@@ -143,3 +143,8 @@ $this->partial('message', [
 O método `partial()` suporta dois parâmetros:
 + `$view` - Nome da view parcial sem o "_", e;
 + *(Opcional)* `$params` - Array associativo com dados que serão convertidos em variáveis para a view.
+
+----
+### Links relativos {#links-relativos}
+
+
