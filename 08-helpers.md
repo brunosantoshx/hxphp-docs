@@ -177,6 +177,7 @@ Exemplos:
 echo $this->menu->getMenu();
 ```
 
+----
 ### Table Helper {#table-helper}
 
 O Table Helper é responsável por criar, montar e exibir tabelas utilizando apenas o PHP.
