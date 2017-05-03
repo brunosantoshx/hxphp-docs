@@ -316,6 +316,64 @@ $this->table->addTagAttr('table', ['class'=>'table table-bordered']);
 ```
 Onde o primeiro parâmetro é nome de uma dessas 4 tags (table, thead, tbody ou tfoot), e o segundo parâmetro são os atributos, utilizando o mesmo padrão apresentado anteriormente.
 
+#### Criando templates para a tabela
+
+O template de tabela trata-se de um arquivo JSON. É basicamente um arquivo de configuração das _tags_ da tabela.
+Os templates devem ser colocados na pasta `templates/Helpers/Table`.
+
+Segue abaixo todas as configurações permitidas:
+```json
+{
+    "tag_table": "<table %s>%s</table>",
+    "tag_caption": "<caption %s>%s</caption>",
+    "tag_thead": "<thead %s>%s</thead>",
+    "tag_thead_row": "<tr %s>%s</tr>",
+    "tag_thead_cell": "<th %s>%s</th>",
+    "tag_tbody": "<tbody %s>%s</tbody>",
+    "tag_tbody_row": "<tr %s>%s</tr>",
+    "tag_tbody_cell": "<td %s>%s</td>",
+    "tag_tfoot": "<tfoot %s>%s</tfoot>",
+    "tag_tfoot_row": "<tr %s>%s</tr>",
+    "tag_tfoot_cell": "<td %s>%s</td>"
+}
+```
+
+Não é necessário inserir todas as _tags_. **Insira apenas as necessárias!**
+Exemplo:
+```json
+{
+    "tag_table": "<table %s class='tabela'>%s</table>",
+    "tag_tbody_cell": "<td %s>Valor: %s</td>"
+}
+```
+**Observação:** É obrigatório sempre colocar os dois coringas (_%s_), um para os atributos da tag, e outro para o conteúdo em si.
+
+#### Definindo template
+
+Para escolher um template de tabela, basta passá-lo como segundo argumento da função **load**.
+Não é necessário passar o caminho e a extensão do arquivo. Apenas o nome.
+Exemplo:
+```php
+$this->load('Helpers\Table', 'template-da-tabela');
+```
+
+#### Exemplo de template
+
+Há diversas utilidades de se usar um template customizado.
+Vamos supor que você necessite que todas as linhas da tabela comece com um _checkbox_.
+Para resolver esta situação, criamos um template com o nome '**tabela-com-inputs**' da seguinte maneira:
+```json
+{
+    "tag_tbody_row": "<tr %s> <td><input type='checkbox'></td> %s</tr>"
+}
+```
+Chamando no Controller:
+```php
+$this->load('Helpers\Table', 'tabela-com-inputs');
+```
+
+**Observação:** Não delete o template default.json.
+
 #### Exibindo a Tabela
 
 Há duas maneira de renderizar a tabela:
