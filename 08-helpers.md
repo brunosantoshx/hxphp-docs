@@ -265,14 +265,14 @@ Todas as funções citadas anteriormente aceitam um segundo parâmetro, que ser�
 Passaremos este parâmetro em forma de _array_.
 
 ```php
-$this->addRow(['Celula1', 'Celula2'], ['class' => 'primeira-linha']);
+$this->table->addRow(['Celula1', 'Celula2'], ['class' => 'primeira-linha']);
 //<tr class="primeira-linha"><td>Celula1</td><td>Celula2</td></tr>
 
-$this->addHeader(['Titulo1', 'Titulo2'],['id' => 'cabecalho']);
+$this->table->addHeader(['Titulo1', 'Titulo2'],['id' => 'cabecalho']);
 
-$this->addFooter(['Rodape1', 'Rodape2'], array('class' => 'tabela-rodape'));
+$this->table->addFooter(['Rodape1', 'Rodape2'], array('class' => 'tabela-rodape'));
 
-$this->addCaption('Titulo da Tabela', ['style'=>'color: red;']);
+$this->table->addCaption('Titulo da Tabela', ['style'=>'color: red;']);
 ```
 
 Simples não?
