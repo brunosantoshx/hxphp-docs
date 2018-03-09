@@ -1,3 +1,6 @@
+---
+currentMenu: informacoes-essenciais
+---
 ## Informações essenciais {#informacoes-essenciais}
 
 Esta seção contempla todos os cuidados e requisitos necessários para a instalação do HXPHP em sua máquina ou servidor.

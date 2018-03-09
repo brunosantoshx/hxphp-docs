@@ -1,3 +1,6 @@
+---
+currentMenu: storage
+---
 ## *Storage* {#storage}
 
 ### Sessões

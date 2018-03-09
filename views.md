@@ -1,3 +1,6 @@
+---
+currentMenu: views
+---
 ## *Views* {#views}
 
 Nesta seção você irá conhecer a última das três camadas do padrão <b>MVC</b>.

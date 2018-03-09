@@ -1,3 +1,6 @@
+---
+currentMenu: load
+---
 ## Método *load()* {#metodo-load}
 
 Esta seção aborda o carregamento de *Helpers*, Serviços, Módulos e outros componentes nos *Controllers*.

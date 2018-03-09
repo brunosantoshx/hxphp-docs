@@ -1,3 +1,6 @@
+---
+currentMenu: http
+---
 ## *HTTP* {#http}
 
 Nesta seção você irá conhecer o processo de obtenção de dados via requisições HTTP.

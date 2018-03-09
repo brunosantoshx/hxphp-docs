@@ -1,3 +1,6 @@
+---
+currentMenu: pontape-inicial
+---
 ## Pontapé inicial {#pontape-inicial}
 Esta seção aborda o funcionamento do framework e suas características.
 

@@ -1,3 +1,6 @@
+---
+currentMenu: controllers
+---
 ## Controllers {#controllers}
 Esta seção aborda a primeira das três camadas do padrão <b>MVC</b>.
 

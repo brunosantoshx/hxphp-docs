@@ -1,3 +1,6 @@
+---
+currentMenu: modulos
+---
 ## *Módulos* {#modulos}
 
 Nesta seção você irá conhecer os módulos.

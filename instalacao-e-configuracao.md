@@ -1,3 +1,6 @@
+---
+currentMenu: instalacao-e-configuracao
+---
 ## Instalação e Configuração {#instalacao-e-configuracao}
 
 Esta seção contempla os procedimentos de instalação e configuração do framework.

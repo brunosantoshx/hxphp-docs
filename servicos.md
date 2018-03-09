@@ -1,3 +1,6 @@
+---
+currentMenu: servicos
+---
 ## Serviços {#servicos}
 
 Nesta seção você irá conhecer os serviços nativos do HXPHP Framework.

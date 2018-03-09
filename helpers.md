@@ -1,3 +1,6 @@
+---
+currentMenu: helpers
+---
 ## *Helpers* {#helpers}
 
 Esta seção aborda os *Helpers* do HXPHP.
