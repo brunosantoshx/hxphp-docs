@@ -13,9 +13,44 @@ menu:
         main:
             name: 
             items:
-                essential-information:
+                informacoes-essenciais:
                     text: Informações essenciais
-                    # You can use relative urls
-                    relativeUrl: informacoes-essenciais.html
+                    relativeUrl: index.html
+                instalacao-e-configuracao:
+                    text: Instalação e configuração
+                    relativeUrl: instalacao-e-configuracao.html
+                pontape-inicial:
+                    text: Pontapé inicial
+                    relativeUrl: pontape-inicial.html
+                controllers:
+                    text: Controllers
+                    relativeUrl: controllers.html
+                models:
+                    text: Models
+                    relativeUrl: models.html
+                views:
+                    text: Views
+                    relativeUrl: views.html
+                load:
+                    text: Método load
+                    relativeUrl: load.html
+                helpers:
+                    text: Helpers
+                    relativeUrl: helpers.html
+                http:
+                    text: HTTP
+                    relativeUrl: http.html
+                storage:
+                    text: Storage
+                    relativeUrl: storage.html
+                modulos:
+                    text: Módulos
+                    relativeUrl: modulos.html
+                servicos:
+                    text: Serviços
+                    relativeUrl: servicos.html
+                utilitarios:
+                    text: Utilitários
+                    relativeUrl: utilitarios.html
 
 baseUrl: https://hxphp.github.io/docs/

@@ -12,4 +12,4 @@
 10. [Storage](https://github.com/brunosantoshx/hxphp-docs/blob/master/storage.md)
 11. [Módulos](https://github.com/brunosantoshx/hxphp-docs/blob/master/modulos.md)
 12. [Serviços](https://github.com/brunosantoshx/hxphp-docs/blob/master/servicos.md)
-13. [Utilitários](https://github.com/brunosantoshx/hxphp-docs/blob/master/tools.md)
+13. [Utilitários](https://github.com/brunosantoshx/hxphp-docs/blob/master/utilitarios.md)
