@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>HXPHP Framework</title>
+
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="https://hxphp.github.io/docs/">
+                HXPHP Framework
+                <small class="hidden-xs hidden-sm">
+                    Documentação Oficial
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                                                    <p class="text-muted">
+                                
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/informacoes-essenciais.html">
+                                            Informações essenciais
+                                        </a>
+                                    </li>
+                                                            </ul>
+                        
+                    </nav>
+
+                
+                <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h2 id="storage"><em>Storage</em></h2>
+<h3 id="sesses">Sessões</h3>
+<p>Para trabalhar com sessões é necessário utilizar os recursos de <em>Storage</em>. Para tal, utiliza-se o objeto <em>Session</em> que contém os seguintes métodos:</p>
+<pre><code class="language-php">class ProdutosController
+{
+    public function listarAction()
+    {
+        $this-&gt;load('Storage\Session');
+
+        $this-&gt;session-&gt;set('name', 'value'); //Cria uma sessão
+        echo $this-&gt;session-&gt;get('name'); //Seleciona uma sessão
+        $this-&gt;session-&gt;clear('name'); //Exclui uma sessão
+        print_r($this-&gt;session-&gt;exists('name')); //Verifica a existência de uma sessão
+    }
+}</code></pre>
+<h3 id="cookies">Cookies</h3>
+<p>Para trabalhar com <em>cookies</em> utiliza-se o objeto <em>Cookie</em> que contém os seguintes métodos:</p>
+<ul>
+<li><code>set()</code>;</li>
+<li><code>exists()</code>;</li>
+<li><code>get()</code>, e;</li>
+<li><code>clear()</code>.</li>
+</ul>
+<pre><code class="language-php">class ProdutosController
+{
+    public function listarAction()
+    {
+        $this-&gt;load('Storage\Cookie');
+
+        $this-&gt;cookie-&gt;set('name', 'value', '31556926'); //Cria um cookie ($name, $value, $time)
+        echo $this-&gt;cookie-&gt;get('name'); //Seleciona um cookie
+        $this-&gt;cookie-&gt;clear('name'); // Exclui um cookie
+        print_r($this-&gt;cookie-&gt;exists('name')); //Verifica a existência do cookie
+    }
+}</code></pre>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

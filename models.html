@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>HXPHP Framework</title>
+
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="https://hxphp.github.io/docs/">
+                HXPHP Framework
+                <small class="hidden-xs hidden-sm">
+                    Documentação Oficial
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                                                    <p class="text-muted">
+                                
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/informacoes-essenciais.html">
+                                            Informações essenciais
+                                        </a>
+                                    </li>
+                                                            </ul>
+                        
+                    </nav>
+
+                
+                <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h2 id="models"><em>Models</em></h2>
+<p>Nesta seção você irá conhecer mais uma das três camadas do padrão <b>MVC</b>.</p>
+<hr />
+<h3 id="o-que-sao-models">O que são <em>Models</em>?</h3>
+<p>Os <em>models</em>, comumente chamados de <b>modelos</b>, são responsáveis por todos os processos relacionados à dados. Ou seja, o processo de leitura, escrita e validação de dados é realizado nesta camada. Estas rotinas são chamadas de <b>regras de negócio</b>.</p>
+<p>O modelo acessa qualquer tipo de informação, isto é, desde um banco de dados até um arquivo <em>XML</em>.
+As informações obtidas no modelo são repassadas para o controlador que, mediante a necessidade, repassa para a visualização. Em outro caminho existe o envio de informações da visualização para o controlador; que, por sua vez, envia para o modelo, e; este consuma o processo realizando as devidas alterações nos dados.</p>
+<hr />
+<h3 id="criando-models">Criando <em>Models</em></h3>
+<p>Agora que você já sabe o que é um <em>model</em>, deve se atentar para os detalhes na criação do mesmo. Quando um <em>model</em> é criado com o objetivo de manipular uma tabela do banco de dados é mais do que recomendado que este seja desenvolvido nos padrões do <em>ORM</em> vigente do framework (vide mais detalhes abaixo).</p>
+<p>Para aproveitar dos benefícios do <em>ORM</em> é necessário que o <em>model</em> herde as configurações dele e, para tal, é necessário que o seu <em>model</em> seja uma extensão da classe mestre <code>\HXPHP\System\Model</code>.</p>
+<p>O código base de um <em>model</em> é:</p>
+<pre><code class="language-php">class NomeDoModel extends \HXPHP\System\Model
+{
+        ...
+}</code></pre>
+<p>As convenções da nomenclatura dos <em>models</em> são ditas pelo <em>ORM</em> vigente, portanto estas serão abordadas em uma seção específica.</p>
+<hr />
+<h3 id="orm-php-activerecord"><em>ORM</em> PHP ActiveRecord</h3>
+<p><em>ORM</em>, da sigla <em>Object-relational mapping</em>, tem a seguinte definição de acordo com a <a href="http://pt.wikipedia.org/wiki/Mapeamento_objeto-relacional">Wikipedia</a>:</p>
+<blockquote>
+<p>&quot;Mapeamento objeto-relacional (ou ORM, do inglês: Object-relational mapping) é uma técnica de desenvolvimento utilizada para reduzir a impedância da programação orientada aos objetos utilizando bancos de dados relacionais. As tabelas do banco de dados são representadas através de classes e os registros de cada tabela são representados como instâncias das classes correspondentes.</p>
+<p>Com esta técnica, o programador não precisa se preocupar com os comandos em linguagem SQL; ele irá usar uma interface de programação simples que faz todo o trabalho de persistência.</p>
+<p>Não é necessária uma correspondência direta entre as tabelas de dados e as classes do programa. A relação entre as tabelas onde originam os dados e o objecto que os disponibiliza é configurada pelo programador, isolando o código do programa das alterações à organização dos dados nas tabelas do banco de dados.&quot;</p>
+</blockquote>
+<p>Em outras palavras, com o uso de um <em>ORM</em> torna-se pouco provável o uso de comandos SQL nos códigos.</p>
+<p>A lógica é a seguinte: para cada tabela tem-se um <em>model</em>; sendo que cada <em>model</em> é um objeto, e; o <em>model</em> é uma extensão da classe mestre do <em>ORM</em>.</p>
+<p>O <em>ORM</em> nativo do HXPHP Framework é o <a href="http://phpactiverecord.org/">PHP ActiveRecord</a>, que é uma biblioteca <em>open source</em> desenvolvida nos padrões <a href="http://en.wikipedia.org/wiki/Active_record_pattern">ActiveRecord</a>. Trata-se de uma ferramenta de simples instalação e com uma sintaxe fácil, ou seja, além de ser fácil a sua implementação, o mesmo ainda conta com um nível mais do que considerável de legibilidade até mesmo para quem nunca ouviu falar deste <em>ORM</em>, pois, somente pelos métodos, nomeados de forma sugestiva, já é possível compreender o funcionamento.
+De toda forma, é recomendado que você leia a documentação oficial para compreender todos os recursos e possibilidades.</p>
+<h4 id="convenes">Convenções</h4>
+<p>A questão fundamental no uso deste <em>ORM</em> está nas convenções de nomenclatura das tabelas do banco de dados e dos <em>models</em>. Confira a lista das 5 principais:</p>
+<ul>
+<li>Todas as tabelas devem ser nomeadas em INGLÊS;</li>
+<li>O nome do model é o <b>singular</b> do nome da tabela;</li>
+<li>O nome do model deverá ser escrito no padrão CamelCase;</li>
+<li>A chave primária deve ser 'id' e NÃO 'ID' ou 'Id', e;</li>
+<li>{Tabela} login_attempts =&gt; {Model} LoginAttempt / lost_passwords =&gt; LostPassword.</li>
+</ul>
+<hr />
+<h3 id="model-na-pratica"><em>Model</em> na prática</h3>
+<pre><code class="language-php">class Product extends \HXPHP\System\Model
+{
+    static function exists($product_code)
+    {
+        $product = self::find_by_code($product_code);
+
+        return !is_null($product) ? true : false;
+    }
+}</code></pre>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

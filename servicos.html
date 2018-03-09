@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>HXPHP Framework</title>
+
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="https://hxphp.github.io/docs/">
+                HXPHP Framework
+                <small class="hidden-xs hidden-sm">
+                    Documentação Oficial
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                                                    <p class="text-muted">
+                                
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/informacoes-essenciais.html">
+                                            Informações essenciais
+                                        </a>
+                                    </li>
+                                                            </ul>
+                        
+                    </nav>
+
+                
+                <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h2 id="servicos">Serviços</h2>
+<p>Nesta seção você irá conhecer os serviços nativos do HXPHP Framework.</p>
+<hr />
+<h3 id="o-que-sao-servicos">O que são Serviços?</h3>
+<p>Serviços são objetos que executam uma ação específica, ou seja, o serviço de autenticação tem como objetivo autenticar o usuário e assim por diante. Os serviços do HXPHP Framework são armazenados na pasta <code>src/HXPHP/System/Services/</code>.</p>
+<hr />
+<h3 id="servicos-lista">Serviço de Autenticação</h3>
+<p>Este serviço contém os seguintes métodos:</p>
+<ul>
+<li><code>login($user_id, $username, $user_role)</code> - Autentica o usuário;</li>
+<li><code>logout()</code> - Exclui sessões de autenticação;</li>
+<li><code>redirectCheck($public_page)</code> - Redireciona o usuário mediante condições;</li>
+<li><code>roleCheck(array $roles)</code> - Verifica o nível de acesso e redireciona caso seja necessário;</li>
+<li><code>login_check()</code> - Verifica se o usuário está autenticado;</li>
+<li><code>getUserRole()</code> - Retorna o nível de acesso do usuário autenticado, e;</li>
+<li><code>getUserId()</code> - Retorna o Id do usuário autenticado.</li>
+</ul>
+<p>Este serviço suporta 4 parâmetros de configuração no método construtor:</p>
+<ul>
+<li>URL de redirecionamento após o login bem sucedido;</li>
+<li>URL de redirecionamento após o logout;</li>
+<li><em>(Opcional)</em> Booleano que determina se o redirecionamento será automático no método <code>login(...);</code> e <code>logout()</code>, e;</li>
+<li><em>(Opcional)</em> Subpasta que permite diferenciar autenticações para múltiplas aplicações.</li>
+</ul>
+<p>Para facilitar a configuração deste serviço existe um módulo de configuração. Portanto, ao invés de setar os valores repetidamente em todos os carregamentos do serviço, pode-se centralizar no arquivo de configuração <code>app/config.php</code>.</p>
+<p>Configuração na prática:</p>
+<pre><code class="language-php">$configs-&gt;env-&gt;development-&gt;auth-&gt;setURLs(
+    '/hxphp/home/',
+    '/hxphp/login/'
+);
+$configs-&gt;env-&gt;development-&gt;auth-&gt;setURLs(
+    '/hxphp/admin/home/',
+    '/hxphp/admin/login/',
+    'admin'
+);</code></pre>
+<p>O módulo de configuração suporta 3 parâmetros:</p>
+<ul>
+<li>URL after login;</li>
+<li>URL after logout, e;</li>
+<li><em>(Opcional)</em> Subpasta.</li>
+</ul>
+<p>Após definir todas as configurações, carregue o serviço no controller:</p>
+<pre><code class="language-php">class LoginController extends \HXPHP\System\Controller
+{
+    public function __construct($configs)
+    {
+        parent::__construct($configs);
+
+        $this-&gt;load('Services\Auth',
+            $this-&gt;configs-&gt;auth-&gt;after_login,
+            $this-&gt;configs-&gt;auth-&gt;after_logout,
+            true,
+            $this-&gt;request-&gt;subfolder
+        );
+
+        // Páginas públicas
+        $this-&gt;auth-&gt;redirectCheck(true);
+
+        // Páginas privadas
+        //$this-&gt;auth-&gt;redirectCheck();
+    }
+
+    public function logarAction()
+    {
+        $this-&gt;auth-&gt;login(1, 'brunosantos', 'user');
+    }
+
+    public function sairAction()
+    {
+        $this-&gt;auth-&gt;logout();
+    }
+}</code></pre>
+<p>Este serviço geralmente trabalha em conjunto com o <em>model</em> de usuários e autentica somente após todas as validações obterem sucesso.</p>
+<hr />
+<h3 id="servico-de-e-mail">Serviço de E-mail</h3>
+<p>O serviço de e-mail também conta um módulo de configuração. Este módulo contém dois métodos:</p>
+<ul>
+<li><code>setFrom(array $from)</code>, e;</li>
+<li><code>getFrom()</code>.</li>
+</ul>
+<p>O primeiro tem a função de definir o nome e e-mail do remetente e o segundo de obter estes valores.</p>
+<p>Exemplo de configuração:</p>
+<pre><code class="language-php">$configs-&gt;env-&gt;development-&gt;mail-&gt;setFrom([
+    'from' =&gt; 'Remetente',
+    'from_mail' =&gt; 'email@remetente.com.br'
+]);</code></pre>
+<p>O serviço contém dois métodos:</p>
+<ul>
+<li><code>setFrom(array $from)</code>, e;</li>
+<li><code>send(...)</code>.</li>
+</ul>
+<p>O método <code>setFrom()</code> do <b>módulo de configuração</b> tem os objetivos de definir as credenciais globais e tornar estes valores disponíveis no controller. Já o método do serviço é que definirá realmente qual será a credencial utilizada, isto é, tanto é possível utilizar as credenciais do módulo com o método <code>getFrom()</code> como também definir um valor diferente.</p>
+<p>Exemplo de uso:</p>
+<pre><code class="language-php">$this-&gt;load('Services\Email');
+
+$this-&gt;email-&gt;setFrom([
+    'from' =&gt; 'Remetente',
+    'from_mail' =&gt; 'email@remetente.com.br'
+]);
+
+// ou
+
+$this-&gt;email-&gt;setFrom($this-&gt;configs-&gt;mail-&gt;getFrom());</code></pre>
+<p>Já o método <code>send()</code>, responsável pelo envio, suporta os seguintes parâmetros:</p>
+<ul>
+<li>E-mail para qual será enviada a mensagem;</li>
+<li>Assunto da mensagem;</li>
+<li>Mensagem;</li>
+<li><em>(Opcional)</em> Credenciais, e;</li>
+<li>Tipo do e-mail (Padrão: <code>true</code>; Caso seja setado como <code>false</code> o e-mail será enviado sem tags HTML).</li>
+</ul>
+<p>Após executar o método <code>send()</code> ele retornará um booleano com o status do processo.</p>
+<p>Serviço na prática:</p>
+<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
+{
+    public function comprarAction()
+    {
+        $this-&gt;load('Services\Email');
+        $this-&gt;email-&gt;setFrom($this-&gt;configs-&gt;mail-&gt;getFrom());
+
+        $compraComSucesso = $this-&gt;email-&gt;send(
+            'fulano@email.com.br',
+            'Compra realizada com sucesso!',
+            'Mensagem',
+            [],
+            false
+        );
+
+        $outroEmail = $this-&gt;email-&gt;send(
+            'fulano@email.com.br',
+            'Outro e-mail',
+            'Mensagem'
+        );
+    }
+}</code></pre>
+<hr />
+<h3 id="servico-de-redefinicao-de-senhas">Serviço de Redefinição de Senhas</h3>
+<p>Este serviço também é extremamente simples e requer um único parâmetro no método construtor que é o link para o controller e action responsáveis pelo processo de redefinir a senha.</p>
+<p>Este link deve ser absoluto e ter <strong>obrigatoriamente</strong> uma <code>/</code> no final, pois o serviço concatena este valor com o token gerado.</p>
+<p>O token é uma propriedade pública e deve ser utilizado para validar a autenticidade da redefinição durante todo o processo.</p>
+<p>Serviço na prática:</p>
+<pre><code class="language-php">class EsqueciASenhaController extends \HXPHP\System\Controller
+{
+    public function enviarAction()
+    {
+        $this-&gt;load(
+            'Services\PasswordRecovery',
+            $this-&gt;configs-&gt;site-&gt;url .
+            $this-&gt;configs-&gt;baseURI .
+            'recuperar/redefinir/'
+        );
+
+        echo $this-&gt;passwordrecovery-&gt;link;
+        echo $this-&gt;passwordrecovery-&gt;token;
+    }
+}</code></pre>
+<p>O token gerado deverá ser armazenado no banco de dados para validação futura e conclusão do processo.</p>
+<p>Obtenção do TOKEN:</p>
+<pre><code class="language-php">$token = $this-&gt;passwordrecovery-&gt;token;</code></pre>
+<hr />
+<h3 id="servico-de-sessao">Serviço de Sessão</h3>
+<p>O serviço de sessão tem a única finalidade de iniciar a sessão do PHP de forma personalizada, para tal, utiliza-se o método estático <code>sec_session_start()</code>.</p>
+<p>Serviço na prática:</p>
+<pre><code class="language-php">\HXPHP\System\Services\StartSession\StartSession::sec_session_start();</code></pre>
+<hr />
+<h3 id="servico-simple-curl">Serviço Simple cURL</h3>
+<p>É muito comum a necessidade de obter e enviar dados para URLs externas através de código. Existem diferentes formas de realizar esta tarefa e uma delas é com o uso da biblioteca cURL.</p>
+<p>O framework contém um serviço que executa uma das aplicações mais comuns desta biblioteca.</p>
+<p>O serviço <em>Simple cURL</em> contém um único método estático (<code>connect()</code>) que suporta 3 parâmetros:</p>
+<ul>
+<li>URL alvo;</li>
+<li><em>(Opcional)</em> $post;</li>
+<li><em>(Opcional)</em> $get;</li>
+</ul>
+<p>O funcionamento consiste em acessar a URL alvo e enviar os parâmetros via POST ou GET mediante o preenchimento dos respectivos parâmetros.</p>
+<p>Algumas observações:</p>
+<ul>
+<li>O serviço conta com a configuração <code>CURLOPT_FOLLOWLOCATION</code> definida como <code>true</code>, isto é, a cURL está configurada para seguir qualquer redirecionamento, e;</li>
+<li>A configuração <code>CURLOPT_RETURNTRANSFER</code> também está definida como <code>true</code>, isto é, o valor é retornado ao invés de impresso.</li>
+</ul>
+<p>Serviço na prática:</p>
+<pre><code class="language-php">$retorno = \HXPHP\System\Services\SimplecURL\SimplecURL::connect(
+    'http://www.hxphp.com.br/produtos/novo',
+    [
+        'name' =&gt; 'Curso Dominando o HXPHP Framework',
+        'description' =&gt; 'Lorem Ipsum'
+    ],
+    [
+        'token' =&gt; '1RSG6K2MV0PS2LVM01PD'
+    ]
+);</code></pre>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>
