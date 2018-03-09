@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>HXPHP Framework</title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                HXPHP Framework
+                <small class="hidden-xs hidden-sm">
+                    Documentation
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container">
+            <div class="row">
+
+                
+                <section class="col-sm-12">
+                    <h2 id="sumrio">Sumário</h2>
+<ol>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/01-essential-information.html">Informações essenciais</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/02-installation-and-configuration.html">Instalação e configuração</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/03-kickoff.html">Pontapé inicial</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/04-controllers.html">Controllers</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/05-models.html">Models</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/06-views.html">Views</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/07-load.html">Método Load</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/08-helpers.html">Helpers</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/09-http.html">HTTP</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/10-storage.html">Storage</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/11-modules.html">Módulos</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/12-services.html">Serviços</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/13-tools.html">Utilitários</a></li>
+</ol>
+<hr />
+<h2 id="metodo-load">7. Método <em>load()</em></h2>
+<p>Esta seção aborda o carregamento de <em>Helpers</em>, Serviços, Módulos e outros componentes nos <em>Controllers</em>.</p>
+<hr />
+<p>Para utilizar os <em>helpers</em> e demais componentes do framework, tanto na view como no controller, é necessário &quot;injetar&quot; o objeto no controller através do método <code>load()</code>. Este método contém apenas um argumento obrigatório que é a <b>localização do objeto</b>. É necessário informar a <em>namespace</em> correspondente e o nome do objeto. A <em>namespace</em>, em suma, é o nome da pasta <em>(considerando a pasta System como raiz)</em> em que o objeto se encontra.</p>
+<p>Os demais argumentos informados no método <code>load('Helpers\NomeDoHelper', $param1, $param2, $paramN)</code> serão utilizados como argumentos no método construtor do objeto que será carregado.</p>
+<p><em>O código resultante seria:</em></p>
+<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
+{
+    public function indexAction()
+    {
+        $this-&gt;load('Helpers\NomeDoHelper', 'param1', 'param2');
+        $this-&gt;load('Modules\NomeDoModulo', 'param1', 'param2');
+        $this-&gt;load('Storage\Session');
+        $this-&gt;load('Services\Email');
+
+        $this-&gt;nomedohelper-&gt;metodo();
+        echo $this-&gt;nomedomodulo-&gt;propriedade;
+        ...
+    }
+}</code></pre>
+<p>Após injetar o objeto, no controller, cria-se um atributo com o seu nome no padrão <em>lowercase</em>.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+        <!-- Livereload -->
+        <script>
+            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+                    ':35729/livereload.js?snipver=1"></' + 'script>')
+        </script>
+        <!-- End Livereload -->
+    </body>
+</html>

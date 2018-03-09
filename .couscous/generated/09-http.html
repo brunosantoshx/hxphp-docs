@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>HXPHP Framework</title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                HXPHP Framework
+                <small class="hidden-xs hidden-sm">
+                    Documentation
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container">
+            <div class="row">
+
+                
+                <section class="col-sm-12">
+                    <h2 id="sumrio">Sumário</h2>
+<ol>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/01-essential-information.html">Informações essenciais</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/02-installation-and-configuration.html">Instalação e configuração</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/03-kickoff.html">Pontapé inicial</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/04-controllers.html">Controllers</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/05-models.html">Models</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/06-views.html">Views</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/07-load.html">Método Load</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/08-helpers.html">Helpers</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/09-http.html">HTTP</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/10-storage.html">Storage</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/11-modules.html">Módulos</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/12-services.html">Serviços</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/13-tools.html">Utilitários</a></li>
+</ol>
+<hr />
+<h2 id="http">9. <em>HTTP</em></h2>
+<p>Nesta seção você irá conhecer o processo de obtenção de dados via requisições HTTP.</p>
+<hr />
+<h3 id="request">HTTP Request</h3>
+<p>Para a obtenção de dados de requisições como <b>POST</b> e <b>GET</b> é necessário utilizar o objeto <em>Request</em>.</p>
+<p>As vantagens são muitas e dentre as principais destaca-se a maior segurança, visto que os dados são tratados nativamente.</p>
+<p>O objeto <em>Request</em> contém os seguintes métodos:</p>
+<p><b>Customização</b></p>
+<ul>
+<li><code>setCustomFilters()</code>;</li>
+</ul>
+<p><b>Obtenção de dados</b></p>
+<ul>
+<li><code>cookie()</code>;</li>
+<li><code>get()</code>;</li>
+<li><code>post()</code>;</li>
+<li><code>server()</code>;</li>
+<li><code>getMethod()</code>;</li>
+</ul>
+<p><b>Validação</b></p>
+<ul>
+<li><code>isValid()</code>;</li>
+<li><code>isPost()</code>;</li>
+<li><code>isGet()</code>;</li>
+<li><code>isPut()</code>, e;</li>
+<li><code>isHead()</code>.</li>
+</ul>
+<p>O método <code>setCustomFilters()</code> tem o objetivo de customizar os filtros de tratamento aplicados aos dados das requisições. Para tal, é necessário informar um <b><em>array</em> associativo</b> com o índice igual ao nome do campo e o valor com a constante de filtro. Leia: <a href="http://php.net/manual/en/filter.filters.sanitize.php"><a href="http://php.net/manual/en/filter.filters.sanitize.php">http://php.net/manual/en/filter.filters.sanitize.php</a></a>. Por padrão, o filtro aplicado em todos os dados é o <code>FILTER_SANITIZE_STRING</code> que evita a injeção de códigos HTML.</p>
+<p>O código resultante seria:</p>
+<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
+{
+    public function salvarAction()
+    {
+        $this-&gt;request-&gt;setCustomFilters([
+            'namedoinput' =&gt; FILTER_SANITIZE_NUMBER_FLOAT
+        ]);
+    }
+}</code></pre>
+<h3 id="trabalhando-com-checkboxes-multiple-selects-e-semelhantes">Trabalhando com checkboxes, multiple selects e semelhantes</h3>
+<p>Como o filtro padrão trata os dados para <code>STRING</code>, isto afeta a obtenção de dados de campos que enviam múltiplas informações. A solução é bem simples:</p>
+<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
+{
+    public function salvarAction()
+    {
+        $this-&gt;request-&gt;setCustomFilters([
+            'id' =&gt; [
+                'filter' =&gt; FILTER_SANITIZE_NUMBER_INT,
+                'flags' =&gt; FILTER_FORCE_ARRAY
+            ]
+        ]);
+    }
+}</code></pre>
+<p>No exemplo acima, utilizamos a <em>flag</em> <code>FILTER_FORCE_ARRAY</code> que irá sempre retornar um array no campo definido e em conjunto com um filtro para tratar os valores para números inteiros.</p>
+<p>Já os métodos <code>get()</code> e <code>post()</code> retornam os dados filtrados, sendo que é possível retornar todo o conteúdo ou apenas um dado específico.</p>
+<p>O código resultante seria:</p>
+<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
+{
+    public function salvarAction()
+    {
+        $this-&gt;request-&gt;setCustomFilters([
+            'nomedocampo' =&gt; FILTER_SANITIZE_NUMBER_FLOAT
+        ]);
+
+        print_r($this-&gt;request-&gt;post()); //Array com todos os dados enviados via POST
+        echo $this-&gt;request-&gt;post('nomedocampo'); //Apenas o conteúdo do campo valor
+
+        echo $this-&gt;request-&gt;server('SERVER_NAME');
+    }
+}</code></pre>
+<p>E, por fim, têm-se os métodos: <code>getMethod()</code>, <code>isPost()</code>, <code>isGet()</code>, <code>isPut()</code> e <code>isHead()</code> que tem como função determinar qual é o método de requisição.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+        <!-- Livereload -->
+        <script>
+            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+                    ':35729/livereload.js?snipver=1"></' + 'script>')
+        </script>
+        <!-- End Livereload -->
+    </body>
+</html>

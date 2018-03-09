@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>HXPHP Framework</title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                HXPHP Framework
+                <small class="hidden-xs hidden-sm">
+                    Documentation
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container">
+            <div class="row">
+
+                
+                <section class="col-sm-12">
+                    <h2 id="sumrio">Sumário</h2>
+<ol>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/01-essential-information.html">Informações essenciais</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/02-installation-and-configuration.html">Instalação e configuração</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/03-kickoff.html">Pontapé inicial</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/04-controllers.html">Controllers</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/05-models.html">Models</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/06-views.html">Views</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/07-load.html">Método Load</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/08-helpers.html">Helpers</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/09-http.html">HTTP</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/10-storage.html">Storage</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/11-modules.html">Módulos</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/12-services.html">Serviços</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/13-tools.html">Utilitários</a></li>
+</ol>
+<hr />
+<h2 id="storage">10. <em>Storage</em></h2>
+<h3 id="sesses">Sessões</h3>
+<p>Para trabalhar com sessões é necessário utilizar os recursos de <em>Storage</em>. Para tal, utiliza-se o objeto <em>Session</em> que contém os seguintes métodos:</p>
+<pre><code class="language-php">class ProdutosController
+{
+    public function listarAction()
+    {
+        $this-&gt;load('Storage\Session');
+
+        $this-&gt;session-&gt;set('name', 'value'); //Cria uma sessão
+        echo $this-&gt;session-&gt;get('name'); //Seleciona uma sessão
+        $this-&gt;session-&gt;clear('name'); //Exclui uma sessão
+        print_r($this-&gt;session-&gt;exists('name')); //Verifica a existência de uma sessão
+    }
+}</code></pre>
+<h3 id="cookies">Cookies</h3>
+<p>Para trabalhar com <em>cookies</em> utiliza-se o objeto <em>Cookie</em> que contém os seguintes métodos:</p>
+<ul>
+<li><code>set()</code>;</li>
+<li><code>exists()</code>;</li>
+<li><code>get()</code>, e;</li>
+<li><code>clear()</code>.</li>
+</ul>
+<pre><code class="language-php">class ProdutosController
+{
+    public function listarAction()
+    {
+        $this-&gt;load('Storage\Cookie');
+
+        $this-&gt;cookie-&gt;set('name', 'value', '31556926'); //Cria um cookie ($name, $value, $time)
+        echo $this-&gt;cookie-&gt;get('name'); //Seleciona um cookie
+        $this-&gt;cookie-&gt;clear('name'); // Exclui um cookie
+        print_r($this-&gt;cookie-&gt;exists('name')); //Verifica a existência do cookie
+    }
+}</code></pre>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+        <!-- Livereload -->
+        <script>
+            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+                    ':35729/livereload.js?snipver=1"></' + 'script>')
+        </script>
+        <!-- End Livereload -->
+    </body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>HXPHP Framework</title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                HXPHP Framework
+                <small class="hidden-xs hidden-sm">
+                    Documentation
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container">
+            <div class="row">
+
+                
+                <section class="col-sm-12">
+                    <h2 id="sumrio">Sumário</h2>
+<ol>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/01-essential-information.html">Informações essenciais</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/02-installation-and-configuration.html">Instalação e configuração</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/03-kickoff.html">Pontapé inicial</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/04-controllers.html">Controllers</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/05-models.html">Models</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/06-views.html">Views</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/07-load.html">Método Load</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/08-helpers.html">Helpers</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/09-http.html">HTTP</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/10-storage.html">Storage</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/11-modules.html">Módulos</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/12-services.html">Serviços</a></li>
+<li><a href="https://github.com/brunosantoshx/hxphp-docs/blob/master/13-tools.html">Utilitários</a></li>
+</ol>
+<hr />
+<h2 id="pontape-inicial">3. Pontapé inicial</h2>
+<p>Esta seção aborda o funcionamento do framework e suas características.</p>
+<hr />
+<h3 id="estrutura-do-framework">Estrutura do framework</h3>
+<p>O HXPHP tem a seguinte estrutura de pastas:</p>
+<pre><code class="language-php">  /hxphp/
+      app/
+        controllers/
+        models/
+        views/
+      public/
+        css/
+        img/
+      src/
+        HXPHP/
+          System/
+            Configs/
+              Environments/
+              Modules/
+            Helpers/
+            Http/
+            Modules/
+            Services/
+            Storage/
+      templates/
+        Helpers
+          Alert
+        Modules
+          Messages</code></pre>
+<p>A relação das funções de cada pasta pode ser conferida na lista abaixo:</p>
+<ul>
+<li>A pasta <code>app</code> é o local dedicado para o desenvolvimento da sua aplicação;</li>
+<li>A pasta <code>public</code> é o local apropriado para armazenar folhas de estilos, scripts e afins;</li>
+<li>A pasta <code>src/HXPHP/System/</code> além de conter os arquivos de controle do framework, também acomoda os Helpers, Módulos e Serviços, e;</li>
+<li>A pasta <code>templates</code> é o local padrão para armazenar os templates utilizados pelos componentes do framework.</li>
+</ul>
+<hr />
+<h3 id="funcionamento-da-url">Funcionamento da URL</h3>
+<p>O HXPHP é baseado no padrão de arquitetura de software <a href="http://pt.wikipedia.org/wiki/MVC">MVC</a> e, por isso, toda a aplicação é controlada pela URL.</p>
+<p>Para que você compreenda completamente o funcionamento, tomemos como base dois exemplos:</p>
+<ul>
+<li>a) HXPHP rodando na raiz, e;</li>
+<li>b) HXPHP rodando em uma subpasta.</li>
+</ul>
+<p>Sendo que os endereços de ambos serão, respectivamente:</p>
+<ul>
+<li>a) <code>http://site.com.br/</code></li>
+<li>b) <code>http://localhost/hxphp/</code></li>
+</ul>
+<p>Agora com esses exemplos definidos é importante que você lembre-se da <code>baseURI</code>, vista no começo desta documentação. O valor desta configuração de ambiente para os dois exemplos seria, respectivamente:</p>
+<ul>
+<li>a) <code>/</code></li>
+<li>b) <code>/hxphp/</code></li>
+</ul>
+<p>Mas afinal de contas para que serve essa configuração? Pois bem, ela é a fronteira entre o <code>hostname</code> e a <code>requisição</code>. Ou seja, o que vier depois dela são os parâmetros controladores de nossa aplicação.</p>
+<p>Na prática, imagine os seguintes links requisitados por um usuário qualquer em ambos os exemplos:</p>
+<ul>
+<li><a><a href="http://site.com.br">http://site.com.br</a><code>/</code><b>projetos/listar/1</b></a></li>
+<li><a><a href="http://localhost">http://localhost</a><code>/hxphp/</code><b>projetos/listar/1</b></a></li>
+</ul>
+<p>Com as situações ilustradas acima é possível compreender claramente o processo de separação, visto que, em ambas as situações a requisição foi: <code>projetos/listar/1</code>.</p>
+<p>Mas, isso não é tudo! Essa requisição é subdividida em:</p>
+<ul>
+<li><code>controller</code> -&gt; <b>projetos</b></li>
+<li><code>action</code> -&gt; <b>listar</b></li>
+<li><code>parâmetro(s)</code> -&gt; <b>1</b></li>
+</ul>
+<h4 id="subpastas">Subpastas</h4>
+<p>Também é possível organizar os <em>controllers</em> em subpastas. Esta funcionalidade permite uma fácil integração entre back e front-end, por exemplo. Confira o exemplo:</p>
+<ul>
+<li><a><a href="http://localhost">http://localhost</a><code>/hxphp/</code><b>admin/projetos/listar/1</b></a></li>
+<li><a><a href="http://localhost">http://localhost</a><code>/hxphp/</code><b>/projetos/listar/1</b></a></li>
+</ul>
+<p>Essa requisição é subdividida em:</p>
+<pre><code>  http://localhost/hxphp/admin/projetos/novo/</code></pre>
+<ul>
+<li><code>subpasta</code> -&gt; <b>admin</b></li>
+<li><code>controller</code> -&gt; <b>projetos</b></li>
+<li><code>action</code> -&gt; <b>novo</b></li>
+<li><code>parâmetro(s)</code> -&gt; null</li>
+</ul>
+<pre><code>  http://localhost/hxphp/projetos/listar/1</code></pre>
+<ul>
+<li><code>subpasta</code> -&gt; null</li>
+<li><code>controller</code> -&gt; <b>projetos</b></li>
+<li><code>action</code> -&gt; <b>listar</b></li>
+<li><code>parâmetro(s)</code> -&gt; <b>1</b></li>
+</ul>
+<p><b>Para utilizar esta funcionalidade é necessária a existência da respectiva subpasta no diretório dos controllers. Se a subpasta não existir, o valor é automaticamente interpretado como Controller.</b></p>
+<p>Veja abaixo a estrutura necessária para reproduzir o exemplo acima:</p>
+<pre><code>  app/
+    controllers/
+      admin/
+        ProjetosController.php
+      ProjetosController.php
+    views/
+      admin/
+        projetos/
+          novo.phtml
+      projetos/
+        listar.phtml</code></pre>
+<p><b>Obs: A configuração de subpasta também se aplica às views!</b></p>
+<p>O <em>Controller</em> e a <em>Action</em> tem posição fixa, mas os parâmetros são infinitos, ou seja, desde que você especifique os dois primeiros valores da requisição, poderá passar quantos parâmetros desejar!</p>
+<p>Exemplo:
+<code>http://site.com.br/controller/action/parametro1/parametro2/parametro3/parametroN</code></p>
+<p>É válido ressaltar que existe um <em>Controller</em> e uma <em>Action</em> padrão (IndexController e indexAction, respectivamente), que entra em funcionamento quando a requisição não é específica, por exemplo:</p>
+<ul>
+<li><a href="http://localhost/hxphp">http://localhost/hxphp</a> - <code>Nenhum controller solicitado</code>, e;</li>
+<li><a href="http://site.com.br/login/">http://site.com.br/login/</a> - <code>Nenhuma action solicitada</code>.</li>
+</ul>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+        <!-- Livereload -->
+        <script>
+            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+                    ':35729/livereload.js?snipver=1"></' + 'script>')
+        </script>
+        <!-- End Livereload -->
+    </body>
+</html>

@@ -1,6 +1,9 @@
 template:
     url: https://github.com/CouscousPHP/Template-Dark
 
-title: HXPHP Framework 3.0 - Docs
+branch: master
+
+title: HXPHP Framework
+subTitle: Documentation
 
 baseUrl: https://hxphp.github.io/docs/
