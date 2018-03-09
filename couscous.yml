@@ -4,6 +4,17 @@ template:
 branch: master
 
 title: HXPHP Framework
-subTitle: Documentation
+subTitle: Documentação Oficial
+
+ # The left menu bar
+menu:
+    sections:
+        main:
+            name: 
+            items:
+                essential-information:
+                    text: Informações essenciais
+                    # You can use relative urls
+                    relativeUrl: informacoes-essenciais.html
 
 baseUrl: https://hxphp.github.io/docs/
