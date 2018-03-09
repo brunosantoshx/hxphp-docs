@@ -1,5 +1,6 @@
 template:
     url: https://github.com/CouscousPHP/Template-Dark
+    index: informacoes-essenciais.md
 
 branch: master
 
