@@ -1,5 +1,11 @@
 body {
     font-size: 19px;
+    color: #000;
+    background: #cae2f3;
+}
+
+a {
+    color: #0070c0;
 }
 
 main {
@@ -11,7 +17,7 @@ section {
 }
 
 h1, h2, h3, h4 {
-    color: #df691a;
+    color: #0071bf;
 }
 h3 {
     font-size: 23px;
@@ -26,23 +32,34 @@ img {
 }
 
 header.navbar {
-    opacity: 0.9;
+    background: #fff !important;
 }
 .navbar .navbar-brand {
     font-size: 28px;
     height: auto;
     line-height: 50px;
     margin-left: 20px;
-    color: #df691a;
+    color: #0071bf;
 }
 .navbar a.navbar-brand:hover {
-    color: #df691a;
+    color: #0071bf;
 }
 .navbar .navbar-brand small {
     font-size: 18px;
     font-weight: 300;
     margin-left: 10px;
     color: white;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+    background-color: #0071bf;
+}
+.nav-pills>li>a {
+    color: #000;
+}
+
+.nav>li>a:hover, .nav>li>a:focus {
+    color: #fff;
 }
 
 @media (min-width: 768px) {
