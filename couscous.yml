@@ -4,6 +4,10 @@ template:
 
 branch: gh-pages
 
+scripts:
+    before:
+        - cp 2.0/informacoes-essenciais.md informacoes-essenciais.md
+
 title: HXPHP Framework
 subTitle: Documentação Oficial
 
