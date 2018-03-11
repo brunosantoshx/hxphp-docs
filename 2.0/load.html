@@ -46,67 +46,67 @@
 
                             <ul class="nav nav-pills nav-stacked">
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/index.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/index.html">
                                             Informações essenciais
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/instalacao-e-configuracao.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/instalacao-e-configuracao.html">
                                             Instalação e configuração
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/pontape-inicial.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/pontape-inicial.html">
                                             Pontapé inicial
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/controllers.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/controllers.html">
                                             Controllers
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/models.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/models.html">
                                             Models
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/views.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/views.html">
                                             Views
                                         </a>
                                     </li>
-                                                                    <li class="">
-                                        <a href="https://hxphp.github.io/docs/load.html">
+                                                                    <li class="active">
+                                        <a href="https://hxphp.github.io/docs/2.0/load.html">
                                             Método load
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/helpers.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/helpers.html">
                                             Helpers
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/http.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/http.html">
                                             HTTP
                                         </a>
                                     </li>
-                                                                    <li class="active">
-                                        <a href="https://hxphp.github.io/docs/storage.html">
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/storage.html">
                                             Storage
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/modulos.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/modulos.html">
                                             Módulos
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/servicos.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/servicos.html">
                                             Serviços
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/utilitarios.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/utilitarios.html">
                                             Utilitários
                                         </a>
                                     </li>
@@ -116,41 +116,27 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h2 id="storage"><em>Storage</em></h2>
-<h3 id="sesses">Sessões</h3>
-<p>Para trabalhar com sessões é necessário utilizar os recursos de <em>Storage</em>. Para tal, utiliza-se o objeto <em>Session</em> que contém os seguintes métodos:</p>
-<pre><code class="language-php">class ProdutosController
+                    <h2 id="metodo-load">Método <em>load()</em></h2>
+<p>Esta seção aborda o carregamento de <em>Helpers</em>, Serviços, Módulos e outros componentes nos <em>Controllers</em>.</p>
+<hr />
+<p>Para utilizar os <em>helpers</em> e demais componentes do framework, tanto na view como no controller, é necessário &quot;injetar&quot; o objeto no controller através do método <code>load()</code>. Este método contém apenas um argumento obrigatório que é a <b>localização do objeto</b>. É necessário informar a <em>namespace</em> correspondente e o nome do objeto. A <em>namespace</em>, em suma, é o nome da pasta <em>(considerando a pasta System como raiz)</em> em que o objeto se encontra.</p>
+<p>Os demais argumentos informados no método <code>load('Helpers\NomeDoHelper', $param1, $param2, $paramN)</code> serão utilizados como argumentos no método construtor do objeto que será carregado.</p>
+<p><em>O código resultante seria:</em></p>
+<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
 {
-    public function listarAction()
+    public function indexAction()
     {
+        $this-&gt;load('Helpers\NomeDoHelper', 'param1', 'param2');
+        $this-&gt;load('Modules\NomeDoModulo', 'param1', 'param2');
         $this-&gt;load('Storage\Session');
+        $this-&gt;load('Services\Email');
 
-        $this-&gt;session-&gt;set('name', 'value'); //Cria uma sessão
-        echo $this-&gt;session-&gt;get('name'); //Seleciona uma sessão
-        $this-&gt;session-&gt;clear('name'); //Exclui uma sessão
-        print_r($this-&gt;session-&gt;exists('name')); //Verifica a existência de uma sessão
+        $this-&gt;nomedohelper-&gt;metodo();
+        echo $this-&gt;nomedomodulo-&gt;propriedade;
+        ...
     }
 }</code></pre>
-<h3 id="cookies">Cookies</h3>
-<p>Para trabalhar com <em>cookies</em> utiliza-se o objeto <em>Cookie</em> que contém os seguintes métodos:</p>
-<ul>
-<li><code>set()</code>;</li>
-<li><code>exists()</code>;</li>
-<li><code>get()</code>, e;</li>
-<li><code>clear()</code>.</li>
-</ul>
-<pre><code class="language-php">class ProdutosController
-{
-    public function listarAction()
-    {
-        $this-&gt;load('Storage\Cookie');
-
-        $this-&gt;cookie-&gt;set('name', 'value', '31556926'); //Cria um cookie ($name, $value, $time)
-        echo $this-&gt;cookie-&gt;get('name'); //Seleciona um cookie
-        $this-&gt;cookie-&gt;clear('name'); // Exclui um cookie
-        print_r($this-&gt;cookie-&gt;exists('name')); //Verifica a existência do cookie
-    }
-}</code></pre>
+<p>Após injetar o objeto, no controller, cria-se um atributo com o seu nome no padrão <em>lowercase</em>.</p>
                 </section>
 
             </div>

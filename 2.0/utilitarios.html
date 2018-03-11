@@ -46,67 +46,67 @@
 
                             <ul class="nav nav-pills nav-stacked">
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/index.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/index.html">
                                             Informações essenciais
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/instalacao-e-configuracao.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/instalacao-e-configuracao.html">
                                             Instalação e configuração
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/pontape-inicial.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/pontape-inicial.html">
                                             Pontapé inicial
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/controllers.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/controllers.html">
                                             Controllers
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/models.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/models.html">
                                             Models
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/views.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/views.html">
                                             Views
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/load.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/load.html">
                                             Método load
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/helpers.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/helpers.html">
                                             Helpers
                                         </a>
                                     </li>
-                                                                    <li class="active">
-                                        <a href="https://hxphp.github.io/docs/http.html">
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/http.html">
                                             HTTP
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/storage.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/storage.html">
                                             Storage
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/modulos.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/modulos.html">
                                             Módulos
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="https://hxphp.github.io/docs/servicos.html">
+                                        <a href="https://hxphp.github.io/docs/2.0/servicos.html">
                                             Serviços
                                         </a>
                                     </li>
-                                                                    <li class="">
-                                        <a href="https://hxphp.github.io/docs/utilitarios.html">
+                                                                    <li class="active">
+                                        <a href="https://hxphp.github.io/docs/2.0/utilitarios.html">
                                             Utilitários
                                         </a>
                                     </li>
@@ -116,76 +116,47 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h2 id="http"><em>HTTP</em></h2>
-<p>Nesta seção você irá conhecer o processo de obtenção de dados via requisições HTTP.</p>
+                    <h2 id="tools"><em>Tools</em></h2>
+<h2 id="nesta-seo-voc-ir-conhecer-o-objeto-auxiliar">Nesta seção você irá conhecer o objeto auxiliar <em>Tools</em>.</h2>
+<h3 id="metodos-auxiliares">Métodos auxiliares</h3>
+<p>O objeto <em>Tools</em> é uma ferramenta de apoio geral, ou seja, trata-se de um objeto que contém métodos comuns com funções de filtro, tratamento, criptografia e afins.</p>
+<p>Por padrão, este objeto contém os seguintes métodos <b>estáticos</b>:</p>
+<ul>
+<li><code>dd($data, $dump = false)</code> - Exibe os dados;</li>
+<li><code>hashHX($password, $salt = null)</code> - Criptografa a senha do usuário no padrão HXPHP;</li>
+<li><code>filteredName($input)</code> - Aplica o <em>camelize</em>;</li>
+<li><code>filteredFileName($input)</code> - Trata o nome de arquivos, e;</li>
+<li><code>decamelize($cameled, [$sep])</code> - Reverte o <em>camelize</em>;</li>
+</ul>
+<h4 id="criptografia-para-senhas">Criptografia para senhas</h4>
+<p>Um dos recursos do HXPHP mais utilizados para sistemas de cadastro e login é a criptografia de senhas.</p>
+<ul>
+<li>Gerando o <code>hash</code> e o <code>salt</code>:
+<pre><code class="language-php">
+\HXPHP\System\Tools::hashHX('senhabruta');</code></pre></li>
+</ul>
+<p>/**</p>
+<ul>
+<li>Retorno:</li>
+<li>[</li>
+<li>'salt' =&gt; '...',</li>
+<li>'password' =&gt; '...'</li>
+<li>];
+*/
+<pre><code></code></pre></li>
+</ul>
+<p>O <code>salt</code> é um valor randômico que é concatenado com a senha bruta informada para gerar o <code>hash</code>.</p>
 <hr />
-<h3 id="request">HTTP Request</h3>
-<p>Para a obtenção de dados de requisições como <b>POST</b> e <b>GET</b> é necessário utilizar o objeto <em>Request</em>.</p>
-<p>As vantagens são muitas e dentre as principais destaca-se a maior segurança, visto que os dados são tratados nativamente.</p>
-<p>O objeto <em>Request</em> contém os seguintes métodos:</p>
-<p><b>Customização</b></p>
 <ul>
-<li><code>setCustomFilters()</code>;</li>
+<li>Gerando o <code>hash</code> para validação com a senha bruta e um <code>salt</code> já definido:
+<pre><code class="language-php">
+$senhaCriptografada = \HXPHP\System\Tools::hashHX('senhabruta', $user-&gt;salt);</code></pre></li>
 </ul>
-<p><b>Obtenção de dados</b></p>
-<ul>
-<li><code>cookie()</code>;</li>
-<li><code>get()</code>;</li>
-<li><code>post()</code>;</li>
-<li><code>server()</code>;</li>
-<li><code>getMethod()</code>;</li>
-</ul>
-<p><b>Validação</b></p>
-<ul>
-<li><code>isValid()</code>;</li>
-<li><code>isPost()</code>;</li>
-<li><code>isGet()</code>;</li>
-<li><code>isPut()</code>, e;</li>
-<li><code>isHead()</code>.</li>
-</ul>
-<p>O método <code>setCustomFilters()</code> tem o objetivo de customizar os filtros de tratamento aplicados aos dados das requisições. Para tal, é necessário informar um <b><em>array</em> associativo</b> com o índice igual ao nome do campo e o valor com a constante de filtro. Leia: <a href="http://php.net/manual/en/filter.filters.sanitize.php"><a href="http://php.net/manual/en/filter.filters.sanitize.php">http://php.net/manual/en/filter.filters.sanitize.php</a></a>. Por padrão, o filtro aplicado em todos os dados é o <code>FILTER_SANITIZE_STRING</code> que evita a injeção de códigos HTML.</p>
-<p>O código resultante seria:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'namedoinput' =&gt; FILTER_SANITIZE_NUMBER_FLOAT
-        ]);
-    }
-}</code></pre>
-<h3 id="trabalhando-com-checkboxes-multiple-selects-e-semelhantes">Trabalhando com checkboxes, multiple selects e semelhantes</h3>
-<p>Como o filtro padrão trata os dados para <code>STRING</code>, isto afeta a obtenção de dados de campos que enviam múltiplas informações. A solução é bem simples:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'id' =&gt; [
-                'filter' =&gt; FILTER_SANITIZE_NUMBER_INT,
-                'flags' =&gt; FILTER_FORCE_ARRAY
-            ]
-        ]);
-    }
-}</code></pre>
-<p>No exemplo acima, utilizamos a <em>flag</em> <code>FILTER_FORCE_ARRAY</code> que irá sempre retornar um array no campo definido e em conjunto com um filtro para tratar os valores para números inteiros.</p>
-<p>Já os métodos <code>get()</code> e <code>post()</code> retornam os dados filtrados, sendo que é possível retornar todo o conteúdo ou apenas um dado específico.</p>
-<p>O código resultante seria:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'nomedocampo' =&gt; FILTER_SANITIZE_NUMBER_FLOAT
-        ]);
+<p>if ($user-&gt;password === $senhaCriptografada['password'])
+return 'Usuário autenticado';</p>
+<pre><code>
 
-        print_r($this-&gt;request-&gt;post()); //Array com todos os dados enviados via POST
-        echo $this-&gt;request-&gt;post('nomedocampo'); //Apenas o conteúdo do campo valor
-
-        echo $this-&gt;request-&gt;server('SERVER_NAME');
-    }
-}</code></pre>
-<p>E, por fim, têm-se os métodos: <code>getMethod()</code>, <code>isPost()</code>, <code>isGet()</code>, <code>isPut()</code> e <code>isHead()</code> que tem como função determinar qual é o método de requisição.</p>
+Como o `salt` é um valor aleatório, se o mesmo não for informado não será possível obter um `hash` idêntico para comparação mesmo que a senha informada pelo usuário esteja correta. Portanto, é necessário informar o `salt` que foi gerado para o `hash` armazenado no banco de dados, isto é, ambos os valores devem ser armazenados utilizados conforme o exemplo acima.</code></pre>
                 </section>
 
             </div>
