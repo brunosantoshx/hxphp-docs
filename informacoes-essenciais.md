@@ -9,7 +9,7 @@ Esta seção contempla todos os cuidados e requisitos necessários para a instal
 
 Para a instalação bem-sucedida do framework são necessários os seguintes softwares:
 
-+ [PHP 5.4+](http://php.net/downloads.php)
++ [PHP 7.0+](http://php.net/downloads.php)
 + [MySql 5.5+](http://dev.mysql.com/downloads/mysql/)
 + [Apache](https://httpd.apache.org/download.cgi)
 + [Composer](https://getcomposer.org/download/)
