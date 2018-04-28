@@ -55,7 +55,7 @@
                                             Instalação e configuração
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="https://hxphp.github.io/docs/2.0/pontape-inicial.html">
                                             Pontapé inicial
                                         </a>
@@ -85,7 +85,7 @@
                                             Helpers
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="https://hxphp.github.io/docs/2.0/http.html">
                                             HTTP
                                         </a>
@@ -116,92 +116,116 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h2 id="http"><em>HTTP</em></h2>
-<p>Nesta seção você irá conhecer o processo de obtenção de dados via requisições HTTP.</p>
+                    <h2 id="pontape-inicial">Pontapé inicial</h2>
+<p>Esta seção aborda o funcionamento do framework e suas características.</p>
 <hr />
-<h3 id="request">HTTP Request</h3>
-<p>Para a obtenção de dados de requisições como <b>POST</b> e <b>GET</b> é necessário utilizar o objeto <em>Request</em>.</p>
-<p>As vantagens são muitas e dentre as principais destaca-se a maior segurança, visto que os dados são tratados nativamente.</p>
-<p>O objeto <em>Request</em> contém os seguintes métodos:</p>
-<p><b>Customização</b></p>
+<h3 id="estrutura-do-framework">Estrutura do framework</h3>
+<p>O HXPHP tem a seguinte estrutura de pastas:</p>
+<pre><code class="language-php">  /hxphp/
+      app/
+        controllers/
+        models/
+        views/
+      public/
+        css/
+        img/
+      src/
+        HXPHP/
+          System/
+            Configs/
+              Environments/
+              Modules/
+            Helpers/
+            Http/
+            Modules/
+            Services/
+            Storage/
+      templates/
+        Helpers
+          Alert
+        Modules
+          Messages</code></pre>
+<p>A relação das funções de cada pasta pode ser conferida na lista abaixo:</p>
 <ul>
-<li><code>setCustomFilters()</code>;</li>
+<li>A pasta <code>app</code> é o local dedicado para o desenvolvimento da sua aplicação;</li>
+<li>A pasta <code>public</code> é o local apropriado para armazenar folhas de estilos, scripts e afins;</li>
+<li>A pasta <code>src/HXPHP/System/</code> além de conter os arquivos de controle do framework, também acomoda os Helpers, Módulos e Serviços, e;</li>
+<li>A pasta <code>templates</code> é o local padrão para armazenar os templates utilizados pelos componentes do framework.</li>
 </ul>
-<p><b>Obtenção de dados</b></p>
+<hr />
+<h3 id="funcionamento-da-url">Funcionamento da URL</h3>
+<p>O HXPHP é baseado no padrão de arquitetura de software <a href="http://pt.wikipedia.org/wiki/MVC">MVC</a> e, por isso, toda a aplicação é controlada pela URL.</p>
+<p>Para que você compreenda completamente o funcionamento, tomemos como base dois exemplos:</p>
 <ul>
-<li><code>cookie()</code>;</li>
-<li><code>get()</code>;</li>
-<li><code>post()</code>;</li>
-<li><code>server()</code>;</li>
-<li><code>getMethod()</code>;</li>
+<li>a) HXPHP rodando na raiz, e;</li>
+<li>b) HXPHP rodando em uma subpasta.</li>
 </ul>
-<p><b>Validação</b></p>
+<p>Sendo que os endereços de ambos serão, respectivamente:</p>
 <ul>
-<li><code>isValid()</code>;</li>
-<li><code>isPost()</code>;</li>
-<li><code>isGet()</code>;</li>
-<li><code>isPut()</code>, e;</li>
-<li><code>isHead()</code>.</li>
+<li>a) <code>http://site.com.br/</code></li>
+<li>b) <code>http://localhost/hxphp/</code></li>
 </ul>
-<p>O método <code>setCustomFilters()</code> tem o objetivo de customizar os filtros de tratamento aplicados aos dados das requisições. Para tal, é necessário informar um <b><em>array</em> associativo</b> com o índice igual ao nome do campo e o valor com a constante de filtro. Leia: <a href="http://php.net/manual/en/filter.filters.sanitize.php"><a href="http://php.net/manual/en/filter.filters.sanitize.php">http://php.net/manual/en/filter.filters.sanitize.php</a></a>. Por padrão, o filtro aplicado em todos os dados é o <code>FILTER_SANITIZE_STRING</code> que evita a injeção de códigos HTML.</p>
-<p>O código resultante seria:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'namedoinput' =&gt; FILTER_SANITIZE_NUMBER_FLOAT
-        ]);
-    }
-}</code></pre>
-<h3 id="trabalhando-com-campos-html">Trabalhando com campos HTML</h3>
-<p>Em algumas aplicações é comum encontrarmos editores HTML que precisam salvar <code>tags</code> no banco de dados. O principal problema nisto é que sem a devida validação, a aplicação se torna vulnerável a ataques XSS.</p>
-<p>Por padrão, o <strong>HXPHP</strong> possui um recurso que impede a escrita de tags HTML no banco de dados. Esta é uma medida de segurança usada para conscientizar o desenvolvedor.</p>
-<p>Caso seja realmente necessário, você precisa se certificar de escolher um bom pacote <em>antisamy/anti-xss</em> antes de qualquer coisa.</p>
-<p>Após isto, no método do <em>controller</em> você precisará inserir o código abaixo:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'descricao' =&gt; [
-                'filter' =&gt; FILTER_UNSAFE_RAW // Filtro usado para permitir HTML
-            ]
-        ]);
-    }
-}</code></pre>
-<h3 id="trabalhando-com-checkboxes-multiple-selects-e-semelhantes">Trabalhando com checkboxes, multiple selects e semelhantes</h3>
-<p>Como o filtro padrão trata os dados para <code>STRING</code>, isto afeta a obtenção de dados de campos que enviam múltiplas informações. A solução é bem simples:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'id' =&gt; [
-                'filter' =&gt; FILTER_SANITIZE_NUMBER_INT,
-                'flags' =&gt; FILTER_FORCE_ARRAY
-            ]
-        ]);
-    }
-}</code></pre>
-<p>No exemplo acima, utilizamos a <em>flag</em> <code>FILTER_FORCE_ARRAY</code> que irá sempre retornar um array no campo definido e em conjunto com um filtro para tratar os valores para números inteiros.</p>
-<p>Já os métodos <code>get()</code> e <code>post()</code> retornam os dados filtrados, sendo que é possível retornar todo o conteúdo ou apenas um dado específico.</p>
-<p>O código resultante seria:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'nomedocampo' =&gt; FILTER_SANITIZE_NUMBER_FLOAT
-        ]);
-
-        print_r($this-&gt;request-&gt;post()); //Array com todos os dados enviados via POST
-        echo $this-&gt;request-&gt;post('nomedocampo'); //Apenas o conteúdo do campo valor
-
-        echo $this-&gt;request-&gt;server('SERVER_NAME');
-    }
-}</code></pre>
-<p>E, por fim, têm-se os métodos: <code>getMethod()</code>, <code>isPost()</code>, <code>isGet()</code>, <code>isPut()</code> e <code>isHead()</code> que tem como função determinar qual é o método de requisição.</p>
+<p>Agora com esses exemplos definidos é importante que você lembre-se da <code>baseURI</code>, vista no começo desta documentação. O valor desta configuração de ambiente para os dois exemplos seria, respectivamente:</p>
+<ul>
+<li>a) <code>/</code></li>
+<li>b) <code>/hxphp/</code></li>
+</ul>
+<p>Mas afinal de contas para que serve essa configuração? Pois bem, ela é a fronteira entre o <code>hostname</code> e a <code>requisição</code>. Ou seja, o que vier depois dela são os parâmetros controladores de nossa aplicação.</p>
+<p>Na prática, imagine os seguintes links requisitados por um usuário qualquer em ambos os exemplos:</p>
+<ul>
+<li><a><a href="http://site.com.br">http://site.com.br</a><code>/</code><b>projetos/listar/1</b></a></li>
+<li><a><a href="http://localhost">http://localhost</a><code>/hxphp/</code><b>projetos/listar/1</b></a></li>
+</ul>
+<p>Com as situações ilustradas acima é possível compreender claramente o processo de separação, visto que, em ambas as situações a requisição foi: <code>projetos/listar/1</code>.</p>
+<p>Mas, isso não é tudo! Essa requisição é subdividida em:</p>
+<ul>
+<li><code>controller</code> -&gt; <b>projetos</b></li>
+<li><code>action</code> -&gt; <b>listar</b></li>
+<li><code>parâmetro(s)</code> -&gt; <b>1</b></li>
+</ul>
+<h4 id="subpastas">Subpastas</h4>
+<p>Também é possível organizar os <em>controllers</em> em subpastas. Esta funcionalidade permite uma fácil integração entre back e front-end, por exemplo. Confira o exemplo:</p>
+<ul>
+<li><a><a href="http://localhost">http://localhost</a><code>/hxphp/</code><b>admin/projetos/listar/1</b></a></li>
+<li><a><a href="http://localhost">http://localhost</a><code>/hxphp/</code><b>/projetos/listar/1</b></a></li>
+</ul>
+<p>Essa requisição é subdividida em:</p>
+<pre><code>  http://localhost/hxphp/admin/projetos/novo/</code></pre>
+<ul>
+<li><code>subpasta</code> -&gt; <b>admin</b></li>
+<li><code>controller</code> -&gt; <b>projetos</b></li>
+<li><code>action</code> -&gt; <b>novo</b></li>
+<li><code>parâmetro(s)</code> -&gt; null</li>
+</ul>
+<pre><code>  http://localhost/hxphp/projetos/listar/1</code></pre>
+<ul>
+<li><code>subpasta</code> -&gt; null</li>
+<li><code>controller</code> -&gt; <b>projetos</b></li>
+<li><code>action</code> -&gt; <b>listar</b></li>
+<li><code>parâmetro(s)</code> -&gt; <b>1</b></li>
+</ul>
+<p><b>Para utilizar esta funcionalidade é necessária a existência da respectiva subpasta no diretório dos controllers. Se a subpasta não existir, o valor é automaticamente interpretado como Controller.</b></p>
+<p>Veja abaixo a estrutura necessária para reproduzir o exemplo acima:</p>
+<pre><code>  app/
+    controllers/
+      admin/
+        ProjetosController.php
+      ProjetosController.php
+    views/
+      admin/
+        projetos/
+          novo.phtml
+      projetos/
+        listar.phtml</code></pre>
+<p><b>Obs: A configuração de subpasta também se aplica às views!</b></p>
+<p>O <em>Controller</em> e a <em>Action</em> tem posição fixa, mas os parâmetros são infinitos, ou seja, desde que você especifique os dois primeiros valores da requisição, poderá passar quantos parâmetros desejar!</p>
+<p>Exemplo:
+<code>http://site.com.br/controller/action/parametro1/parametro2/parametro3/parametroN</code></p>
+<p>É válido ressaltar que existe um <em>Controller</em> e uma <em>Action</em> padrão (IndexController e indexAction, respectivamente), que entra em funcionamento quando a requisição não é específica, por exemplo:</p>
+<ul>
+<li><a href="http://localhost/hxphp">http://localhost/hxphp</a> - <code>Nenhum controller solicitado</code>, e;</li>
+<li><a href="http://site.com.br/login/">http://site.com.br/login/</a> - <code>Nenhuma action solicitada</code>.</li>
+</ul>
                 </section>
 
             </div>

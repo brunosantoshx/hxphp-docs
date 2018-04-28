@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>HXPHP Framework - Documentação Oficial</title>
+
+        <meta name="description" content="HXPHP - O seu primeiro framework PHP">
+        <meta name="keywords" content="HXPHP, framework PHP, linguagem PHP, curso de framework PHP, framework php para iniciantes">
+        <meta name="author" content="Bruno C. Santos">
+        <link rel="shortcut icon" href="http://www.hxphp.com.br/assets/img/favicon.jpg">
+        <link rel="apple-touch-icon" href="http://www.hxphp.com.br/assets/img/apple-touch-icon.jpg">
+        <link rel="apple-touch-icon" sizes="72x72" href="http://www.hxphp.com.br/assets/img/apple-touch-icon-72x72.jpg">
+        <link rel="apple-touch-icon" sizes="114x114" href="http://www.hxphp.com.br/assets/img/apple-touch-icon-114x114.jpg">
+
+
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="https://hxphp.github.io/docs/">
+                <img src="https://hxphp.github.io/docs/img/hxphp-framework-logo.png">
+                <small class="hidden-xs hidden-sm">
+                    Documentação Oficial
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                                                    <p class="text-muted">
+                                
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/index.html">
+                                            Informações essenciais
+                                        </a>
+                                    </li>
+                                                                    <li class="active">
+                                        <a href="https://hxphp.github.io/docs/2.0/instalacao-e-configuracao.html">
+                                            Instalação e configuração
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/pontape-inicial.html">
+                                            Pontapé inicial
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/controllers.html">
+                                            Controllers
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/models.html">
+                                            Models
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/views.html">
+                                            Views
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/load.html">
+                                            Método load
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/helpers.html">
+                                            Helpers
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/http.html">
+                                            HTTP
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/storage.html">
+                                            Storage
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/modulos.html">
+                                            Módulos
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/servicos.html">
+                                            Serviços
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/utilitarios.html">
+                                            Utilitários
+                                        </a>
+                                    </li>
+                                                            </ul>
+                        
+                    </nav>
+
+                
+                <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h2 id="instalacao-e-configuracao">Instalação e Configuração</h2>
+<p>Esta seção contempla os procedimentos de instalação e configuração do framework.</p>
+<hr />
+<h3 id="bootstrapping">Bootstrapping</h3>
+<p>Após vistar todos os itens da lista de requisitos, prossiga com a instalação, que tanto em rede local como remota, consiste em:</p>
+<ul>
+<li>Enviar os arquivos para a pasta desejada;</li>
+<li>Editar o arquivo <code>app/config.php</code>, e;</li>
+<li>Editar o arquivo <code>.htaccess</code>.</li>
+</ul>
+<hr />
+<h4 id="configurando-o-framework">Configurando o framework</h4>
+<p>Após enviar os arquivos, configure o framework. Todas as configurações devem ser definidas no arquivo:</p>
+<p><code>/app/config.php</code></p>
+<p>As configurações são divididas em dois grupos:</p>
+<ul>
+<li>Configurações globais, e;</li>
+<li>Configurações de ambiente.</li>
+</ul>
+<p>As <code>globais</code> tem como objetivo definir parâmetros que, em suma, não necessitam de alteração, pois, consistem em intervenções no funcionamento padrão do framework. Exemplos: Diretório dos controllers, diretório das views e etc.</p>
+<p>Já as <code>configurações de ambiente</code> são parâmetros que variam de acordo com o <code>ambiente atual</code>. O ambiente além de conter a sua configuração padrão também pode conter módulos.</p>
+<p>Para iniciar a configuração é necessário instanciar o objeto <code>$configs = new HXPHP\System\Configs\Config</code>. E, após isto, é possível:</p>
+<ul>
+<li>Alterar as configurações globais, e/ou;</li>
+<li>Adicionar e configurar ambientes.</li>
+</ul>
+<p>Para adicionar um ambiente: <code>$configs-&gt;env-&gt;add('ambiente');</code>.
+Os ambientes padrão são: <code>development</code> e <code>production</code>.</p>
+<p>Para criar um ambiente: </p>
+<ul>
+<li>Acesse a pasta <code>HXPHP\System\Configs\Environments</code>, e;</li>
+<li>Crie um arquivo no padrão <code>EnvironmentNomeDoAmbiente</code>.</li>
+</ul>
+<p>Conteúdo padrão de um ambiente:</p>
+<pre><code class="language-php">  namespace HXPHP\System\Configs\Environments;
+
+  use HXPHP\System\Configs as Configs;
+
+  class EnvironmentNomeDoAmbiente extends Configs\AbstractEnvironment
+  {
+
+  }</code></pre>
+<p>Por padrão, a única configuração padrão de ambiente é a <code>baseURI</code> que define a <a href="#funcionamento-da-url">BASE DA URL</a>.
+Para alterá-la: <code>$configs-&gt;env-&gt;nomedoambiente-&gt;baseURI = '/hxphp/';</code>.</p>
+<p>Os módulos padrão de ambiente são: <code>Database</code> e <code>Mail</code>. Os módulos não são padronizados.</p>
+<p>Para criar um módulo é necessário salvá-lo na pasta: <code>/src/HXPHP/System/Configs/Modules/</code> e <b>adicioná-lo na lista de módulos</b> do arquivo <code>/src/HXPHP/System/Configs/RegisterModules.php</code>.</p>
+<p>Exemplo demonstrando o registro de um módulo qualquer chamado Youtube (RegisterModules.php):</p>
+<pre><code class="language-php">  namespace HXPHP\System\Configs;
+
+  class RegisterModules
+  {
+    public $modules = [];
+
+    public function __construct()
+    {
+      //Informe os nomes dos módulos em lowercase
+      $this-&gt;modules = array(
+        'database',
+        'mail',
+        'youtube'
+      );
+
+      return $this;
+    }
+  }</code></pre>
+<h5 id="exemplo-de-configurao">Exemplo de configuração:</h5>
+<pre><code class="language-php">
+  //Constantes
+  $configs = new HXPHP\System\Configs\Config;
+
+  //Globais
+  $configs-&gt;global-&gt;models-&gt;directory = APP_PATH . 'models' . DS;
+
+  $configs-&gt;global-&gt;views-&gt;directory = APP_PATH . 'views' . DS;
+  $configs-&gt;global-&gt;views-&gt;extension = '.phtml';
+
+  $configs-&gt;global-&gt;controllers-&gt;directory = APP_PATH . 'controllers' . DS;
+  $configs-&gt;global-&gt;controllers-&gt;notFound = 'Error404Controller';
+
+  $configs-&gt;title = 'Titulo customizado';
+
+  //Configurações de Ambiente - Desenvolvimento
+  $configs-&gt;env-&gt;add('development');
+
+  $configs-&gt;env-&gt;development-&gt;baseURI = '/hxphp/';
+
+  $configs-&gt;env-&gt;development-&gt;database-&gt;setConnectionData(array(
+    'driver' =&gt; 'mysql',
+    'host' =&gt; 'localhost',
+    'user' =&gt; 'root',
+    'password' =&gt; '',
+    'dbname' =&gt; 'hxphp',
+    'charset' =&gt; 'utf8'
+  ));
+
+  $configs-&gt;env-&gt;development-&gt;mail-&gt;setFrom(array(
+    'from' =&gt; 'Remetente',
+    'from_mail' =&gt; 'email@remetente.com.br'
+  ));
+
+  //Configurações de Ambiente - Produção
+  $configs-&gt;env-&gt;add('production');
+
+  $configs-&gt;env-&gt;production-&gt;baseURI = '/';
+
+  $configs-&gt;env-&gt;production-&gt;database-&gt;setConnectionData(array(
+    'driver' =&gt; 'mysql',
+    'host' =&gt; 'localhost',
+    'user' =&gt; 'usuariodobanco',
+    'password' =&gt; 'senhadobanco',
+    'dbname' =&gt; 'hxphp',
+    'charset' =&gt; 'utf8'
+  ));
+
+  $configs-&gt;env-&gt;production-&gt;mail-&gt;setFrom(array(
+    'from' =&gt; 'Remetente',
+    'from_mail' =&gt; 'email@remetente.com.br'
+  ));
+
+  return $configs;</code></pre>
+<hr />
+<h4 id="configurando-o-htaccess">Configurando o .htaccess</h4>
+<p>O arquivo <code>.htaccess</code> é responsável pelo processo de reescrita das URLs, isto é, trata-se de um componente fundamental para a aplicação.</p>
+<p>Portanto, edite o arquivo <code>.htaccess</code>, localizado na pasta raiz do framework, para configurar a BASE. O bloco que deve ser configurado é listado abaixo:</p>
+<pre><code class="language-php">  &lt;IfModule mod_rewrite.c&gt;
+    RewriteEngine On
+    RewriteBase /hxphp/
+    RewriteRule ^index\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /hxphp/index.php [L]
+  &lt;/IfModule&gt;</code></pre>
+<p>Atente-se para os comandos: <code>RewriteBase</code> e <code>RewriteRule</code>. Veja que ambos contém a menção do valor da <code>baseURI</code>, portanto, caso você tenha definido um valor customizado, altere-o. Adotando nosso exemplo anterior, tendo a <code>baseURI</code> igual a <em>administrativo</em>, tem-se o seguinte código:</p>
+<pre><code class="language-php">  &lt;IfModule mod_rewrite.c&gt;
+    RewriteEngine On
+    RewriteBase /administrativo/
+    RewriteRule ^index\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /administrativo/index.php [L]
+  &lt;/IfModule&gt;</code></pre>
+<p>Para testar o sucesso da configuração acesse:
+<code>http://localhost/{baseURI}/</code></p>
+<hr />
+<h3 id="instalando-as-dependencias">Instalando as dependências do framework</h3>
+<p>O HXPHP Framework utiliza o <a href="https://getcomposer.org/download">Composer</a> para gerenciar as dependências, portanto, antes de prosseguir, certifique-se que o mesmo está instalado em sua máquina. Para isso, abra o terminal (CMD no Windows) e digite o seguinte comando: <code>composer --version</code>.</p>
+<p>Após constatar que o <a href="https://getcomposer.org/download">Composer</a> está em pleno funcionamento, navegue até a pasta do framework e execute o comando: <code>composer install</code>.</p>
+<hr />
+<p><b>Para lhe auxiliar neste processo, confira essa série completa de videoaulas gratuitas sobre instalação e uso do Composer: <a href="https://goo.gl/9oQNr5">Série completa do canal HXTUTORS</a></b></p>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

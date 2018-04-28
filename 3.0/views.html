@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>HXPHP Framework - Documentação Oficial</title>
+
+        <meta name="description" content="HXPHP - O seu primeiro framework PHP">
+        <meta name="keywords" content="HXPHP, framework PHP, linguagem PHP, curso de framework PHP, framework php para iniciantes">
+        <meta name="author" content="Bruno C. Santos">
+        <link rel="shortcut icon" href="http://www.hxphp.com.br/assets/img/favicon.jpg">
+        <link rel="apple-touch-icon" href="http://www.hxphp.com.br/assets/img/apple-touch-icon.jpg">
+        <link rel="apple-touch-icon" sizes="72x72" href="http://www.hxphp.com.br/assets/img/apple-touch-icon-72x72.jpg">
+        <link rel="apple-touch-icon" sizes="114x114" href="http://www.hxphp.com.br/assets/img/apple-touch-icon-114x114.jpg">
+
+
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="https://hxphp.github.io/docs/">
+                <img src="https://hxphp.github.io/docs/img/hxphp-framework-logo.png">
+                <small class="hidden-xs hidden-sm">
+                    Documentação Oficial
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                                                    <p class="text-muted">
+                                
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/index.html">
+                                            Informações essenciais
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/instalacao-e-configuracao.html">
+                                            Instalação e configuração
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/pontape-inicial.html">
+                                            Pontapé inicial
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/controllers.html">
+                                            Controllers
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/models.html">
+                                            Models
+                                        </a>
+                                    </li>
+                                                                    <li class="active">
+                                        <a href="https://hxphp.github.io/docs/2.0/views.html">
+                                            Views
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/load.html">
+                                            Método load
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/helpers.html">
+                                            Helpers
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/http.html">
+                                            HTTP
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/storage.html">
+                                            Storage
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/modulos.html">
+                                            Módulos
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/servicos.html">
+                                            Serviços
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/utilitarios.html">
+                                            Utilitários
+                                        </a>
+                                    </li>
+                                                            </ul>
+                        
+                    </nav>
+
+                
+                <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h2 id="views"><em>Views</em></h2>
+<p>Nesta seção você irá conhecer a última das três camadas do padrão <b>MVC</b>.</p>
+<hr />
+<h3 id="o-que-sao-views">O que são <em>views</em>?</h3>
+<p>As <em>views</em>, comumente chamadas de <b>interfaces</b>, são responsáveis por toda parte gráfica de nossa aplicação. É a camada que acomoda nossos códigos HTML.</p>
+<hr />
+<h3 id="criando-views">Criando <em>views</em></h3>
+<p>Para criar uma <em>view</em> é necessário ter um cuidado fundamental que é: verificar a extensão definida para salvar o arquivo. Portanto, verifique o valor da configuração global <code>$configs-&gt;global-&gt;views-&gt;extension</code>.</p>
+<p>Por padrão a extensão das <em>views</em> é a <code>.phtml</code>. Ciente da extensão necessária é só salvar a <em>view</em> na pasta responsável.</p>
+<p>As <em>views</em> são organizadas da seguinte forma: <br>
+<em>app/views/<code>{nomedocontroller}</code>/<code>{nomedaaction}</code>.<code>phtml</code></em>.</p>
+<h4 id="subpastas">Subpastas</h4>
+<p>Quando o parâmetro <code>subfolder</code> existe, isto é, atende aos requisitos mencionados na seção de Funcionamento da URL, as <em>views</em> também deverão ser organizadas nas respectivas subpastas do diretório <code>app/views</code>.</p>
+<p>Um exemplo para o link (<code>http://www.site.com.br/hxphp/admin/produtos/listar</code>):</p>
+<pre><code>app/
+    views/
+        admin/
+            produtos/
+                    listar.phtml</code></pre>
+<h4 id="convenes">Convenções</h4>
+<p>O padrão é <b>lowercase</b>. Todas as <em>views</em> de um <em>controller</em> são armazenadas em uma pasta com o nome do <em>controller</em>. Cada view é nomeada de acordo com a <em>action</em>. Porém, é possível alterar estas configurações através do objeto <b>View</b>.</p>
+<hr />
+<h3 id="configurando-a-view">Configurando a <em>View</em></h3>
+<p>Estas são as opções disponíveis para configurar uma view:</p>
+<ul>
+<li><code>setPartialsDir($string)</code> - Define o diretório das views parciais - <em>Padrão: app/views/partials/</em></li>
+<li><code>setPath($string)</code> - Define o diretório do arquivo - <em>Padrão: nome do controller</em></li>
+<li><code>setFile($string)</code> - Define o nome do arquivo - <em>Padrão: nome da action</em></li>
+<li><code>setHeader($string)</code> - Define o cabeçalho da view - <em>Padrão: header</em></li>
+<li><code>setFooter($string)</code> - Define o rodapé da view - <em>Padrão: footer</em></li>
+<li><code>setTemplate($boolean)</code> - Define se o cabeçalho e rodapé serão inclusos - <em>Padrão: true</em></li>
+<li><code>setAssets($string, $string | $array)</code> - Define arquivos CSS ou JS customizados para a view - <em>O primeiro parâmetro determina o tipo de arquivo, isto é, css ou js</em></li>
+<li><code>setTitle($string)</code> - Define o título da view - <em>A variável $view_title recebe o valor desta configuração</em></li>
+</ul>
+<p><em>O código resultante seria:</em></p>
+<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
+{
+    public function indexAction()
+    {
+        $this-&gt;view-&gt;setPath('index')
+               -&gt;setFile('index')
+               -&gt;setHeader('header')
+               -&gt;setFooter('footer')
+               -&gt;setTemplate(true)
+               -&gt;setAssets('css', 'teste.css')
+               -&gt;setAssets('css', array(
+                    'teste2.css',
+                    'teste3.css'
+                ))
+               -&gt;setAssets('js', array(
+                    'teste2.js',
+                    'teste3.js'
+                ))
+               -&gt;setTitle('Oops! Nada encontrado!');
+    }
+}</code></pre>
+<hr />
+<h3 id="enviando-dados-para-a-view">Enviando dados para a <em>View</em></h3>
+<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
+{
+    public function indexAction()
+    {
+      $this-&gt;view-&gt;setVar('mensagem', 'Hello World')
+                -&gt;setVars([
+                        'usuario' =&gt; 'Bruno Santos',
+                        'facebook' =&gt; 'https://www.facebook.com/brunocsantos2012'
+                     )]);
+    }
+}</code></pre>
+<p>Na <em>view</em> todos estes dados são extraídos e atribuídos em variáveis com o prefixo <code>view_</code>. No exemplo acima, as variáveis disponíveis na view seriam:</p>
+<ul>
+<li>$view_mensagem</li>
+<li>$view_usuario</li>
+<li>$view_facebook</li>
+</ul>
+<hr />
+<h3 id="incluindo-views-parciais">Incluindo views parciais</h3>
+<p>Quando desenvolvemos um sistema complexo ou um site com muito conteúdo é bem comum existir códigos repetidos nas views. Uma alternativa é criar uma pasta qualquer dentro do diretórios das views e fazer o <code>include</code> manualmente com as funções do PHP e herdar as variáveis via chamada global.</p>
+<p>Para realizar este procedimento no HXPHP você pode criar <em>views parciais</em>. Por padrão, o diretório para armazenar estes arquivos parciais é: <code>app/views/partials</code>. É válido ressaltar que é possível definir um diretório diferente para as parciais para um <code>controller</code> ou até mesmo para uma determinada <code>action</code>.</p>
+<p>Algumas observações:</p>
+<ul>
+<li>O padrão para nomenclatura é que o nome do arquivo comece com &quot;_&quot;. Ex: <code>_social-icons.phtml</code>, e;</li>
+<li>É possível passar dados para as views parciais.</li>
+</ul>
+<h4 id="exemplos">Exemplos</h4>
+<ul>
+<li>
+<p>View parcial (app/views/partials/_message.phtml):</p>
+<pre><code class="language-php">&lt;h4 class="alert alert-success"&gt;
+&lt;?php echo $view_msg; ?&gt;
+&lt;/h4&gt;</code></pre>
+</li>
+<li>Chamada da view partial em uma view (app/views/index/index.phtml):
+<pre><code class="language-php">$this-&gt;partial('message', [
+'msg' =&gt; 'Uhull! Você instalou e configurou o HXPHP Framework com sucesso!'
+]);</code></pre></li>
+</ul>
+<p>O método <code>partial()</code> suporta dois parâmetros:</p>
+<ul>
+<li><code>$view</code> - Nome da view parcial sem o &quot;_&quot;, e;</li>
+<li><em>(Opcional)</em> <code>$params</code> - Array associativo com dados que serão convertidos em variáveis para a view.</li>
+</ul>
+<hr />
+<h3 id="links-relativos">Links relativos</h3>
+<p>Para adicionar um link relativo em uma view é possível usar a constante <code>BASE</code> juntamente com o restante do caminho, porém, esta prática não é a mais recomendada, pois, é preciso alterar todos os links quando ocorre uma mudança de subpastas, por exemplo.</p>
+<p>Técnica não recomendada:</p>
+<pre><code class="language-php">&lt;a href="&lt;?php echo BASE . 'subpasta/cadastro'; ?&gt;" title="Cadastre-se"&gt;Cadastre-se&lt;/a&gt;</code></pre>
+<p>Se a estrutura de pastas for diferente no ambiente de produção será preciso editar todos os links e trata-se de um trabalho desnecessário utilizando os métodos de links relativos.</p>
+<p>Os métodos <code>getRelativeURL()</code> e <code>printRelativeURL()</code> suportam dois parâmetros:</p>
+<ul>
+<li><code>(string) $URL</code> - Caminho que será &quot;concatenado&quot;, e;</li>
+<li><code>(bool) $controller</code> - Este parâmetro tem como objetivo definir se o <code>controller</code> atual será concatenado ou não. O valor <code>true</code> é usado quando o primeiro parâmetro é uma action com possíveis argumentos e o valor <code>false</code> é usado quando é necessário gerar um link relativo para outro controller.</code> O valor padrão é <code>true</code>.</li>
+</ul>
+<h4 id="exemplos-1">Exemplos</h4>
+<ul>
+<li>
+<p>Técnica não recomendada (app/views/admin/cadastro.phtml):</p>
+<pre><code class="language-php">&lt;form action="&lt;?php echo BASE . 'admin/cadastro/cadastrar/'; ?&gt;" method="post"&gt;
+&lt;a href="&lt;?php echo BASE . 'admin/login/'; ?&gt;"&gt;Fazer login&lt;/a&gt;
+&lt;/form&gt;</code></pre>
+</li>
+<li><b>Técnica recomendada</b> (app/views/admin/cadastro.phtml):
+<pre><code class="language-php">&lt;form action="&lt;?php $this-&gt;printRelativeURL('cadastrar'); ?&gt;" method="post"&gt;
+&lt;a href="&lt;?php $this-&gt;printRelativeURL('login', false); ?&gt;"&gt;Fazer login&lt;/a&gt;
+&lt;/form&gt;</code></pre></li>
+</ul>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

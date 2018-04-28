@@ -85,12 +85,12 @@
                                             Helpers
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="https://hxphp.github.io/docs/2.0/http.html">
                                             HTTP
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="https://hxphp.github.io/docs/2.0/storage.html">
                                             Storage
                                         </a>
@@ -116,92 +116,41 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h2 id="http"><em>HTTP</em></h2>
-<p>Nesta seção você irá conhecer o processo de obtenção de dados via requisições HTTP.</p>
-<hr />
-<h3 id="request">HTTP Request</h3>
-<p>Para a obtenção de dados de requisições como <b>POST</b> e <b>GET</b> é necessário utilizar o objeto <em>Request</em>.</p>
-<p>As vantagens são muitas e dentre as principais destaca-se a maior segurança, visto que os dados são tratados nativamente.</p>
-<p>O objeto <em>Request</em> contém os seguintes métodos:</p>
-<p><b>Customização</b></p>
-<ul>
-<li><code>setCustomFilters()</code>;</li>
-</ul>
-<p><b>Obtenção de dados</b></p>
-<ul>
-<li><code>cookie()</code>;</li>
-<li><code>get()</code>;</li>
-<li><code>post()</code>;</li>
-<li><code>server()</code>;</li>
-<li><code>getMethod()</code>;</li>
-</ul>
-<p><b>Validação</b></p>
-<ul>
-<li><code>isValid()</code>;</li>
-<li><code>isPost()</code>;</li>
-<li><code>isGet()</code>;</li>
-<li><code>isPut()</code>, e;</li>
-<li><code>isHead()</code>.</li>
-</ul>
-<p>O método <code>setCustomFilters()</code> tem o objetivo de customizar os filtros de tratamento aplicados aos dados das requisições. Para tal, é necessário informar um <b><em>array</em> associativo</b> com o índice igual ao nome do campo e o valor com a constante de filtro. Leia: <a href="http://php.net/manual/en/filter.filters.sanitize.php"><a href="http://php.net/manual/en/filter.filters.sanitize.php">http://php.net/manual/en/filter.filters.sanitize.php</a></a>. Por padrão, o filtro aplicado em todos os dados é o <code>FILTER_SANITIZE_STRING</code> que evita a injeção de códigos HTML.</p>
-<p>O código resultante seria:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
+                    <h2 id="storage"><em>Storage</em></h2>
+<h3 id="sesses">Sessões</h3>
+<p>Para trabalhar com sessões é necessário utilizar os recursos de <em>Storage</em>. Para tal, utiliza-se o objeto <em>Session</em> que contém os seguintes métodos:</p>
+<pre><code class="language-php">class ProdutosController
 {
-    public function salvarAction()
+    public function listarAction()
     {
-        $this-&gt;request-&gt;setCustomFilters([
-            'namedoinput' =&gt; FILTER_SANITIZE_NUMBER_FLOAT
-        ]);
-    }
-}</code></pre>
-<h3 id="trabalhando-com-campos-html">Trabalhando com campos HTML</h3>
-<p>Em algumas aplicações é comum encontrarmos editores HTML que precisam salvar <code>tags</code> no banco de dados. O principal problema nisto é que sem a devida validação, a aplicação se torna vulnerável a ataques XSS.</p>
-<p>Por padrão, o <strong>HXPHP</strong> possui um recurso que impede a escrita de tags HTML no banco de dados. Esta é uma medida de segurança usada para conscientizar o desenvolvedor.</p>
-<p>Caso seja realmente necessário, você precisa se certificar de escolher um bom pacote <em>antisamy/anti-xss</em> antes de qualquer coisa.</p>
-<p>Após isto, no método do <em>controller</em> você precisará inserir o código abaixo:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'descricao' =&gt; [
-                'filter' =&gt; FILTER_UNSAFE_RAW // Filtro usado para permitir HTML
-            ]
-        ]);
-    }
-}</code></pre>
-<h3 id="trabalhando-com-checkboxes-multiple-selects-e-semelhantes">Trabalhando com checkboxes, multiple selects e semelhantes</h3>
-<p>Como o filtro padrão trata os dados para <code>STRING</code>, isto afeta a obtenção de dados de campos que enviam múltiplas informações. A solução é bem simples:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'id' =&gt; [
-                'filter' =&gt; FILTER_SANITIZE_NUMBER_INT,
-                'flags' =&gt; FILTER_FORCE_ARRAY
-            ]
-        ]);
-    }
-}</code></pre>
-<p>No exemplo acima, utilizamos a <em>flag</em> <code>FILTER_FORCE_ARRAY</code> que irá sempre retornar um array no campo definido e em conjunto com um filtro para tratar os valores para números inteiros.</p>
-<p>Já os métodos <code>get()</code> e <code>post()</code> retornam os dados filtrados, sendo que é possível retornar todo o conteúdo ou apenas um dado específico.</p>
-<p>O código resultante seria:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'nomedocampo' =&gt; FILTER_SANITIZE_NUMBER_FLOAT
-        ]);
+        $this-&gt;load('Storage\Session');
 
-        print_r($this-&gt;request-&gt;post()); //Array com todos os dados enviados via POST
-        echo $this-&gt;request-&gt;post('nomedocampo'); //Apenas o conteúdo do campo valor
-
-        echo $this-&gt;request-&gt;server('SERVER_NAME');
+        $this-&gt;session-&gt;set('name', 'value'); //Cria uma sessão
+        echo $this-&gt;session-&gt;get('name'); //Seleciona uma sessão
+        $this-&gt;session-&gt;clear('name'); //Exclui uma sessão
+        print_r($this-&gt;session-&gt;exists('name')); //Verifica a existência de uma sessão
     }
 }</code></pre>
-<p>E, por fim, têm-se os métodos: <code>getMethod()</code>, <code>isPost()</code>, <code>isGet()</code>, <code>isPut()</code> e <code>isHead()</code> que tem como função determinar qual é o método de requisição.</p>
+<h3 id="cookies">Cookies</h3>
+<p>Para trabalhar com <em>cookies</em> utiliza-se o objeto <em>Cookie</em> que contém os seguintes métodos:</p>
+<ul>
+<li><code>set()</code>;</li>
+<li><code>exists()</code>;</li>
+<li><code>get()</code>, e;</li>
+<li><code>clear()</code>.</li>
+</ul>
+<pre><code class="language-php">class ProdutosController
+{
+    public function listarAction()
+    {
+        $this-&gt;load('Storage\Cookie');
+
+        $this-&gt;cookie-&gt;set('name', 'value', '31556926'); //Cria um cookie ($name, $value, $time)
+        echo $this-&gt;cookie-&gt;get('name'); //Seleciona um cookie
+        $this-&gt;cookie-&gt;clear('name'); // Exclui um cookie
+        print_r($this-&gt;cookie-&gt;exists('name')); //Verifica a existência do cookie
+    }
+}</code></pre>
                 </section>
 
             </div>

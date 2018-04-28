@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>HXPHP Framework - Documentação Oficial</title>
+
+        <meta name="description" content="HXPHP - O seu primeiro framework PHP">
+        <meta name="keywords" content="HXPHP, framework PHP, linguagem PHP, curso de framework PHP, framework php para iniciantes">
+        <meta name="author" content="Bruno C. Santos">
+        <link rel="shortcut icon" href="http://www.hxphp.com.br/assets/img/favicon.jpg">
+        <link rel="apple-touch-icon" href="http://www.hxphp.com.br/assets/img/apple-touch-icon.jpg">
+        <link rel="apple-touch-icon" sizes="72x72" href="http://www.hxphp.com.br/assets/img/apple-touch-icon-72x72.jpg">
+        <link rel="apple-touch-icon" sizes="114x114" href="http://www.hxphp.com.br/assets/img/apple-touch-icon-114x114.jpg">
+
+
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="https://hxphp.github.io/docs/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="https://hxphp.github.io/docs/">
+                <img src="https://hxphp.github.io/docs/img/hxphp-framework-logo.png">
+                <small class="hidden-xs hidden-sm">
+                    Documentação Oficial
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                                                    <p class="text-muted">
+                                
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/index.html">
+                                            Informações essenciais
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/instalacao-e-configuracao.html">
+                                            Instalação e configuração
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/pontape-inicial.html">
+                                            Pontapé inicial
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/controllers.html">
+                                            Controllers
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/models.html">
+                                            Models
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/views.html">
+                                            Views
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/load.html">
+                                            Método load
+                                        </a>
+                                    </li>
+                                                                    <li class="active">
+                                        <a href="https://hxphp.github.io/docs/2.0/helpers.html">
+                                            Helpers
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/http.html">
+                                            HTTP
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/storage.html">
+                                            Storage
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/modulos.html">
+                                            Módulos
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/servicos.html">
+                                            Serviços
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="https://hxphp.github.io/docs/2.0/utilitarios.html">
+                                            Utilitários
+                                        </a>
+                                    </li>
+                                                            </ul>
+                        
+                    </nav>
+
+                
+                <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h2 id="helpers"><em>Helpers</em></h2>
+<p>Esta seção aborda os <em>Helpers</em> do HXPHP.</p>
+<hr />
+<h3 id="o-que-sao-helpers">O que são <em>Helpers</em>?</h3>
+<p>Os <em>Helpers</em> são componentes auxiliares. Em suma, são objetos que desempenham funções nas <code>views</code>.</p>
+<hr />
+<h3 id="alert-helper">Alert Helper</h3>
+<p>O <b>Alert Helper</b> é responsável pela exibição de mensagens de aviso, erro, sucesso e afins.</p>
+<p>Para utilizar este <em>helper</em> é necessário passar um <em>array</em> como parâmetro no construtor e este deve conter a seguinte estrutura:</p>
+<pre><code class="language-php">[
+    'danger', // Classes Bootstrap disponíveis: danger, warning, info, success
+    'Título da mensagem',
+    'Conteúdo da mensagem' // Pode ser um array com várias mensagens
+];</code></pre>
+<p>O código resultante seria:</p>
+<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
+{
+    public function indexAction()
+    {
+        $alerta = [
+          'success',
+          'Uhuul! Produto cadastrado com sucesso!',
+          'O produto já está disponível para seus clientes.'
+        ];
+
+        $this-&gt;load('Helpers\Alert', $alerta);
+
+        var_dump($this-&gt;alert-&gt;getAlert()); // ou
+        echo $this-&gt;alert;
+    }
+}</code></pre>
+<p>O método <code>getAlert()</code>, responsável pela renderização do alerta, é inserido na <em>view</em> e geralmente é encontrado em cabeçalhos para evitar a repetição de códigos.</p>
+<p>É válido ressaltar que o alerta renderizado é gerado a partir de um template localizado na pasta: <code>templates/Helpers/Alert/</code>.</p>
+<hr />
+<h3 id="menu-helper">Menu Helper</h3>
+<p>O <b>Menu Helper</b> tem a função de renderizar um menu customizado mediante o nível de acesso do usuário.</p>
+<p>Diferentemente do <em>Alert Helper</em>, que trabalha com templates, este conta com um módulo específico de configuração. Portanto, antes de utilizá-lo, é necessário verificar se o módulo está registrado.</p>
+<h4 id="recursos-do-mdulo-de-configurao">Recursos do módulo de configuração</h4>
+<p>O módulo contém dois métodos:</p>
+<ul>
+<li><code>setMenus()</code>: Que é responsável por definir a estrutura do menu e, opcionalmente, o nível de acesso;</li>
+<li><code>setConfigs()</code>: Que é responsável por customizar o menu que será renderizado.</li>
+</ul>
+<h5 id="definindo-a-estrutura-dos-menus">Definindo a estrutura dos menus</h5>
+<p>Exemplo de configuração para definir dois menus (o primeiro para usuários com nível de acesso igual a <b>administrator</b> e o segundo que é neutro):</p>
+<pre><code class="language-php">$configs-&gt;env-&gt;development-&gt;menu-&gt;setMenus([
+    'Home/home' =&gt; '%siteURL%',
+    'Projetos/briefcase' =&gt; '%baseURI%/projetos/listar/',
+    'Clientes/users' =&gt; [
+      'Listar todos/users' =&gt; '%baseURI%',
+      'Tipos de clientes/users' =&gt; '%baseURI%/clientes/tipos'
+    ],
+    'Usuários/users' =&gt; '%baseURI%/usuarios/listar/'
+], 'administrator');
+
+$configs-&gt;env-&gt;development-&gt;menu-&gt;setMenus([
+    'Home/home' =&gt; '%siteURL%/home',
+    'Projetos/briefcase' =&gt; '%baseURI%/projetos/listar/'
+]);</code></pre>
+<p>Observações:</p>
+<ul>
+<li>O método suporta 2 argumentos: <em>(array)</em> <code>$menus</code> e <em>(string)</em> <code>$access_level</code>;</li>
+<li>O segundo argumento é opcional, isto é, também é possível definir um menu sem um nível de acesso para páginas públicas e afins;</li>
+<li>O <em>array</em> com os menus é padronizado da seguinte forma:
+<pre><code class="language-php">[
+'Menu Sem Dropdown/codigo-icone-font-awesome-sem-prefixo' =&gt; 'http://www.link-absoluto.com',
+'Usuários/users' =&gt; '%baseURI%/link-relativo',
+'Menu Com Dropdown/home' =&gt; [
+  'Submenu/briefcase' =&gt; '%baseURI%/link-relativo',
+  'Submenu #2/users' =&gt; '%baseURI%/link-relativo'
+]
+]</code></pre></li>
+<li>É possível utilizar os coringas <code>%baseURI%</code> e <code>%siteURL%</code> que são substituídos pelo valor da configuração <code>baseURI</code> e pelo endereço do site, respectivamente;</li>
+<li>A ferramenta <a href="http://fontawesome.io/">Font Awesome</a> foi utilizada nos ícones que acompanham os títulos nos menus e submenus, e;</li>
+<li>O prefixo <code>fa</code> utilizado para a exibição dos ícones é inserido nativamente.</li>
+</ul>
+<h5 id="customizando-o-menu">Customizando o menu</h5>
+<p>Exemplo com todas as possíveis configurações do menu:</p>
+<pre><code class="language-php">$configs-&gt;env-&gt;development-&gt;menu-&gt;setConfigs([
+    'container' =&gt; false, // Tag container (opcional). Ex: nav
+    'container_id' =&gt; '',
+    'container_class' =&gt; '',
+    'menu_id' =&gt; 'menu',
+    'menu_class' =&gt; 'menu',
+    'menu_item_class' =&gt; 'menu-item',
+    'menu_item_active_class' =&gt; 'active',
+    'menu_item_dropdown_class' =&gt; 'dropdown',
+    'link_before' =&gt; '&lt;span&gt;', // Conteúdo anterior ao título
+    'link_after' =&gt; '&lt;/span&gt;', // Conteúdo posterior ao título
+    'link_class' =&gt; 'menu-link',
+    'link_active_class' =&gt; 'menu-active-link',
+    'link_dropdown_class' =&gt; 'dropdown-toggle',
+    'link_dropdown_attrs' =&gt; [
+      'data-toggle' =&gt; 'dropdown' // Data Atributos para ativação do dropdown
+   ,
+    'dropdown_class' =&gt; 'dropdown-menu',
+    'dropdown_item_class' =&gt; 'dropdown-item',
+    'dropdown_item_active_class' =&gt; 'active'
+]);</code></pre>
+<p>O exemplo acima está com todos os valores padrão, portanto, caso necessite customizar o seu menu, insira <b>apenas as configurações que deseja alterar</b> o valor padrão.</p>
+<h4 id="carregando-o-menu-helper-no-controller">Carregando o Menu Helper no Controller</h4>
+<p>Este <em>helper</em> requer duas dependências no construtor: <code>Request</code> e <code>Configs</code>. E se o menu for específico para um nível de acesso também é necessário informar o respectivo valor.</p>
+<p>O código resultante seria:</p>
+<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
+{
+    public function indexAction()
+    {
+        $this-&gt;load(
+            'Helpers\Menu',
+            $this-&gt;request,
+            $this-&gt;configs,
+            $this-&gt;auth-&gt;getUserRole() //access_level
+        );
+    }
+}</code></pre>
+<h4 id="renderizando-o-menu">Renderizando o menu</h4>
+<p>Após configurar e carregar o <em>helper</em> na <em>action</em> desejada, será possível renderizar o menu na <em>view</em>. Para tal, utilize o método <code>getMenu()</code>.</p>
+<p>Exemplos:</p>
+<pre><code class="language-php">echo $this-&gt;menu-&gt;getMenu();</code></pre>
+<hr />
+<h3 id="table-helper">Table Helper</h3>
+<p>O Table Helper é responsável por criar, montar e exibir tabelas utilizando apenas o PHP.</p>
+<p>Vamos às demonstrações de uso!</p>
+<p>Para carregar nosso Helper, basta chamá-lo no Controller:</p>
+<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
+{
+    public function indexAction()
+    {
+        $this-&gt;load('Helpers\Table');</code></pre>
+<h4 id="criando-linhas-para-a-tabela">Criando linhas para a tabela</h4>
+<p>Há basicamente <strong>4</strong> funções que nos permitem criar registros na tabela.
+Vamos por partes.</p>
+<p>Para criarmos um cabeçalho para a tabela, usamos a seguinte função:</p>
+<pre><code class="language-php">$this-&gt;table-&gt;addHeader(['ID', 'Nome', 'Idade']);</code></pre>
+<p>Resultado:</p>
+<pre><code class="language-html">&lt;thead&gt;
+    &lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Nome&lt;/th&gt;&lt;th&gt;Idade&lt;/th&gt;
+&lt;/thead&gt;</code></pre>
+<p>Basicamente passamos um <em>array</em> como parâmetro da nossa função, onde cada índice do <em>array</em> representa um dos títulos do cabeçalho.</p>
+<p>Seguindo o mesmo padrão podemos utilizar as funções abaixo para criação de outros membros da tabela:</p>
+<pre><code class="language-php">//Adicionar uma linha (dentro do tbody) à nossa tabela. 
+//Repare que cada índice do array passado, representa uma célula da linha.
+$this-&gt;table-&gt;addRow(['1', 'Caio', '21']);</code></pre>
+<pre><code class="language-php">//É possível adicionar diversas linhas ao mesmo tempo.
+$linhas = array(
+    ['1', 'Caio', '21'],
+    ['2', 'Bruno', '22']
+);
+
+//Desta vez utilizaremos a função no plural
+$this-&gt;table-&gt;addRows($linhas);</code></pre>
+<p>Resultado:</p>
+<pre><code class="language-html">&lt;tr&gt;
+    &lt;td&gt;1&lt;/td&gt;&lt;td&gt;Caio&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;2&lt;/td&gt;&lt;td&gt;Bruno&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+<p>Repare que criamos uma &quot;<em>matriz</em>&quot;, onde cada linha dessa <em>matriz</em> é um <em>array</em> contendo as células de sua própria linha na tabela.</p>
+<p>Podemos, da mesma forma, adicionar um rodapé à nossa tabela:</p>
+<pre><code class="language-php">$this-&gt;table-&gt;addFooter(['34', 'João', '52']);</code></pre>
+<p>Neste caso, as linhas ficarão dentro da tag <code>&lt;tfoot&gt;</code> na tabela.</p>
+<p>E por fim, podemos adicionar um <em>Caption</em> à nossa tabela.</p>
+<pre><code class="language-php">$this-&gt;table-&gt;addCaption('Título da Tabela');</code></pre>
+<h4 id="atributos-e-customizao">Atributos e Customização</h4>
+<p>Muitas vezes é necessário adicionar atributos às diversas <em>tags</em> da tabela.</p>
+<p>Por exemplo, você pode querer dizer que alguma das linhas da tabela precisa ter alguma <em>class</em> ou um <em>id</em> específico.
+É muito simples resolver este problema.</p>
+<p>Todas as funções citadas anteriormente aceitam um segundo parâmetro, que serão os nossos <strong>atributos</strong>.
+Passaremos este parâmetro em forma de <em>array</em>.</p>
+<pre><code class="language-php">$this-&gt;table-&gt;addRow(['Celula1', 'Celula2'], ['class' =&gt; 'primeira-linha']);
+//&lt;tr class="primeira-linha"&gt;&lt;td&gt;Celula1&lt;/td&gt;&lt;td&gt;Celula2&lt;/td&gt;&lt;/tr&gt;
+
+$this-&gt;table-&gt;addHeader(['Titulo1', 'Titulo2'],['id' =&gt; 'cabecalho']);
+
+$this-&gt;table-&gt;addFooter(['Rodape1', 'Rodape2'], array('class' =&gt; 'tabela-rodape'));
+
+$this-&gt;table-&gt;addCaption('Titulo da Tabela', ['style'=&gt;'color: red;']);</code></pre>
+<p>Simples não?</p>
+<p>Ainda assim, muitas das vezes é necessário que os atributos estejam em tags mais específicas ainda, como <code>&lt;td&gt;</code> ou <code>&lt;th&gt;.</code></p>
+<p>Para adicionar atributos à células específicas, basta transformar a célula em um array, e adicionar os atributos.
+Exemplo:</p>
+<pre><code class="language-php">$celulas = array('01', 'Caio', '21 anos', ['programador', 'class'=&gt;'profissao']);
+$this-&gt;table-&gt;addRow($celulas);</code></pre>
+<p>Resultado:</p>
+<pre><code class="language-html">&lt;tr&gt;
+    &lt;td&gt;01&lt;/td&gt;&lt;td&gt;Caio&lt;/td&gt;&lt;td&gt;anos&lt;/td&gt;&lt;td class="profissao"&gt;programador&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+<p>Observe que, o primeiro elemento do array da célula, é o conteúdo da própria célula (programador), e os demais elementos, são os atributos, que devem obedecer à seguinte forma:</p>
+<pre><code class="language-php">'NomeDoAtributo'=&gt;'Valor';</code></pre>
+<p>Este recurso funciona tanto para as linhas do corpo, quanto para as linhas do Header e do Footer.
+Deste modo, qualquer célula ou linha da tabela, pode possuir atributos específicos.
+Exemplo:</p>
+<pre><code class="language-php">$this-&gt;table-&gt;addHeader(['ID', 'Nome', 'Idade', array('Profissao', 'colspan'=&gt;'2')]);</code></pre>
+<p>Contudo, há ainda outras tags que podem ser customizadas. São elas:</p>
+<pre><code class="language-html">&lt;table&gt;, &lt;thead&gt;, &lt;tbody&gt;, &lt;tfooter&gt;</code></pre>
+<p>Para adicionar atributos à estas <em>tags</em>, podemos usar a seguinte função:</p>
+<pre><code class="language-php">$this-&gt;table-&gt;addTagAttr('table', ['class'=&gt;'table table-bordered']);</code></pre>
+<p>Onde o primeiro parâmetro é nome de uma dessas 4 tags (table, thead, tbody ou tfoot), e o segundo parâmetro são os atributos, utilizando o mesmo padrão apresentado anteriormente.</p>
+<h4 id="criando-templates-para-a-tabela">Criando templates para a tabela</h4>
+<p>O template de tabela trata-se de um arquivo JSON. É basicamente um arquivo de configuração das <em>tags</em> da tabela.
+Os templates devem ser colocados na pasta <code>templates/Helpers/Table</code>.</p>
+<p>Segue abaixo todas as configurações permitidas:</p>
+<pre><code class="language-json">{
+    "tag_table": "&lt;table %s&gt;%s&lt;/table&gt;",
+    "tag_caption": "&lt;caption %s&gt;%s&lt;/caption&gt;",
+    "tag_thead": "&lt;thead %s&gt;%s&lt;/thead&gt;",
+    "tag_thead_row": "&lt;tr %s&gt;%s&lt;/tr&gt;",
+    "tag_thead_cell": "&lt;th %s&gt;%s&lt;/th&gt;",
+    "tag_tbody": "&lt;tbody %s&gt;%s&lt;/tbody&gt;",
+    "tag_tbody_row": "&lt;tr %s&gt;%s&lt;/tr&gt;",
+    "tag_tbody_cell": "&lt;td %s&gt;%s&lt;/td&gt;",
+    "tag_tfoot": "&lt;tfoot %s&gt;%s&lt;/tfoot&gt;",
+    "tag_tfoot_row": "&lt;tr %s&gt;%s&lt;/tr&gt;",
+    "tag_tfoot_cell": "&lt;td %s&gt;%s&lt;/td&gt;"
+}</code></pre>
+<p>Não é necessário inserir todas as <em>tags</em>. <strong>Insira apenas as necessárias!</strong>
+Exemplo:</p>
+<pre><code class="language-json">{
+    "tag_table": "&lt;table %s class='tabela'&gt;%s&lt;/table&gt;",
+    "tag_tbody_cell": "&lt;td %s&gt;Valor: %s&lt;/td&gt;"
+}</code></pre>
+<p><strong>Observação:</strong> É obrigatório sempre colocar os dois coringas (<em>%s</em>), um para os atributos da tag, e outro para o conteúdo em si.</p>
+<h4 id="definindo-template">Definindo template</h4>
+<p>Para escolher um template de tabela, basta passá-lo como segundo argumento da função <strong>load</strong>.
+Não é necessário passar o caminho e a extensão do arquivo. Apenas o nome.
+Exemplo:</p>
+<pre><code class="language-php">$this-&gt;load('Helpers\Table', 'template-da-tabela');</code></pre>
+<h4 id="exemplo-de-template">Exemplo de template</h4>
+<p>Há diversas utilidades de se usar um template customizado.
+Vamos supor que você necessite que todas as linhas da tabela comece com um <em>checkbox</em>.
+Para resolver esta situação, criamos um template com o nome '<strong>tabela-com-inputs</strong>' da seguinte maneira:</p>
+<pre><code class="language-json">{
+    "tag_tbody_row": "&lt;tr %s&gt; &lt;td&gt;&lt;input type='checkbox'&gt;&lt;/td&gt; %s&lt;/tr&gt;"
+}</code></pre>
+<p>Chamando no Controller:</p>
+<pre><code class="language-php">$this-&gt;load('Helpers\Table', 'tabela-com-inputs');</code></pre>
+<p><strong>Observação:</strong> Não delete o template default.json.</p>
+<h4 id="exibindo-a-tabela">Exibindo a Tabela</h4>
+<p>Há duas maneira de renderizar a tabela:</p>
+<p>No controller:</p>
+<pre><code class="language-php">$this-&gt;table-&gt;getTable();</code></pre>
+<p>Ou através da View:</p>
+<pre><code class="language-php">echo $this-&gt;table;</code></pre>
+<h4 id="exemplo-geral">Exemplo Geral</h4>
+<p>Vamos criar uma tabela utilizando o Table Helper.</p>
+<pre><code class="language-php">$this-&gt;load('Helpers\Table');
+
+$this-&gt;table-&gt;addCaption('Funcionários');
+$this-&gt;table-&gt;addHeader(['ID', 'Nome', 'Profissao'], ['class'=&gt;'cabecalho']);
+$this-&gt;table-&gt;addRows(array(
+    ['1', 'Caio', 'Programador'],
+    ['2', 'Bruno', 'Programador'],
+    ['3', 'João', ['Diretor', 'class'=&gt;'success']]
+));
+//Integração com o Bootstrap
+$this-&gt;table-&gt;addTagAttr('table', ['class'=&gt;'table table-bordered']);
+
+echo $this-&gt;table-&gt;getTable();
+</code></pre>
+<h4 id="table-helper-e-o-php-activerecord">Table Helper e o PHP ActiveRecord</h4>
+<p>É muito fácil utilizar o Table Helper para criar tabelas através das consultas do PHP ActiveRecord.
+Exemplo:</p>
+<pre><code class="language-php">$rows = Book::all();
+
+foreach ($rows as $book) {
+    $book = $book-&gt;to_array();
+    $this-&gt;table-&gt;addRow($book);
+}</code></pre>
+<h4 id="observaes">Observações</h4>
+<p>Para fins de <em>debug</em> ou maior liberdade na criação de tabelas é possível &quot;capturar&quot; partes da tabela, sem ter que renderizá-la por completo.
+Podemos fazer uso das seguintes funções:</p>
+<pre><code class="language-php">//Retorna o array somente com as linhas da tabela renderizadas
+$this-&gt;table-&gt;getRows();
+
+//Retorna o array somente com as linhas do cabeçalho renderizadas
+$this-&gt;table-&gt;getHeader();
+
+//Retorna o array somente com as linhas do rodapé renderizadas
+$this-&gt;table-&gt;getFooter();
+
+//Retorna um array com o conteúdo do título e seus atributos renderizados
+$this-&gt;table-&gt;getCaption();</code></pre>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

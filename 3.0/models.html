@@ -65,7 +65,7 @@
                                             Controllers
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="https://hxphp.github.io/docs/2.0/models.html">
                                             Models
                                         </a>
@@ -85,7 +85,7 @@
                                             Helpers
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="https://hxphp.github.io/docs/2.0/http.html">
                                             HTTP
                                         </a>
@@ -116,92 +116,55 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h2 id="http"><em>HTTP</em></h2>
-<p>Nesta seção você irá conhecer o processo de obtenção de dados via requisições HTTP.</p>
+                    <h2 id="models"><em>Models</em></h2>
+<p>Nesta seção você irá conhecer mais uma das três camadas do padrão <b>MVC</b>.</p>
 <hr />
-<h3 id="request">HTTP Request</h3>
-<p>Para a obtenção de dados de requisições como <b>POST</b> e <b>GET</b> é necessário utilizar o objeto <em>Request</em>.</p>
-<p>As vantagens são muitas e dentre as principais destaca-se a maior segurança, visto que os dados são tratados nativamente.</p>
-<p>O objeto <em>Request</em> contém os seguintes métodos:</p>
-<p><b>Customização</b></p>
-<ul>
-<li><code>setCustomFilters()</code>;</li>
-</ul>
-<p><b>Obtenção de dados</b></p>
-<ul>
-<li><code>cookie()</code>;</li>
-<li><code>get()</code>;</li>
-<li><code>post()</code>;</li>
-<li><code>server()</code>;</li>
-<li><code>getMethod()</code>;</li>
-</ul>
-<p><b>Validação</b></p>
-<ul>
-<li><code>isValid()</code>;</li>
-<li><code>isPost()</code>;</li>
-<li><code>isGet()</code>;</li>
-<li><code>isPut()</code>, e;</li>
-<li><code>isHead()</code>.</li>
-</ul>
-<p>O método <code>setCustomFilters()</code> tem o objetivo de customizar os filtros de tratamento aplicados aos dados das requisições. Para tal, é necessário informar um <b><em>array</em> associativo</b> com o índice igual ao nome do campo e o valor com a constante de filtro. Leia: <a href="http://php.net/manual/en/filter.filters.sanitize.php"><a href="http://php.net/manual/en/filter.filters.sanitize.php">http://php.net/manual/en/filter.filters.sanitize.php</a></a>. Por padrão, o filtro aplicado em todos os dados é o <code>FILTER_SANITIZE_STRING</code> que evita a injeção de códigos HTML.</p>
-<p>O código resultante seria:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
+<h3 id="o-que-sao-models">O que são <em>Models</em>?</h3>
+<p>Os <em>models</em>, comumente chamados de <b>modelos</b>, são responsáveis por todos os processos relacionados à dados. Ou seja, o processo de leitura, escrita e validação de dados é realizado nesta camada. Estas rotinas são chamadas de <b>regras de negócio</b>.</p>
+<p>O modelo acessa qualquer tipo de informação, isto é, desde um banco de dados até um arquivo <em>XML</em>.
+As informações obtidas no modelo são repassadas para o controlador que, mediante a necessidade, repassa para a visualização. Em outro caminho existe o envio de informações da visualização para o controlador; que, por sua vez, envia para o modelo, e; este consuma o processo realizando as devidas alterações nos dados.</p>
+<hr />
+<h3 id="criando-models">Criando <em>Models</em></h3>
+<p>Agora que você já sabe o que é um <em>model</em>, deve se atentar para os detalhes na criação do mesmo. Quando um <em>model</em> é criado com o objetivo de manipular uma tabela do banco de dados é mais do que recomendado que este seja desenvolvido nos padrões do <em>ORM</em> vigente do framework (vide mais detalhes abaixo).</p>
+<p>Para aproveitar dos benefícios do <em>ORM</em> é necessário que o <em>model</em> herde as configurações dele e, para tal, é necessário que o seu <em>model</em> seja uma extensão da classe mestre <code>\HXPHP\System\Model</code>.</p>
+<p>O código base de um <em>model</em> é:</p>
+<pre><code class="language-php">class NomeDoModel extends \HXPHP\System\Model
 {
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'namedoinput' =&gt; FILTER_SANITIZE_NUMBER_FLOAT
-        ]);
-    }
+        ...
 }</code></pre>
-<h3 id="trabalhando-com-campos-html">Trabalhando com campos HTML</h3>
-<p>Em algumas aplicações é comum encontrarmos editores HTML que precisam salvar <code>tags</code> no banco de dados. O principal problema nisto é que sem a devida validação, a aplicação se torna vulnerável a ataques XSS.</p>
-<p>Por padrão, o <strong>HXPHP</strong> possui um recurso que impede a escrita de tags HTML no banco de dados. Esta é uma medida de segurança usada para conscientizar o desenvolvedor.</p>
-<p>Caso seja realmente necessário, você precisa se certificar de escolher um bom pacote <em>antisamy/anti-xss</em> antes de qualquer coisa.</p>
-<p>Após isto, no método do <em>controller</em> você precisará inserir o código abaixo:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
+<p>As convenções da nomenclatura dos <em>models</em> são ditas pelo <em>ORM</em> vigente, portanto estas serão abordadas em uma seção específica.</p>
+<hr />
+<h3 id="orm-php-activerecord"><em>ORM</em> PHP ActiveRecord</h3>
+<p><em>ORM</em>, da sigla <em>Object-relational mapping</em>, tem a seguinte definição de acordo com a <a href="http://pt.wikipedia.org/wiki/Mapeamento_objeto-relacional">Wikipedia</a>:</p>
+<blockquote>
+<p>&quot;Mapeamento objeto-relacional (ou ORM, do inglês: Object-relational mapping) é uma técnica de desenvolvimento utilizada para reduzir a impedância da programação orientada aos objetos utilizando bancos de dados relacionais. As tabelas do banco de dados são representadas através de classes e os registros de cada tabela são representados como instâncias das classes correspondentes.</p>
+<p>Com esta técnica, o programador não precisa se preocupar com os comandos em linguagem SQL; ele irá usar uma interface de programação simples que faz todo o trabalho de persistência.</p>
+<p>Não é necessária uma correspondência direta entre as tabelas de dados e as classes do programa. A relação entre as tabelas onde originam os dados e o objecto que os disponibiliza é configurada pelo programador, isolando o código do programa das alterações à organização dos dados nas tabelas do banco de dados.&quot;</p>
+</blockquote>
+<p>Em outras palavras, com o uso de um <em>ORM</em> torna-se pouco provável o uso de comandos SQL nos códigos.</p>
+<p>A lógica é a seguinte: para cada tabela tem-se um <em>model</em>; sendo que cada <em>model</em> é um objeto, e; o <em>model</em> é uma extensão da classe mestre do <em>ORM</em>.</p>
+<p>O <em>ORM</em> nativo do HXPHP Framework é o <a href="http://phpactiverecord.org/">PHP ActiveRecord</a>, que é uma biblioteca <em>open source</em> desenvolvida nos padrões <a href="http://en.wikipedia.org/wiki/Active_record_pattern">ActiveRecord</a>. Trata-se de uma ferramenta de simples instalação e com uma sintaxe fácil, ou seja, além de ser fácil a sua implementação, o mesmo ainda conta com um nível mais do que considerável de legibilidade até mesmo para quem nunca ouviu falar deste <em>ORM</em>, pois, somente pelos métodos, nomeados de forma sugestiva, já é possível compreender o funcionamento.
+De toda forma, é recomendado que você leia a documentação oficial para compreender todos os recursos e possibilidades.</p>
+<h4 id="convenes">Convenções</h4>
+<p>A questão fundamental no uso deste <em>ORM</em> está nas convenções de nomenclatura das tabelas do banco de dados e dos <em>models</em>. Confira a lista das 5 principais:</p>
+<ul>
+<li>Todas as tabelas devem ser nomeadas em INGLÊS;</li>
+<li>O nome do model é o <b>singular</b> do nome da tabela;</li>
+<li>O nome do model deverá ser escrito no padrão CamelCase;</li>
+<li>A chave primária deve ser 'id' e NÃO 'ID' ou 'Id', e;</li>
+<li>{Tabela} login_attempts =&gt; {Model} LoginAttempt / lost_passwords =&gt; LostPassword.</li>
+</ul>
+<hr />
+<h3 id="model-na-pratica"><em>Model</em> na prática</h3>
+<pre><code class="language-php">class Product extends \HXPHP\System\Model
 {
-    public function salvarAction()
+    static function exists($product_code)
     {
-        $this-&gt;request-&gt;setCustomFilters([
-            'descricao' =&gt; [
-                'filter' =&gt; FILTER_UNSAFE_RAW // Filtro usado para permitir HTML
-            ]
-        ]);
-    }
-}</code></pre>
-<h3 id="trabalhando-com-checkboxes-multiple-selects-e-semelhantes">Trabalhando com checkboxes, multiple selects e semelhantes</h3>
-<p>Como o filtro padrão trata os dados para <code>STRING</code>, isto afeta a obtenção de dados de campos que enviam múltiplas informações. A solução é bem simples:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'id' =&gt; [
-                'filter' =&gt; FILTER_SANITIZE_NUMBER_INT,
-                'flags' =&gt; FILTER_FORCE_ARRAY
-            ]
-        ]);
-    }
-}</code></pre>
-<p>No exemplo acima, utilizamos a <em>flag</em> <code>FILTER_FORCE_ARRAY</code> que irá sempre retornar um array no campo definido e em conjunto com um filtro para tratar os valores para números inteiros.</p>
-<p>Já os métodos <code>get()</code> e <code>post()</code> retornam os dados filtrados, sendo que é possível retornar todo o conteúdo ou apenas um dado específico.</p>
-<p>O código resultante seria:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'nomedocampo' =&gt; FILTER_SANITIZE_NUMBER_FLOAT
-        ]);
+        $product = self::find_by_code($product_code);
 
-        print_r($this-&gt;request-&gt;post()); //Array com todos os dados enviados via POST
-        echo $this-&gt;request-&gt;post('nomedocampo'); //Apenas o conteúdo do campo valor
-
-        echo $this-&gt;request-&gt;server('SERVER_NAME');
+        return !is_null($product) ? true : false;
     }
 }</code></pre>
-<p>E, por fim, têm-se os métodos: <code>getMethod()</code>, <code>isPost()</code>, <code>isGet()</code>, <code>isPut()</code> e <code>isHead()</code> que tem como função determinar qual é o método de requisição.</p>
                 </section>
 
             </div>

@@ -85,7 +85,7 @@
                                             Helpers
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="https://hxphp.github.io/docs/2.0/http.html">
                                             HTTP
                                         </a>
@@ -95,7 +95,7 @@
                                             Storage
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="https://hxphp.github.io/docs/2.0/modulos.html">
                                             Módulos
                                         </a>
@@ -116,92 +116,110 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h2 id="http"><em>HTTP</em></h2>
-<p>Nesta seção você irá conhecer o processo de obtenção de dados via requisições HTTP.</p>
+                    <h2 id="modulos"><em>Módulos</em></h2>
+<h2 id="nesta-seo-voc-ir-conhecer-os-mdulos">Nesta seção você irá conhecer os módulos.</h2>
+<h3 id="o-que-sao-modulos">O que são Módulos?</h3>
+<p>Módulos são basicamente plugins, ou seja, são bibliotecas de códigos que tem por objetivo adicionar recursos para os componentes do framework.</p>
 <hr />
-<h3 id="request">HTTP Request</h3>
-<p>Para a obtenção de dados de requisições como <b>POST</b> e <b>GET</b> é necessário utilizar o objeto <em>Request</em>.</p>
-<p>As vantagens são muitas e dentre as principais destaca-se a maior segurança, visto que os dados são tratados nativamente.</p>
-<p>O objeto <em>Request</em> contém os seguintes métodos:</p>
-<p><b>Customização</b></p>
+<h3 id="message-module"><em>Message Module</em></h3>
+<p>O único módulo nativo do framework é o <b>Message Module</b>. Ele é responsável por gerenciar todas as mensagens de erro, aviso, sucesso e etc.</p>
+<p>Para utilizar este módulo é necessário:</p>
 <ul>
-<li><code>setCustomFilters()</code>;</li>
+<li>Criar um template de mensagens no formato JSON, e;</li>
+<li>Salvar na pasta <code>templates/Modules/Messages/</code>.</li>
 </ul>
-<p><b>Obtenção de dados</b></p>
+<p>Veja o exemplo do template <code>auth.json</code>:</p>
+<pre><code class="language-json">{
+    "description" : "Template de mensagens para o serviço de autenticação",
+    "messages" : {
+        "usuario-bloqueado" : {
+            "subject" : "Acesso bloqueado por excesso de tentativas",
+            "message" : "Olá %s, &lt;br /&gt; Seu acesso foi bloqueado pelo excesso de tentativas, contate o administrador para liberação. Lembre-se de que esse recurso é para sua segurança, caso necessário solicite um novo acesso para evitar transtornos futuros."
+        }
+    },
+    "alerts" : {
+        "conta-em-uso" : {
+            "style"   : "danger",
+            "title"   : "Ops! Conta em uso!",
+            "message" : "Esta conta já está registrada e sendo utilizada no momento!"
+        },
+        "tentativas-esgotando" : {
+            "style"   : "warning",
+            "title"   : "Ops! Verifique com cuidado os dados!",
+            "message" : "Suas tentativas estão acabando, você só tem %s tentativa(s)! Após exceder esse número seu acesso só será liberado através da aprovação do administrador!"
+        },
+        "dados-incorretos" : {
+            "style"   : "info",
+            "title"   : "Ops! Dados incorretos!",
+            "message" : "Não foi possível realizar a autenticação, confira seus dados!"
+        },
+        "usuario-bloqueado" : {
+            "style"   : "danger",
+            "title"   : "Ops! Usuário bloqueado!",
+            "message" : "Não foi possível realizar a autenticação, pois este usuário encontra-se bloqueado no sistema, contate o administrador para liberação!"
+        },
+        "usuario-inexistente" : {
+            "style"   : "danger",
+            "title"   : "Ops! Dados incorretos!",
+            "message" : "Não foi possível realizar a autenticação, confira seus dados!"
+        }
+    }
+}</code></pre>
+<p>Perceba que existem três estruturas principais:</p>
 <ul>
-<li><code>cookie()</code>;</li>
-<li><code>get()</code>;</li>
-<li><code>post()</code>;</li>
-<li><code>server()</code>;</li>
-<li><code>getMethod()</code>;</li>
+<li>Description;</li>
+<li>Messages, e;</li>
+<li>Alerts.</li>
 </ul>
-<p><b>Validação</b></p>
+<p>A estrutura <b>description</b> deve conter a descrição do template.</p>
+<p>Já a estrutura <b>messages</b> deve acomodar mensagens que serão enviadas por e-mail.</p>
+<p>E, por fim, a estrutura <b>alerts</b> que deve acomodar as mensagens que serão renderizadas pelo <a href="#alert-helper">Alert Helper</a>.</p>
+<p>As estruturas <b>messages</b> e <b>alerts</b> contém seções pré-definidas:</p>
 <ul>
-<li><code>isValid()</code>;</li>
-<li><code>isPost()</code>;</li>
-<li><code>isGet()</code>;</li>
-<li><code>isPut()</code>, e;</li>
-<li><code>isHead()</code>.</li>
+<li><b>subject</b> e <b>message</b> para a a estrutura <b>messages</b>, e;</li>
+<li><b>style</b>, <b>title</b> e <b>message</b> para a estrutura <b>alerts</b>.</li>
 </ul>
-<p>O método <code>setCustomFilters()</code> tem o objetivo de customizar os filtros de tratamento aplicados aos dados das requisições. Para tal, é necessário informar um <b><em>array</em> associativo</b> com o índice igual ao nome do campo e o valor com a constante de filtro. Leia: <a href="http://php.net/manual/en/filter.filters.sanitize.php"><a href="http://php.net/manual/en/filter.filters.sanitize.php">http://php.net/manual/en/filter.filters.sanitize.php</a></a>. Por padrão, o filtro aplicado em todos os dados é o <code>FILTER_SANITIZE_STRING</code> que evita a injeção de códigos HTML.</p>
+<p>Estas seções devem ser acomodadas dentro de uma estrura intermediária que é nomeada com um código referente ao seu conteúdo.</p>
+<p>Após criar e preencher os templates com seus respectivos conteúdos é possível resgatar estes valores de forma prática através do <b>Messages Module</b>.</p>
+<p>O primeiro passo é declarar para o método construtor do módulo qual é o nome do template que será utilizado.</p>
+<p>Obs: <b>Lembre-se de não informar a extensão .json</b>.</p>
 <p>O código resultante seria:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'namedoinput' =&gt; FILTER_SANITIZE_NUMBER_FLOAT
-        ]);
+<pre><code class="language-php">$messages = new Messages('auth');
+//ou
+$this-&gt;load('Modules\Messages', 'auth');</code></pre>
+<p>Para retornar o conteúdo de uma mensagem|alerta é necessário utilizar o seguinte caminho:</p>
+<pre><code class="language-php">$this-&gt;messages-&gt;alerts-&gt;getByCode('conta-em-uso');</code></pre>
+<p>Executando o código acima tem-se como retorno um <em>array</em> no formato necessário para ser interpretado pelo <a href="#alert-helper">Alert Helper</a>.</p>
+<p>Perceba que <code>{alerts}</code> é uma das opções disponíveis, isto é, trata-se da estrutura que você deseja utilizar. No template anteriormente apresentado, pode-se observar duas estruturas: <em>messages</em> e <em>alerts</em>.</p>
+<pre><code class="language-php">$this-&gt;messages-&gt;messages-&gt;getByCode('usuario-bloqueado');</code></pre>
+<p>Caso queira definir uma estrutura padrão e utilizar diretamente o método <code>getByCode($codigo)</code> configure o método <code>setBlock($estrutura);</code>.</p>
+<pre><code class="language-php">$this-&gt;messages-&gt;setBlock('messages');
+$this-&gt;messages-&gt;getByCode('usuario-bloqueado');</code></pre>
+<p>Também é possível preencher valores coringas presentes na mensagem do template (%s), para tal, é necessário informar estes parâmetros em um <em>array</em> seguindo o padrão abaixo:</p>
+<p>Template para exemplo:</p>
+<pre><code class="language-json">{
+    "description" : "Template de mensagens para exemplo",
+    "alerts" : {
+        "codigo" : {
+            "style"   : "info",
+            "title"   : "%s",
+            "message" : "Olá %s %s, como vai?"
+        }
     }
 }</code></pre>
-<h3 id="trabalhando-com-campos-html">Trabalhando com campos HTML</h3>
-<p>Em algumas aplicações é comum encontrarmos editores HTML que precisam salvar <code>tags</code> no banco de dados. O principal problema nisto é que sem a devida validação, a aplicação se torna vulnerável a ataques XSS.</p>
-<p>Por padrão, o <strong>HXPHP</strong> possui um recurso que impede a escrita de tags HTML no banco de dados. Esta é uma medida de segurança usada para conscientizar o desenvolvedor.</p>
-<p>Caso seja realmente necessário, você precisa se certificar de escolher um bom pacote <em>antisamy/anti-xss</em> antes de qualquer coisa.</p>
-<p>Após isto, no método do <em>controller</em> você precisará inserir o código abaixo:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'descricao' =&gt; [
-                'filter' =&gt; FILTER_UNSAFE_RAW // Filtro usado para permitir HTML
-            ]
-        ]);
-    }
-}</code></pre>
-<h3 id="trabalhando-com-checkboxes-multiple-selects-e-semelhantes">Trabalhando com checkboxes, multiple selects e semelhantes</h3>
-<p>Como o filtro padrão trata os dados para <code>STRING</code>, isto afeta a obtenção de dados de campos que enviam múltiplas informações. A solução é bem simples:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'id' =&gt; [
-                'filter' =&gt; FILTER_SANITIZE_NUMBER_INT,
-                'flags' =&gt; FILTER_FORCE_ARRAY
-            ]
-        ]);
-    }
-}</code></pre>
-<p>No exemplo acima, utilizamos a <em>flag</em> <code>FILTER_FORCE_ARRAY</code> que irá sempre retornar um array no campo definido e em conjunto com um filtro para tratar os valores para números inteiros.</p>
-<p>Já os métodos <code>get()</code> e <code>post()</code> retornam os dados filtrados, sendo que é possível retornar todo o conteúdo ou apenas um dado específico.</p>
 <p>O código resultante seria:</p>
-<pre><code class="language-php">class ProdutosController extends \HXPHP\System\Controller
-{
-    public function salvarAction()
-    {
-        $this-&gt;request-&gt;setCustomFilters([
-            'nomedocampo' =&gt; FILTER_SANITIZE_NUMBER_FLOAT
-        ]);
+<pre><code class="language-php">$this-&gt;load('Modules\Messages', 'meutemplate');
+$this-&gt;messages-&gt;setBlock('alerts');
 
-        print_r($this-&gt;request-&gt;post()); //Array com todos os dados enviados via POST
-        echo $this-&gt;request-&gt;post('nomedocampo'); //Apenas o conteúdo do campo valor
+$substituir_coringas = [
+    'title' =&gt; 'Hello World',
+    'message' =&gt; [
+      'Bruno',
+      'Santos'
+    ]
+];
 
-        echo $this-&gt;request-&gt;server('SERVER_NAME');
-    }
-}</code></pre>
-<p>E, por fim, têm-se os métodos: <code>getMethod()</code>, <code>isPost()</code>, <code>isGet()</code>, <code>isPut()</code> e <code>isHead()</code> que tem como função determinar qual é o método de requisição.</p>
+$this-&gt;messages-&gt;getByCode('codigo', $substituir_coringas);</code></pre>
                 </section>
 
             </div>
