@@ -113,4 +113,6 @@ class ProdutosController extends \HXPHP\System\Controller
 }
 ```
 
+-----
+
 E, por fim, têm-se os métodos: `getMethod()`, `isPost()`, `isGet()`, `isPut()` e `isHead()` que tem como função determinar qual é o método de requisição.
