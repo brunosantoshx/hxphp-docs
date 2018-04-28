@@ -48,6 +48,30 @@ class ProdutosController extends \HXPHP\System\Controller
 }
 ```
 
+### Trabalhando com campos HTML
+
+Em algumas aplicações é comum encontrarmos editores HTML que precisam salvar `tags` no banco de dados. O principal problema nisto é que sem a devida validação, a aplicação se torna vulnerável a ataques XSS.
+
+Por padrão, o **HXPHP** possui um recurso que impede a escrita de tags HTML no banco de dados. Esta é uma medida de segurança usada para conscientizar o desenvolvedor.
+
+Caso seja realmente necessário, você precisa se certificar de escolher um bom pacote *antisamy/anti-xss* antes de qualquer coisa.
+
+Após isto, no método do *controller* você precisará inserir o código abaixo:
+
+```php
+class ProdutosController extends \HXPHP\System\Controller
+{
+    public function salvarAction()
+    {
+        $this->request->setCustomFilters([
+            'descricao' => [
+                'filter' => FILTER_UNSAFE_RAW // Filtro usado para permitir HTML
+            ]
+        ]);
+    }
+}
+```
+
 ### Trabalhando com checkboxes, multiple selects e semelhantes
 
 Como o filtro padrão trata os dados para `STRING`, isto afeta a obtenção de dados de campos que enviam múltiplas informações. A solução é bem simples:
