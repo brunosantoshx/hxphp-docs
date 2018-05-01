@@ -1,11 +1,16 @@
 ---
 currentMenu: instalacao-e-configuracao
 ---
-## Instalação e Configuração {#instalacao-e-configuracao}
+## Instalação {#instalacao}
 
 Esta seção contempla os procedimentos de instalação e configuração do framework.
 
 ----
+
+### Instalando e executando o HXPHP com Docker
+
+
+
 ### Bootstrapping {#bootstrapping}
 
 Após vistar todos os itens da lista de requisitos, prossiga com a instalação, que tanto em rede local como remota, consiste em:
@@ -16,7 +21,7 @@ Após vistar todos os itens da lista de requisitos, prossiga com a instalação,
 
 ----
 
-#### Configurando o framework
+## Configurando o framework {#configuracao}
 
 Após enviar os arquivos, configure o framework. Todas as configurações devem ser definidas no arquivo:
 
@@ -27,7 +32,15 @@ As configurações são divididas em dois grupos:
 + Configurações globais, e;
 + Configurações de ambiente.
 
+----
+
+### Configurações globais
+
 As `globais` tem como objetivo definir parâmetros que, em suma, não necessitam de alteração, pois, consistem em intervenções no funcionamento padrão do framework. Exemplos: Diretório dos controllers, diretório das views e etc.
+
+----
+
+### Configurações de Ambiente
 
 Já as `configurações de ambiente` são parâmetros que variam de acordo com o `ambiente atual`. O ambiente além de conter a sua configuração padrão também pode conter módulos.
 
