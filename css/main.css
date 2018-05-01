@@ -23,6 +23,11 @@ h3 {
     font-size: 23px;
 }
 
+h2 {
+    font-weight: bold;
+    color: #170b64;
+}
+
 li {
     margin-bottom: 3px;
 }
@@ -113,3 +118,18 @@ code {
     white-space: -moz-pre-wrap;
     word-wrap: break-word;
 }
+
+li code,
+p code {
+    font-style: italic;
+    background: #0071bf;
+}
+
+blockquote code {
+    background: #b9e0fb;
+    color: #001830;
+    padding: 10px;
+    display: inline-block;
+}
+
+
