@@ -20,42 +20,42 @@ menu:
             items:
                 informacoes-essenciais:
                     text: Informações essenciais
-                    relativeUrl: 2.0/index.html
+                    relativeUrl: 3.0/index.html
                 instalacao-e-configuracao:
                     text: Instalação e configuração
-                    relativeUrl: 2.0/instalacao-e-configuracao.html
+                    relativeUrl: 3.0/instalacao-e-configuracao.html
                 pontape-inicial:
                     text: Pontapé inicial
-                    relativeUrl: 2.0/pontape-inicial.html
+                    relativeUrl: 3.0/pontape-inicial.html
                 controllers:
                     text: Controllers
-                    relativeUrl: 2.0/controllers.html
+                    relativeUrl: 3.0/controllers.html
                 models:
                     text: Models
-                    relativeUrl: 2.0/models.html
+                    relativeUrl: 3.0/models.html
                 views:
                     text: Views
-                    relativeUrl: 2.0/views.html
+                    relativeUrl: 3.0/views.html
                 load:
                     text: Método load
-                    relativeUrl: 2.0/load.html
+                    relativeUrl: 3.0/load.html
                 helpers:
                     text: Helpers
-                    relativeUrl: 2.0/helpers.html
+                    relativeUrl: 3.0/helpers.html
                 http:
                     text: HTTP
-                    relativeUrl: 2.0/http.html
+                    relativeUrl: 3.0/http.html
                 storage:
                     text: Storage
-                    relativeUrl: 2.0/storage.html
+                    relativeUrl: 3.0/storage.html
                 modulos:
                     text: Módulos
-                    relativeUrl: 2.0/modulos.html
+                    relativeUrl: 3.0/modulos.html
                 servicos:
                     text: Serviços
-                    relativeUrl: 2.0/servicos.html
+                    relativeUrl: 3.0/servicos.html
                 utilitarios:
                     text: Utilitários
-                    relativeUrl: 2.0/utilitarios.html
+                    relativeUrl: 3.0/utilitarios.html
 
 baseUrl: https://hxphp.github.io/docs/
