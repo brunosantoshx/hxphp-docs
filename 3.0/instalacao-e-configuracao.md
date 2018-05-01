@@ -28,6 +28,16 @@ Você pode conferir se ambos estão instalados, executando os seguintes comandos
 
 > `docker-compose -v`
 
+----
+
+### Credenciais
+
+As credenciais de conexão com o MySQL estão no arquivo `.env` no diretório em que o HXPHP foi instalado. 
+
+----
+
+### Levantando os containers
+
 Após isto, para usar o Docker siga os seguintes passos:
 
 + Abra o terminal **(PowerShell, se usar Windows)**
@@ -36,6 +46,19 @@ Após isto, para usar o Docker siga os seguintes passos:
 + Execute o seguinte comando:
 
 > `docker-compose up -d`
+
+----
+
+### Serviços
+
+Após a conclusão do processo, você poderá utilizar os softwares listados abaixo nos respectivos endereços:
+
++ **HXPHP**: [http://localhost:8000](http://localhost:8000)
++ **phpMyAdmin**: [http://localhost:8080](http://localhost:8080)
+
+Os dados de acesso ao **phpMyAdmin** estão no arquivo `.env`. O servidor/host é `mysql`, por padrão.
+
+----
 
 ### Observações
 
@@ -46,17 +69,7 @@ Após isto, para usar o Docker siga os seguintes passos:
 
 3. Um diretório *(volume)* **data** será criado na raiz do projeto e será responsável por armazenar os dados do MySQL *(container mysql)*. Certifique-se que esta pasta não existe antes de rodar o `docker-compose up -d`.
 
-
-
-### Bootstrapping {#bootstrapping}
-
-Após vistar todos os itens da lista de requisitos, prossiga com a instalação, que tanto em rede local como remota, consiste em:
-
-+ Enviar os arquivos para a pasta desejada;
-+ Editar o arquivo `app/config.php`, e;
-+ Editar o arquivo `.htaccess`.
-
-----
+---- 
 
 ## Configurando o framework {#configuracao}
 
