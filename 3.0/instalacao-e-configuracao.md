@@ -1,13 +1,45 @@
 ---
 currentMenu: instalacao-e-configuracao
 ---
+
 ## Instalação {#instalacao}
 
-Esta seção contempla os procedimentos de instalação e configuração do framework.
+Você precisa do [Composer](https://getcomposer.org/download) para instalar o HXPHP, portanto, antes de prosseguir, certifique-se que o mesmo está instalado em sua máquina. Para isso, abra o terminal (CMD no Windows) e digite o seguinte comando: `composer --version`.
+
+Após constatar que o [Composer](https://getcomposer.org/download) está em pleno funcionamento, navegue até o diretório escolhido para instalação e execute o comando: 
+
+
+> `composer create-project --prefer-dist hxphp/hxphp hxphp`
+
+
+*Este comando cria o projeto e instala todas as dependências do framework.*
 
 ----
 
-### Instalando e executando o HXPHP com Docker
+## Usando o Docker
+
+Você precisa tanto do[Docker](https://www.docker.com/community-edition) como do [Docker Compose](https://docs.docker.com/compose/install/) instalados em sua máquina. 
+
+Você pode conferir se ambos estão instalados, executando os seguintes comandos no terminal **(PowerShell, se usar Windows)**:
+
+> `docker -v`
+
+> `docker-compose -v`
+
+Após isto, para usar o Docker siga os seguintes passos:
+
++ Abra o terminal **(PowerShell, se usar Windows)**
++ Navegue até o diretório do HXPHP. Ex: `cd ~/Desktop/hxphp`
++ Delete a pasta `data` *(se existir)*
++ Execute o seguinte comando:
+
+> `docker-compose up -d`
+
+### Observações
+
+1. Este processo pode demorar alguns minutos na primeira execução, pois, o Docker irá baixar as imagens necessárias
+2. Para parar os containers use `docker-compose down -v`
+3. Um diretório *(volume)* `data` será criado na raiz do projeto e será responsável por armazenar os dados dos bancos de dados mantidos no container `mysql`. Certifique-se que esta pasta não existe antes de rodar o `docker-compose up -d`.
 
 
 

@@ -24,6 +24,7 @@ Para usar o HXPHP com Docker são precisos:
 
 Para a instalação bem-sucedida do framework são necessários os seguintes softwares:
 
++ [Git](https://git-scm.com/)
 + [PHP 7.0+](http://php.net/downloads.php)
 + [MySql 5.5+](http://dev.mysql.com/downloads/mysql/)
 + [Apache](https://httpd.apache.org/download.cgi)
