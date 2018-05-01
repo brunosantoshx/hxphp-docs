@@ -7,6 +7,21 @@ Esta seção contempla todos os cuidados e requisitos necessários para a instal
 
 ----
 
+
+### Usando o HXPHP com Docker
+
+Se você deseja trabalhar com o HXPHP em qualquer sistema operacional e não esquentar a cabeça com PHP, Apache, NGINX e demais softwares para configurar o ambiente, você pode gostar de conhecer e usar o Docker.
+
+Para usar o HXPHP com Docker são precisos:
+
++ [Git](https://git-scm.com/)
++ [Docker](https://www.docker.com/community-edition)
++ [Docker Compose](https://docs.docker.com/compose/install/)
+
+----
+
+### Usando o HXPHP com LAMP
+
 Para a instalação bem-sucedida do framework são necessários os seguintes softwares:
 
 + [PHP 7.0+](http://php.net/downloads.php)
@@ -15,7 +30,3 @@ Para a instalação bem-sucedida do framework são necessários os seguintes sof
 + [Composer](https://getcomposer.org/download/)
 
 O *mod_rewrite* deve estar habilitado. Caso contrário o MVC não terá efeito e o *Apache* irá reportar o erro <b>"Not Found"</b>.
-
-----
-
-<b>Para lhe auxiliar neste processo, confira essa série completa de videoaulas gratuitas sobre os requisitos para programar PHP na sua máquina: [Série completa do canal HXTUTORS](https://goo.gl/9oQNr5)</b>
