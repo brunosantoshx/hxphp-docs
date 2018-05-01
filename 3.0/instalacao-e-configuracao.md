@@ -94,13 +94,16 @@ As `globais` tem como objetivo definir parâmetros que, em suma, não necessitam
 
 Já as `configurações de ambiente` são parâmetros que variam de acordo com o `ambiente atual`. O ambiente além de conter a sua configuração padrão também pode conter módulos.
 
-Para iniciar a configuração é necessário instanciar o objeto `$configs = new HXPHP\System\Configs\Config`. E, após isto, é possível:
+----
 
-+ Alterar as configurações globais, e/ou;
-+ Adicionar e configurar ambientes.
+#### Adicionando um ambiente
 
 Para adicionar um ambiente: `$configs->env->add('ambiente');`. 
 Os ambientes padrão são: `development` e `production`.
+
+----
+
+#### Criando um ambiente
 
 Para criar um ambiente: 
 + Acesse a pasta `HXPHP\System\Configs\Environments`, e;
@@ -123,6 +126,9 @@ Conteúdo padrão de um ambiente:
 Por padrão, a única configuração padrão de ambiente é a `baseURI` que define a [BASE DA URL](#funcionamento-da-url).
 Para alterá-la: `$configs->env->nomedoambiente->baseURI = '/hxphp/';`.
 
+----
+
+#### Módulos
 
 Os módulos padrão de ambiente são: `Database` e `Mail`. Os módulos não são padronizados.
 
@@ -151,6 +157,8 @@ Exemplo demonstrando o registro de um módulo qualquer chamado Youtube (Register
     }
   }
 ```
+
+----
 
 ##### Exemplo de configuração:
 
@@ -211,52 +219,3 @@ Exemplo demonstrando o registro de um módulo qualquer chamado Youtube (Register
 
   return $configs;
 ```
-
-----
-#### Configurando o .htaccess
-
-O arquivo `.htaccess` é responsável pelo processo de reescrita das URLs, isto é, trata-se de um componente fundamental para a aplicação.
-
-Portanto, edite o arquivo `.htaccess`, localizado na pasta raiz do framework, para configurar a BASE. O bloco que deve ser configurado é listado abaixo:
-
-
-```php
-  <IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /hxphp/
-    RewriteRule ^index\.php$ - [L]
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule . /hxphp/index.php [L]
-  </IfModule>
-```
-
-Atente-se para os comandos: `RewriteBase` e `RewriteRule`. Veja que ambos contém a menção do valor da `baseURI`, portanto, caso você tenha definido um valor customizado, altere-o. Adotando nosso exemplo anterior, tendo a `baseURI` igual a *administrativo*, tem-se o seguinte código:
-
-
-```php
-  <IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /administrativo/
-    RewriteRule ^index\.php$ - [L]
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule . /administrativo/index.php [L]
-  </IfModule>
-```
-
-
-Para testar o sucesso da configuração acesse: 
-`http://localhost/{baseURI}/`
-
-----
-
-### Instalando as dependências do framework {#instalando-as-dependencias}
-
-O HXPHP Framework utiliza o [Composer](https://getcomposer.org/download) para gerenciar as dependências, portanto, antes de prosseguir, certifique-se que o mesmo está instalado em sua máquina. Para isso, abra o terminal (CMD no Windows) e digite o seguinte comando: `composer --version`.
-
-Após constatar que o [Composer](https://getcomposer.org/download) está em pleno funcionamento, navegue até a pasta do framework e execute o comando: `composer install`.
-
-----
-
-<b>Para lhe auxiliar neste processo, confira essa série completa de videoaulas gratuitas sobre instalação e uso do Composer: [Série completa do canal HXTUTORS](https://goo.gl/9oQNr5)</b>
