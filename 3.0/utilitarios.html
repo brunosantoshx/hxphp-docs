@@ -116,8 +116,9 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h2 id="tools"><em>Tools</em></h2>
-<h2 id="nesta-seo-voc-ir-conhecer-o-objeto-auxiliar">Nesta seção você irá conhecer o objeto auxiliar <em>Tools</em>.</h2>
+                    <h2 id="tools">Tools</h2>
+<p>Nesta seção você irá conhecer o objeto auxiliar <em>Tools</em>.</p>
+<hr />
 <h3 id="metodos-auxiliares">Métodos auxiliares</h3>
 <p>O objeto <em>Tools</em> é uma ferramenta de apoio geral, ou seja, trata-se de um objeto que contém métodos comuns com funções de filtro, tratamento, criptografia e afins.</p>
 <p>Por padrão, este objeto contém os seguintes métodos <b>estáticos</b>:</p>
@@ -128,35 +129,33 @@
 <li><code>filteredFileName($input)</code> - Trata o nome de arquivos, e;</li>
 <li><code>decamelize($cameled, [$sep])</code> - Reverte o <em>camelize</em>;</li>
 </ul>
-<h4 id="criptografia-para-senhas">Criptografia para senhas</h4>
-<p>Um dos recursos do HXPHP mais utilizados para sistemas de cadastro e login é a criptografia de senhas.</p>
+<hr />
+<h4 id="hash">Hash</h4>
+<p>Um dos recursos do HXPHP mais utilizados para sistemas de cadastro e login é a geração de hash.</p>
 <ul>
-<li>Gerando o <code>hash</code> e o <code>salt</code>:
-<pre><code class="language-php">
-\HXPHP\System\Tools::hashHX('senhabruta');</code></pre></li>
+<li>Gerando o <code>hash</code> e o <code>salt</code>:</li>
 </ul>
-<p>/**</p>
-<ul>
-<li>Retorno:</li>
-<li>[</li>
-<li>'salt' =&gt; '...',</li>
-<li>'password' =&gt; '...'</li>
-<li>];
-*/
-<pre><code></code></pre></li>
-</ul>
+<pre><code class="language-php">\HXPHP\System\Tools::hashHX('senhabruta');
+
+/**
+    * Retorno:
+    * [
+    *   'salt' =&gt; '...',
+    *   'password' =&gt; '...'
+    * ];
+*/</code></pre>
+<hr />
 <p>O <code>salt</code> é um valor randômico que é concatenado com a senha bruta informada para gerar o <code>hash</code>.</p>
 <hr />
 <ul>
-<li>Gerando o <code>hash</code> para validação com a senha bruta e um <code>salt</code> já definido:
-<pre><code class="language-php">
-$senhaCriptografada = \HXPHP\System\Tools::hashHX('senhabruta', $user-&gt;salt);</code></pre></li>
+<li>Gerando o <code>hash</code> para validação com a senha bruta e um <code>salt</code> já definido:</li>
 </ul>
-<p>if ($user-&gt;password === $senhaCriptografada['password'])
-return 'Usuário autenticado';</p>
-<pre><code>
+<pre><code class="language-php">$senhaCriptografada = \HXPHP\System\Tools::hashHX('senhabruta', $user-&gt;salt);
 
-Como o `salt` é um valor aleatório, se o mesmo não for informado não será possível obter um `hash` idêntico para comparação mesmo que a senha informada pelo usuário esteja correta. Portanto, é necessário informar o `salt` que foi gerado para o `hash` armazenado no banco de dados, isto é, ambos os valores devem ser armazenados utilizados conforme o exemplo acima.</code></pre>
+if ($user-&gt;password === $senhaCriptografada['password'])
+    return 'Usuário autenticado';</code></pre>
+<hr />
+<p>Como o <code>salt</code> é um valor aleatório, se o mesmo não for informado não será possível obter um <code>hash</code> idêntico para comparação mesmo que a senha informada pelo usuário esteja correta. Portanto, é necessário informar o <code>salt</code> que foi gerado para o <code>hash</code> armazenado no banco de dados, isto é, ambos os valores devem ser armazenados utilizados conforme o exemplo acima.</p>
                 </section>
 
             </div>
